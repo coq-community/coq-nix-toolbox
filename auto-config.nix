@@ -24,12 +24,14 @@ in
   do-nothing ? false,
   update-nixpkgs ? false,
   ci ? false,
+  ci-step ? null,
   inNixShell ? null
 }@args:
 let
   do-nothing = (args.do-nothing or false) || update-nixpkgs;
   input = {
-    config = optionalImport config-file (optionalImport fallback-file {}) ;
+    config = optionalImport config-file (optionalImport fallback-file {})
+      // config;
     nixpkgs = optionalImport nixpkgs-file (throw "cannot find nixpkgs");
   };
 in
@@ -50,8 +52,8 @@ if (input.config.format or "1.0.0") == "1.0.0" then
       namespace = input.config.namespace or ".";
       logpath = input.config.logpath or (logpath-from namespace);
       realpath = input.config.realpath or ".";
-      select = input.config.select or 0;
-      inputs = input.config.inputs or [ {} ];
+      select = input.config.select or "default";
+      inputs = input.config.inputs or { default = {}; };
       override = input.config.override or {};
       src = input.config.src or fetchGit (
         if false # replace by a version check when supported
@@ -68,11 +70,11 @@ if (input.config.format or "1.0.0") == "1.0.0" then
       if !pathExists path then {}
       else mapAttrs (x: _v: callPackage (path + "/${x}") {}) (readDir path);
       # preparing inputs
-    inputs = forEach config.inputs
-      (i: foldl recursiveUpdate {} [
+    inputs = mapAttrs
+      (_: i: foldl recursiveUpdate {} [
         (setAttrByPath ppath { override.version = "${src}"; ci = true; })
         i config.override
-      ]);
+      ]) config.inputs;
     do-override = pkg: cfg:
       let pkg' = if cfg?override
           then pkg.override or (x: pkg) cfg.override else pkg; in
@@ -108,22 +110,33 @@ if (input.config.format or "1.0.0") == "1.0.0" then
         (self: super: { coqPackages =
           super.coqPackages.filterPackages
             (! (super.coqPackages.coq.dontFilter or false)); })
-      ]; in rec {
-        inherit input;
-        pkgs = import config.nixpkgs { inherit overlays; };
+      ];
+      pkgs = import config.nixpkgs { inherit overlays; };
+      ci-coqpkgs = step: attrValues (filterAttrs (n: v:
+          let k = input.coqPackages.${n}.ci or false; in
+          switch-if [
+            { cond = k == true; out = isNull step || step == 2; }
+            { cond = isInt k;   out = isNull step || step == k; }
+          ] false) pkgs.coqPackages);
+    in rec {
+        inherit input pkgs;
         default-coq-derivation =
           makeOverridable pkgs.coqPackages.mkCoqDerivation
             { inherit pname; version = "${src}"; };
         this-pkg = attrByPath ppath default-coq-derivation pkgs;
         emacs = with pkgs; emacsWithPackages
-          (epkgs: with epkgs.melpaStablePackages; [proof-general]);
-        ci-coqpkgs =
-          filterAttrs (n: v: input.coqPackages.${n}.ci or false)
-            pkgs.coqPackages;
+          (epkgs: with epkgs.melpaStablePackages; [ proof-general ]);
+        ci-pkgs = step: switch-if [
+          { cond = step == 0;
+            out = (this-pkg.buildInputs or []) ++
+                  (this-pkg.propagatedBuildInputs or []) ++
+                  ci-coqpkgs step; }
+          { cond = step == 1; out = [ this-pkg ] ++ ci-coqpkgs step; }
+        ] (ci-coqpkgs step);
         json_input = toJSON input;
       };
-    instances = map mk-instance inputs;
-    selected-instance = elemAt instances select;
+    instances = mapAttrs (_: mk-instance) inputs;
+    selected-instance = instances."${select}";
     shellHook = readFile shellHook-file
         + optionalString print-env "nixEnv"
         + optionalString update-nixpkgs "updateNixPkgs; exit";
@@ -139,11 +152,15 @@ if (input.config.format or "1.0.0") == "1.0.0" then
       propagatedBuildInputs = optionals (!do-nothing)
         (old.propagatedBuildInputs or []);
     });
-    nix-ci = map (b: b.ci-coqpkgs) instances;
+    nix-ci = step: flatten (mapAttrsToList (_: i: i.ci-pkgs step) instances);
+    nix-ci-for = name: step: instances.${name}.ci-pkgs step;
     nix-default = selected-instance.this-pkg;
-    nix-auto = if inNixShell then nix-shell else
-      if ci then nix-ci else nix-default;
+    nix-auto = switch-if [
+      { cond = inNixShell;  out = nix-shell; }
+      { cond = ci == true;  out = nix-ci ci-step; }
+      { cond = isString ci; out = nix-ci-for ci ci-step; }
+    ] nix-default;
     in {inherit nixpkgs config selected-instance instances shellHook
-                nix-shell nix-default nix-ci nix-auto; }
+                nix-shell nix-default nix-ci nix-ci-for nix-auto; }
   )
 else throw "Current config.format (${input.config.format}) not implemented"
