@@ -72,7 +72,7 @@ if (input.config.format or "1.0.0") == "1.0.0" then
       # preparing inputs
     inputs = mapAttrs
       (_: i: foldl recursiveUpdate {} [
-        (setAttrByPath ppath { override.version = "${src}"; ci = true; })
+        (setAttrByPath ppath { override.version = "${src}"; ci = 1; })
         i config.override
       ]) config.inputs;
     do-override = pkg: cfg:
