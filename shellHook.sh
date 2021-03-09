@@ -103,7 +103,7 @@ nixHelp (){
 Available commands:
   printNixEnv
   nixEnv
-  upateNixDefault
+  generateNixDefault
   updateNixPkgs
   updateNixPkgsUnstable
   updateNixPkgsMaster

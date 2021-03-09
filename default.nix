@@ -3,18 +3,18 @@
 # 2. a shell and a build derivation
 with builtins;
 let
-  get-path = currentDir: f: let local = currentDir + "/.nix/${f}"; in
+  get-path = src: f: let local = src + "/.nix/${f}"; in
     if pathExists local then local else ./. + "/${f}";
 in
 {
-  currentDir ? ./., # provide he current directory
-  config-file ? get-path currentDir "config.nix",
-  fallback-file ? get-path currentDir "fallback-config.nix",
-  nixpkgs-file ? get-path currentDir "nixpkgs.nix",
-  shellHook-file ? get-path currentDir "shellHook.sh",
-  overlays-dir ? get-path currentDir "overlays",
-  coq-overlays-dir ? get-path currentDir "coq-overlays",
-  ocaml-overlays-dir ? get-path currentDir "ocaml-overlays",
+  src ? ./., # provide he current directory
+  config-file ? get-path src "config.nix",
+  fallback-file ? get-path src "fallback-config.nix",
+  nixpkgs-file ? get-path src "nixpkgs.nix",
+  shellHook-file ? get-path src "shellHook.sh",
+  overlays-dir ? get-path src "overlays",
+  coq-overlays-dir ? get-path src "coq-overlays",
+  ocaml-overlays-dir ? get-path src "ocaml-overlays",
   ci-matrix ? false,
   config ? {},
   override ? {},
@@ -37,6 +37,7 @@ let
       // config;
     nixpkgs = optionalImport nixpkgs-file (throw "cannot find nixpkgs");
     pkgs = import initial.nixpkgs {};
+    src = src;
   };
 in
 with (initial.pkgs.coqPackages.lib or tmp-pkgs.lib);
@@ -62,10 +63,13 @@ if (initial.config.format or "1.0.0") == "1.0.0" then
       realpath = initial.config.realpath or ".";
       select = initial.config.select or "default";
       inputs = initial.config.inputs or { default = {}; };
-      src = initial.config.src or (fetchGit (
-        if false # replace by a version check when supported
-                 # cf https://github.com/NixOS/nix/issues/1837
-        then { url = currentDir; shallow = true; } else currentDir)); };
+      src = initial.config.src or
+        (if pathExists (/. + initial.src or ./.) -> pathExists (/. + initial.src + "/.git")
+         then fetchGit (
+           if false # replace by a version check when supported
+                    # cf https://github.com/NixOS/nix/issues/1837
+           then { url = initial.src; shallow = true; } else initial.src)
+         else /. + initial.src); };
   in
   with config; switch-if [
     { cond = attribute-from coq-attribute != attribute;
@@ -174,7 +178,8 @@ if (initial.config.format or "1.0.0") == "1.0.0" then
     configDir = ".nix";
     nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
       inherit jsonInput jasonInputs shellHook nixpkgs logpath realpath;
-      inherit configDir currentDir;
+      inherit configDir;
+      currentDir = initial.src;
       coq_version = pkgs.coqPackages.coq.coq-version;
 
       nativeBuildInputs = optionals (!do-nothing)
