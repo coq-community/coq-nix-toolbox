@@ -33,8 +33,8 @@ let
     if (isPath f || isString f) && pathExists f then import f else d;
   do-nothing = (args.do-nothing or false) || update-nixpkgs || ci-matrix;
   initial = {
-    config = optionalImport config-file (optionalImport fallback-file {})
-      // config;
+    config = (optionalImport config-file (optionalImport fallback-file {})
+              // config;
     nixpkgs = optionalImport nixpkgs-file (throw "cannot find nixpkgs");
     pkgs = import initial.nixpkgs {};
     src = src;
@@ -172,14 +172,13 @@ if (initial.config.format or "1.0.0") == "1.0.0" then
     selected-instance = instances."${select}";
     shellHook = readFile shellHook-file
         + optionalString print-env "\nprintNixEnv; exit"
-        + optionalString update-nixpkgs "\nupdateNixPkgs; exit"
+        + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
         + optionalString ci-matrix "\nnixInputs; exit";
     jasonInputs = toJSON (attrNames inputs);
-    configDir = ".nix";
     nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
       inherit jsonInput jasonInputs shellHook nixpkgs logpath realpath;
-      inherit configDir;
       currentDir = initial.src;
+      configSubDir = ".nix";
       coq_version = pkgs.coqPackages.coq.coq-version;
 
       nativeBuildInputs = optionals (!do-nothing)
@@ -201,7 +200,7 @@ if (initial.config.format or "1.0.0") == "1.0.0" then
     ] nix-default;
     in
 nix-shell.overrideAttrs (o: {
-  configDir = ".";
+  configSubDir = ".";
   passthru = (o.passthru or {}) // { inherit nixpkgs config selected-instance instances shellHook
           nix-shell nix-default nix-ci nix-ci-for nix-auto; };
 }))
