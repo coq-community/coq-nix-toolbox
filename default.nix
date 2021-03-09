@@ -1,23 +1,20 @@
-# This file was generated from `meta.yml`, please do not edit manually.
-# Follow the instructions on https://github.com/coq-community/templates to regenerate.
-# this config parser reads a config file with its format attributes
-# (or default to the last available format)
-prefix:
+# This file is a toolbox file to parse a .nix directory and make
+# 1. a nix overlay
+# 2. a shell and a build derivation
 with builtins;
 let
-  optionalImport = f: d:
-    if (isPath f || isString f) && pathExists f then import f else d;
-  get-path = f: let local = prefix + "/.nix/${f}"; in
+  get-path = currentDir: f: let local = currentDir + "/.nix/${f}"; in
     if pathExists local then local else ./. + "/${f}";
 in
 {
-  config-file ? get-path "config.nix",
-  fallback-file ? get-path "fallback-config.nix",
-  nixpkgs-file ? get-path "nixpkgs.nix",
-  shellHook-file ? get-path "shellHook.sh",
-  overlays-dir ? get-path "overlays",
-  coq-overlays-dir ? get-path "coq-overlays",
-  ocaml-overlays-dir ? get-path "ocaml-overlays",
+  currentDir ? ./., # provide he current directory
+  config-file ? get-path currentDir "config.nix",
+  fallback-file ? get-path currentDir "fallback-config.nix",
+  nixpkgs-file ? get-path currentDir "nixpkgs.nix",
+  shellHook-file ? get-path currentDir "shellHook.sh",
+  overlays-dir ? get-path currentDir "overlays",
+  coq-overlays-dir ? get-path currentDir "coq-overlays",
+  ocaml-overlays-dir ? get-path currentDir "ocaml-overlays",
   ci-matrix ? false,
   config ? {},
   override ? {},
@@ -32,41 +29,43 @@ in
   inNixShell ? null
 }@args:
 let
+  optionalImport = f: d:
+    if (isPath f || isString f) && pathExists f then import f else d;
   do-nothing = (args.do-nothing or false) || update-nixpkgs || ci-matrix;
-  input = {
+  initial = {
     config = optionalImport config-file (optionalImport fallback-file {})
       // config;
     nixpkgs = optionalImport nixpkgs-file (throw "cannot find nixpkgs");
+    pkgs = import initial.nixpkgs {};
   };
 in
-let tmp-pkgs = import input.nixpkgs {}; in
-with (tmp-pkgs.coqPackages.lib or tmp-pkgs.lib);
-if (input.config.format or "1.0.0") == "1.0.0" then
+with (initial.pkgs.coqPackages.lib or tmp-pkgs.lib);
+if (initial.config.format or "1.0.0") == "1.0.0" then
   let
     inNixShell = args.inNixShell or trivial.inNixShell;
     attribute-from = coq-attribute: "coqPackages.${coq-attribute}";
     logpath-from = namespace: concatStringsSep "/" (splitString "." namespace);
     config = rec {
       format = "1.0.0";
-      coq-attribute = input.config.coq-attribute or "template";
-      shell-coq-attribute = input.config.coq-attribute or
-        input.config.shell-coq-attribute or "template";
-      attribute = input.config.attribute or (attribute-from coq-attribute);
-      shell-attribute = input.config.shell-attribute or (attribute-from shell-coq-attribute);
-      nixpkgs = input.config.nixpkgs or input.nixpkgs;
-      ppath = input.config.ppath or (splitString "." attribute);
-      shell-ppath = input.config.shell-ppath or (splitString "." shell-attribute);
-      pname = input.config.pname or (last ppath);
-      shell-pname = input.config.shell-pname or (last shell-ppath);
-      namespace = input.config.namespace or ".";
-      logpath = input.config.logpath or (logpath-from namespace);
-      realpath = input.config.realpath or ".";
-      select = input.config.select or "default";
-      inputs = input.config.inputs or { default = {}; };
-      src = input.config.src or (fetchGit (
+      coq-attribute = initial.config.coq-attribute or "template";
+      shell-coq-attribute = initial.config.coq-attribute or
+        initial.config.shell-coq-attribute or "template";
+      attribute = initial.config.attribute or (attribute-from coq-attribute);
+      shell-attribute = initial.config.shell-attribute or (attribute-from shell-coq-attribute);
+      nixpkgs = initial.config.nixpkgs or initial.nixpkgs;
+      ppath = initial.config.ppath or (splitString "." attribute);
+      shell-ppath = initial.config.shell-ppath or (splitString "." shell-attribute);
+      pname = initial.config.pname or (last ppath);
+      shell-pname = initial.config.shell-pname or (last shell-ppath);
+      namespace = initial.config.namespace or ".";
+      logpath = initial.config.logpath or (logpath-from namespace);
+      realpath = initial.config.realpath or ".";
+      select = initial.config.select or "default";
+      inputs = initial.config.inputs or { default = {}; };
+      src = initial.config.src or (fetchGit (
         if false # replace by a version check when supported
                  # cf https://github.com/NixOS/nix/issues/1837
-        then { url = prefix; shallow = true; } else prefix)); };
+        then { url = currentDir; shallow = true; } else currentDir)); };
   in
   with config; switch-if [
     { cond = attribute-from coq-attribute != attribute;
@@ -172,9 +171,10 @@ if (input.config.format or "1.0.0") == "1.0.0" then
         + optionalString update-nixpkgs "\nupdateNixPkgs; exit"
         + optionalString ci-matrix "\nnixInputs; exit";
     jasonInputs = toJSON (attrNames inputs);
+    configDir = ".nix";
     nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
       inherit jsonInput jasonInputs shellHook nixpkgs logpath realpath;
-      currentdir = prefix;
+      inherit configDir currentDir;
       coq_version = pkgs.coqPackages.coq.coq-version;
 
       nativeBuildInputs = optionals (!do-nothing)
@@ -194,7 +194,10 @@ if (input.config.format or "1.0.0") == "1.0.0" then
       { cond = ci == true;  out = nix-ci ci-step; }
       { cond = isString ci; out = nix-ci-for ci ci-step; }
     ] nix-default;
-    in {inherit nixpkgs config selected-instance instances shellHook
-                nix-shell nix-default nix-ci nix-ci-for nix-auto; }
-  )
-else throw "Current config.format (${input.config.format}) not implemented"
+    in
+nix-shell.overrideAttrs (o: {
+  configDir = ".";
+  passthru = (o.passthru or {}) // { inherit nixpkgs config selected-instance instances shellHook
+          nix-shell nix-default nix-ci nix-ci-for nix-auto; };
+}))
+else throw "Current config.format (${initial.config.format}) not implemented"

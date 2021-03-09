@@ -15,18 +15,20 @@ nixEnv () {
   for x in $propagatedBuildInputs; do echo $x; done
 }
 
-upateNixDefault () {
-  cat $currentdir/default.nix
-} > default.nix
+generateNixDefault () {
+  cat $currentDir/project-default.nix > default.nix
+  HASH=$(git ls-remote https://github.com/coq-community/coq-nix-toolbox refs/heads/master | cut -f1)
+  sed -i "s/<coq-nix-toolbox-sha256>/$HASH/" default.nix
+}
 
-updateNixPkgs (){
+updateNixPkgsUnstable (){
   HASH=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/nixpkgs-unstable | cut -f1);
   URL=https://github.com/NixOS/nixpkgs/archive/$HASH.tar.gz
   SHA256=$(nix-prefetch-url --unpack $URL)
   echo "fetchTarball {
     url = $URL;
     sha256 = \"$SHA256\";
-  }" > .nix/nixpkgs.nix
+  }" > $configDir/nixpkgs.nix
 }
 
 updateNixPkgsMaster (){
@@ -36,10 +38,10 @@ updateNixPkgsMaster (){
   echo "fetchTarball {
     url = $URL;
     sha256 = \"$SHA256\";
-  }" > .nix/nixpkgs.nix
+  }" > $configDir/nixpkgs.nix
 }
 
-updateNixPkgsCustom (){
+updateNixPkgs (){
   if [[ -n "$1" ]]
   then if [[ -n "$2" ]]; then B=$2; else B="master"; fi
        HASH=$(git ls-remote https://github.com/$1/nixpkgs refs/heads/$B | cut -f1)
@@ -48,8 +50,10 @@ updateNixPkgsCustom (){
        echo "fetchTarball {
          url = $URL;
          sha256 = \"$SHA256\";
-       }" > .nix/nixpkgs.nix
-  else echo "error: usage: updateNixPkgsCustom <github username> [branch]"
+       }" > $configDir/nixpkgs.nix
+  else
+      echo "error: usage: updateNixPkgs <github username> [branch]"
+      echo "otherwise use updateNixPkgsUnstable or updateNixPkgsMaster"
   fi
 }
 
@@ -62,7 +66,7 @@ nixInputs (){
 }
 
 initNixConfig (){
-  F=./.nix/config.nix;
+  F=./$configDir/config.nix;
   if [[ -f $F ]]
     then echo "$F already exists"
     else if [[ -n "$1" ]]
@@ -78,7 +82,7 @@ initNixConfig (){
 
 fetchCoqOverlay (){
   F=$nixpkgs/pkgs/development/coq-modules/$1/default.nix
-  D=./.nix/coq-overlays/$1/
+  D=./$configDir/coq-overlays/$1/
   if [[ -f "$F" ]]
     then mkdir -p $D; cp $F $D; chmod u+w ${D}default.nix;
          git add ${D}default.nix
@@ -101,7 +105,8 @@ Available commands:
   nixEnv
   upateNixDefault
   updateNixPkgs
-  updateNixPkgsCustom
+  updateNixPkgsUnstable
+  updateNixPkgsMaster
   nixInput
   nixInputs
   initNixConfig name
