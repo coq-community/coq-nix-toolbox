@@ -65,7 +65,7 @@ nixInput (){
 }
 
 nixInputs (){
-    echo $jasonInputs
+    echo $jsonInputs
 }
 
 initNixConfig (){
