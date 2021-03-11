@@ -1,6 +1,8 @@
 #! /usr/bin/bash
 
 export currentDir=$PWD
+export configDir=$currentDir/.nix
+
 nixCommands=()
 addNixCommand (){
   nixCommands+=($1)
@@ -38,17 +40,22 @@ ppNixEnv () {
 }
 addNixCommand ppNixEnv
 
-
 nixEnv () {
   for x in $buildInputs; do echo $x; done
   for x in $propagatedBuildInputs; do echo $x; done
 }
 addNixCommand nixEnv
 
+updateNixToolBox () {
+  HASH=$(git ls-remote https://github.com/coq-community/coq-nix-toolbox refs/heads/master | cut -f1)
+  mkdir -p $configDir
+  echo "\"$HASH\"" > $configDir/coq-nix-toolbox.nix
+}
+addNixCommand updateNixToolBox
+
 generateNixDefault () {
   cat $toolboxDir/project-default.nix > $currentDir/default.nix
-  HASH=$(git ls-remote https://github.com/coq-community/coq-nix-toolbox refs/heads/master | cut -f1)
-  sed -i "s/<coq-nix-toolbox-sha256>/$HASH/" $currentDir/default.nix
+  updateNixToolBox
 }
 addNixCommand generateNixDefault
 
@@ -56,11 +63,11 @@ updateNixpkgsUnstable (){
   HASH=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/nixpkgs-unstable | cut -f1);
   URL=https://github.com/NixOS/nixpkgs/archive/$HASH.tar.gz
   SHA256=$(nix-prefetch-url --unpack $URL)
-  mkdir -p $currentDir/$configSubDir
+  mkdir -p $configDir
   echo "fetchTarball {
     url = $URL;
     sha256 = \"$SHA256\";
-  }" > $currentDir/$configSubDir/nixpkgs.nix
+  }" > $configDir/nixpkgs.nix
 }
 addNixCommand updateNixpkgsUnstable
 
@@ -68,11 +75,11 @@ updateNixpkgsMaster (){
   HASH=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/master | cut -f1)
   URL=https://github.com/NixOS/nixpkgs/archive/$HASH.tar.gz
   SHA256=$(nix-prefetch-url --unpack $URL)
-  mkdir -p $currentDir/$configSubDir
+  mkdir -p $configDir
   echo "fetchTarball {
     url = $URL;
     sha256 = \"$SHA256\";
-  }" > $currentDir/$configSubDir/nixpkgs.nix
+  }" > $configDir/nixpkgs.nix
 }
 addNixCommand updateNixpkgsMaster
 
@@ -82,11 +89,11 @@ updateNixpkgs (){
        HASH=$(git ls-remote https://github.com/$1/nixpkgs refs/heads/$B | cut -f1)
        URL=https://github.com/$1/nixpkgs/archive/$HASH.tar.gz
        SHA256=$(nix-prefetch-url --unpack $URL)
-       mkdir -p $currentDir/$configSubDir
+       mkdir -p $configDir
        echo "fetchTarball {
          url = $URL;
          sha256 = \"$SHA256\";
-       }" > $currentDir/$configSubDir/nixpkgs.nix
+       }" > $configDir/nixpkgs.nix
   else
       echo "error: usage: updateNixpkgs <github username> [branch]"
       echo "otherwise use updateNixpkgsUnstable or updateNixpkgsMaster"
@@ -105,16 +112,15 @@ nixTasks (){
 addNixCommand nixTasks
 
 initNixConfig (){
-  F=$currentDir/$configSubDir/config.nix;
-  if [[ -f $F ]]
-    then echo "$F already exists"
-    else if [[ -n "$1" ]]
-      then echo "{" > $F
-           echo "  coq-attribute = \"$1\";" >> $F
-           echo "  overrides = {};" >> $F
-           echo "}" >> $F
-           chmod u+w $F
-      else echo "usage: initNixConfig pname"
+  Orig=$toolboxDir/template-config.nix
+  F=$configDir/config.nix;
+  if [[ -f $F ]]; then
+     echo "$F already exists"
+  else if [[ -n "$1" ]]; then
+       mkdir -p $configDir
+       cat $Orig > $F
+       sed -i "s/template/$1/" $F
+    else echo "usage: initNixConfig pname"
     fi
   fi
 }
@@ -122,7 +128,7 @@ addNixCommand initNixConfig
 
 fetchCoqOverlay (){
   F=$nixpkgs/pkgs/development/coq-modules/$1/default.nix
-  D=$currentDir/$configSubDir/coq-overlays/$1/
+  D=$configDir/coq-overlays/$1/
   if [[ -f "$F" ]]
     then mkdir -p $D; cp $F $D; chmod u+w ${D}default.nix;
          git add ${D}default.nix

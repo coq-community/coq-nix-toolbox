@@ -5,7 +5,7 @@ with builtins;
 let
   toolboxDir = ./.;
   get-path = src: f: let local = src + "/.nix/${f}"; in
-    if pathExists local then local else ./. + "/${f}";
+    if pathExists local then local else ./. + ".nix/${f}";
 in
 {
   src ? ./., # provide the current directory
@@ -68,7 +68,6 @@ with initial.lib; let
     inherit (setup.config) nixpkgs coqproject;
     inherit jsonTask jsonTasks shellHook toolboxDir;
 
-    configSubDir = ".nix";
     coq_version = pkgs.coqPackages.coq.coq-version;
 
     nativeBuildInputs = optionals (!do-nothing)
@@ -95,7 +94,6 @@ with initial.lib; let
   ] nix-default;
   in
 nix-shell.overrideAttrs (o: {
-  configSubDir = ".";
   passthru = (o.passthru or {})
              // { inherit initial setup shellHook;
                   inherit nix-shell nix-default;
