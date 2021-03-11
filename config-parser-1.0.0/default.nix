@@ -33,13 +33,22 @@ in with config; let
       (mk-tasks [ ] global-override)
     ]) config.tasks;
 
+  buildInputFrom = pkgs: str:
+    pkgs.coqPackages.${str} or pkgs.ocamlPackages.${str} or pkgs.${str};
+
   mk-instance = task: let
     overlays = import ./overlays.nix
       { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir task; };
     pkgs = import config.nixpkgs { inherit overlays; };
     ci = import ./ci.nix { inherit lib this-shell-pkg pkgs task; };
-    this-pkg = attrByPath config.ppath default-coq-derivation pkgs;
-    this-shell-pkg = attrByPath config.shell-ppath default-coq-derivation pkgs;
+    patchBIPkg = pkg:
+      let bi = map (buildInputFrom pkgs) (config.buildInputs or []); in
+      if bi == [] then pkg else
+      pkg.overrideAttrs (o: { buildInputs = o.buildInputs ++ bi;});
+
+    this-pkg = patchBIPkg (attrByPath config.ppath default-coq-derivation pkgs);
+    this-shell-pkg = patchBIPkg (attrByPath config.shell-ppath default-coq-derivation pkgs);
+
     in rec {
       inherit task pkgs this-pkg this-shell-pkg ci;
       jsonTask = toJSON task;

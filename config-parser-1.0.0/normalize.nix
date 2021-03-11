@@ -19,6 +19,7 @@ let
     coqproject = config.coqproject or "_CoqProject";
     select = config.select or "default";
     tasks = config.tasks or { default = {}; };
+    buildInputs = config.buildInputs or [];
     src = config.src or
       (if pathExists (/. + (initial.src or ./.))
           -> pathExists (/. + initial.src + "/.git")
