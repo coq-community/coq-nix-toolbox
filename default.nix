@@ -25,8 +25,8 @@ in
   print-env ? false,
   do-nothing ? false,
   update-nixpkgs ? false,
-  ci-step ? null,
-  ci ? (!isNull ci-step),
+  ci-job ? null,
+  ci ? (!isNull ci-job),
   inNixShell ? null
 }@args:
 let
@@ -46,7 +46,7 @@ let
   };
   my-throw = x: throw "Coq nix toolbox error: ${x}";
 in
-with initial.lib; let 
+with initial.lib; let
   inNixShell = args.inNixShell or trivial.inNixShell;
   setup = switch initial.config.format [
     { case = "1.0.0";        out = import ./config-parser-1.0.0 initial; }
@@ -58,16 +58,16 @@ with initial.lib; let
       + optionalString print-env "\nprintNixEnv; exit"
       + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
       + optionalString ci-matrix "\nnixInputs; exit";
-  jsonInputs = toJSON (attrNames setup.fixed-input);
-  jsonInput  = toJSON selected-instance.input; 
+  jsonMedleys = toJSON (attrNames setup.fixed-medley);
+  jsonMedley  = toJSON selected-instance.medley;
   emacs = with selected-instance.pkgs; emacsWithPackages
     (epkgs: with epkgs.melpaStablePackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
 
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs logpath realpath;
-    inherit jsonInput jsonInputs shellHook toolboxDir;
-    
+    inherit jsonMedley jsonMedleys shellHook toolboxDir;
+
     configSubDir = ".nix";
     coq_version = pkgs.coqPackages.coq.coq-version;
 
@@ -85,13 +85,13 @@ with initial.lib; let
       emacsBin = "${emacs}" + "/bin/emacs";
   });
 
-  nix-ci = step: flatten (mapAttrsToList (_: i: i.ci.subpkgs step) instances);
-  nix-ci-for = name: step: instances.${name}.ci.subpkgs step;
+  nix-ci = job: flatten (mapAttrsToList (_: i: i.ci.subpkgs job) instances);
+  nix-ci-for = name: job: instances.${name}.ci.subpkgs job;
   nix-default = selected-instance.this-pkg;
   nix-auto = switch-if [
     { cond = inNixShell;  out = nix-shell; }
-    { cond = ci == true;  out = nix-ci ci-step; }
-    { cond = isString ci; out = nix-ci-for ci ci-step; }
+    { cond = ci == true;  out = nix-ci ci-job; }
+    { cond = isString ci; out = nix-ci-for ci ci-job; }
   ] nix-default;
   in
 nix-shell.overrideAttrs (o: {

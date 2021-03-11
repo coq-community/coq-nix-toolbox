@@ -1,4 +1,4 @@
-{ overlays-dir, lib, coq-overlays-dir, ocaml-overlays-dir, input }:
+{ overlays-dir, lib, coq-overlays-dir, ocaml-overlays-dir, medley }:
 with builtins; with lib;
 let
   mk-overlay = path: self: super:
@@ -11,17 +11,17 @@ let
       then pkg'.overrideAttrs cfg.overrideAttrs else pkg';
   nixpkgs-overrides =
     self: super: mapAttrs (n: ov: do-override super.${n} ov)
-      (removeAttrs input [ "coqPackages" "ocamlPackages" ]);
+      (removeAttrs medley [ "coqPackages" "ocamlPackages" ]);
   ocaml-overrides =
     self: super: mapAttrs (n: ov: do-override super.${n} ov)
-      (input.ocamlPackages or {});
+      (medley.ocamlPackages or {});
   coq-overrides =
     self: super: mapAttrs
       (n: ov: do-override (super.${n} or
         (makeOverridable self.mkCoqDerivation {
           pname = "${n}"; version = "${src}";
         })) ov)
-      (input.coqPackages or {});
+      (medley.coqPackages or {});
   fold-override = foldl (fpkg: override: fpkg.overrideScope' override);
   in
 [

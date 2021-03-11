@@ -17,9 +17,9 @@ with lib;
 let config = import ./normalize.nix { inherit (initial) lib config nixpkgs; };
 in with config; let
 
-  # preparing inputs
-  overriden-inputs = let
-      mk-inputs = pre: x:
+  # preparing medleys
+  overriden-medleys = let
+      mk-medleys = pre: x:
         setAttrByPath pre (mapAttrs (n: v: {override.version = v;}) x);
     in mapAttrs
     (_: i: foldl recursiveUpdate {} [
@@ -27,25 +27,25 @@ in with config; let
         { override.version = "${src}"; ci = "shell"; })
       (setAttrByPath ppath { override.version = "${src}"; ci = 0; })
       i
-      (mk-inputs [ "coqPackages" ] override)
-      (mk-inputs [ "ocamlPackages" ] ocaml-override)
-      (mk-inputs [ ] global-override)
-    ]) config.inputs;
+      (mk-medleys [ "coqPackages" ] override)
+      (mk-medleys [ "ocamlPackages" ] ocaml-override)
+      (mk-medleys [ ] global-override)
+    ]) config.medleys;
 
-  mk-instance = input: let
+  mk-instance = medley: let
     overlays = import ./overlays.nix
-      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir input; };
+      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir medley; };
     pkgs = import config.nixpkgs { inherit overlays; };
-    ci = import ./ci.nix { inherit lib this-shell-pkg pkgs input; };
+    ci = import ./ci.nix { inherit lib this-shell-pkg pkgs medley; };
     this-pkg = attrByPath config.ppath default-coq-derivation pkgs;
     this-shell-pkg = attrByPath config.shell-ppath default-coq-derivation pkgs;
     in rec {
-      inherit input pkgs this-pkg this-shell-pkg ci;
-      jsonInput = toJSON input;
+      inherit medley pkgs this-pkg this-shell-pkg ci;
+      jsonMedley = toJSON medley;
     };
   in
 {
-  instances = mapAttrs (_: mk-instance) overriden-inputs;
-  fixed-input = overriden-inputs;
+  instances = mapAttrs (_: mk-instance) overriden-medleys;
+  fixed-medley = overriden-medleys;
   inherit config;
 }

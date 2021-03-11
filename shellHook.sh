@@ -78,15 +78,15 @@ updateNixpkgs (){
 }
 addNixCommand updateNixpkgs
 
-nixInput (){
-    echo $jsonInput
+nixMedley (){
+    echo $jsonMedley
 }
-addNixCommand nixInput
+addNixCommand nixMedley
 
-nixInputs (){
-    echo $jsonInputs
+nixMedleys (){
+    echo $jsonMedleys
 }
-addNixCommand nixInputs
+addNixCommand nixMedleys
 
 initNixConfig (){
   F=$currentDir/$configSubDir/config.nix;

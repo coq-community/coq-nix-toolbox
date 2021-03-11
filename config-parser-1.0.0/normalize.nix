@@ -20,7 +20,7 @@ let
     logpath = initial.config.logpath or (logpath-from namespace);
     realpath = initial.config.realpath or ".";
     select = initial.config.select or "default";
-    inputs = initial.config.inputs or { default = {}; };
+    medleys = initial.config.medleys or { default = {}; };
     src = initial.config.src or
       (if pathExists (/. + initial.src or ./.) -> pathExists (/. + initial.src + "/.git")
        then fetchGit (
