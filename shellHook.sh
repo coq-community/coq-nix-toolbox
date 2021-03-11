@@ -78,15 +78,15 @@ updateNixpkgs (){
 }
 addNixCommand updateNixpkgs
 
-nixMedley (){
-    echo $jsonMedley
+nixTask (){
+    echo $jsonTask
 }
-addNixCommand nixMedley
+addNixCommand nixTask
 
-nixMedleys (){
-    echo $jsonMedleys
+nixTasks (){
+    echo $jsonTasks
 }
-addNixCommand nixMedleys
+addNixCommand nixTasks
 
 initNixConfig (){
   F=$currentDir/$configSubDir/config.nix;
@@ -117,13 +117,21 @@ fetchCoqOverlay (){
 addNixCommand fetchCoqOverlay
 
 cachedMake (){
-  vopath="$(env -i nix-build)/lib/coq/$coq_version/user-contrib/$logpath"
-  dest=$currentDir/$realpath
-  if [[ -d vopath ]]
-  then echo "Compiling/Fetching and copying vo from $vopath to $realpath"
-       rsync -r --ignore-existing --include=*/ $vopath/* $dest
-  else echo "Error: cannot find compiled $logpath, check your .nix/config.nix"
-  fi
+  cproj=$currentDir/$coqproject
+  cprojDir=$(dirname $cproj)
+  build=$(env -i nix-build --no-out-link)
+  grep -e "^-R.*" $cproj | while read -r line; do
+    realpath=$(echo $line | cut -d" " -f2)
+    namespace=$(echo $line | cut -d" " -f3)
+    logpath=${namespace/.//}
+    vopath="$build/lib/coq/$coq_version/user-contrib/$logpath"
+    dest=$cprojDir/$realpath
+    if [[ -d $vopath ]]
+    then echo "Compiling/Fetching and copying vo from $vopath to $realpath"
+         cp -nr --no-preserve=mode,ownership  $vopath/* $dest
+    else echo "Error: cannot find compiled $logpath, check your .nix/config.nix"
+    fi
+  done
 }
 addNixCommand cachedMake
 

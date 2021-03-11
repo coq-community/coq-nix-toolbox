@@ -1,4 +1,4 @@
-{ lib, pkgs, this-shell-pkg, medley }:
+{ lib, pkgs, this-shell-pkg, task }:
 with builtins; with lib; let
   to-job = n: switch n [
     { case = -1;        out = "dependencies";}
@@ -20,7 +20,7 @@ with builtins; with lib; let
         job = to-job raw-job;
         keep = n: v:
           let
-            ipkg-n = medley.coqPackages.${n} or {};
+            ipkg-n = task.coqPackages.${n} or {};
             job-n = switch-if [
               { cond = !(ipkg-n?ci);             out = "NOCI";}
               { cond = !((ipkg-n.ci or {})?job); out = n;}
@@ -31,7 +31,7 @@ with builtins; with lib; let
       ++ optionals (job == "dependencies") dependencies;
   collect-job = v: if v?ci && v.ci?job then [ (to-job v.ci.job) ] else [];
   collect-jobs = p: flatten (map collect-job (attrValues p));
-  jobs = collect-jobs (medley.coqPackages or {});
+  jobs = collect-jobs (task.coqPackages or {});
 in
 {
   inherit jobs subpkgs;

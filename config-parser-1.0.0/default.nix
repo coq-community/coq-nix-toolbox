@@ -14,12 +14,13 @@ with builtins;
   lib,
 }@initial:
 with lib;
-let config = import ./normalize.nix { inherit (initial) lib config nixpkgs; };
+let config = import ./normalize.nix
+  { inherit (initial) src lib config nixpkgs; };
 in with config; let
 
-  # preparing medleys
-  overriden-medleys = let
-      mk-medleys = pre: x:
+  # preparing tasks
+  overriden-tasks = let
+      mk-tasks = pre: x:
         setAttrByPath pre (mapAttrs (n: v: {override.version = v;}) x);
     in mapAttrs
     (_: i: foldl recursiveUpdate {} [
@@ -27,25 +28,25 @@ in with config; let
         { override.version = "${src}"; ci = "shell"; })
       (setAttrByPath ppath { override.version = "${src}"; ci = 0; })
       i
-      (mk-medleys [ "coqPackages" ] override)
-      (mk-medleys [ "ocamlPackages" ] ocaml-override)
-      (mk-medleys [ ] global-override)
-    ]) config.medleys;
+      (mk-tasks [ "coqPackages" ] override)
+      (mk-tasks [ "ocamlPackages" ] ocaml-override)
+      (mk-tasks [ ] global-override)
+    ]) config.tasks;
 
-  mk-instance = medley: let
+  mk-instance = task: let
     overlays = import ./overlays.nix
-      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir medley; };
+      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir task; };
     pkgs = import config.nixpkgs { inherit overlays; };
-    ci = import ./ci.nix { inherit lib this-shell-pkg pkgs medley; };
+    ci = import ./ci.nix { inherit lib this-shell-pkg pkgs task; };
     this-pkg = attrByPath config.ppath default-coq-derivation pkgs;
     this-shell-pkg = attrByPath config.shell-ppath default-coq-derivation pkgs;
     in rec {
-      inherit medley pkgs this-pkg this-shell-pkg ci;
-      jsonMedley = toJSON medley;
+      inherit task pkgs this-pkg this-shell-pkg ci;
+      jsonTask = toJSON task;
     };
   in
 {
-  instances = mapAttrs (_: mk-instance) overriden-medleys;
-  fixed-medley = overriden-medleys;
+  instances = mapAttrs (_: mk-instance) overriden-tasks;
+  fixed-task = overriden-tasks;
   inherit config;
 }

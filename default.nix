@@ -57,16 +57,16 @@ with initial.lib; let
   shellHook = readFile shellHook-file
       + optionalString print-env "\nprintNixEnv; exit"
       + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
-      + optionalString ci-matrix "\nnixInputs; exit";
-  jsonMedleys = toJSON (attrNames setup.fixed-medley);
-  jsonMedley  = toJSON selected-instance.medley;
+      + optionalString ci-matrix "\nnixTasks; exit";
+  jsonTasks = toJSON (attrNames setup.fixed-task);
+  jsonTask  = toJSON selected-instance.task;
   emacs = with selected-instance.pkgs; emacsWithPackages
     (epkgs: with epkgs.melpaStablePackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
 
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
-    inherit (setup.config) nixpkgs logpath realpath;
-    inherit jsonMedley jsonMedleys shellHook toolboxDir;
+    inherit (setup.config) nixpkgs coqproject;
+    inherit jsonTask jsonTasks shellHook toolboxDir;
 
     configSubDir = ".nix";
     coq_version = pkgs.coqPackages.coq.coq-version;
