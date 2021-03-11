@@ -14,14 +14,30 @@ nixHelp (){
 printNixEnv () {
   echo "Here is your work environement"
   echo "nativeBuildInputs:"
-  for x in $nativeBuildInputs; do printf "  "; echo $x | cut -d "-" -f "2-"; done
+  for x in $nativeBuildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
   echo "buildInputs:"
-  for x in $buildInputs; do printf "  "; echo $x | cut -d "-" -f "2-"; done
+  for x in $buildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
   echo "propagatedBuildInputs:"
-  for x in $propagatedBuildInputs; do printf "  "; echo $x | cut -d "-" -f "2-"; done
+  for x in $propagatedBuildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
   echo "you can pass option --arg override '{coq = \"x.y\"; ...}' to nix-shell to change packages versions"
 }
 addNixCommand printNixEnv
+
+ppNixEnv () {
+  echo "Available packages:"
+  for x in $buildInputs
+  do printf -- "- "
+     pkgv=$(echo $x | cut -d "-" -f "2-")
+     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+  done
+  for x in $propagatedBuildInputs
+  do printf -- "- "
+     pkgv=$(echo $x | cut -d "-" -f "2-")
+     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+  done
+}
+addNixCommand ppNixEnv
+
 
 nixEnv () {
   for x in $buildInputs; do echo $x; done
