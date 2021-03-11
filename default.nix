@@ -5,7 +5,7 @@ with builtins;
 let
   toolboxDir = ./.;
   get-path = src: f: let local = src + "/.nix/${f}"; in
-    if pathExists local then local else ./. + ".nix/${f}";
+    if pathExists local then local else ./. + "/.nix/${f}";
 in
 {
   src ? ./., # provide the current directory
