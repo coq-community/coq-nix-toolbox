@@ -111,6 +111,16 @@ nixTasks (){
 }
 addNixCommand nixTasks
 
+ppTaskSet (){
+    echo $jsonTaskSet | json2yaml
+}
+addNixCommand ppTaskSet
+
+ppCI (){
+    echo $jsonCI | json2yaml
+}
+addNixCommand ppCI
+
 initNixConfig (){
   Orig=$toolboxDir/template-config.nix
   F=$configDir/config.nix;

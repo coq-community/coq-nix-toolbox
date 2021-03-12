@@ -25,8 +25,8 @@ in with config; let
     in mapAttrs
     (_: i: foldl recursiveUpdate {} [
       (setAttrByPath shell-ppath
-        { override.version = "${src}"; ci = "shell"; })
-      (setAttrByPath ppath { override.version = "${src}"; ci = 0; })
+        { override.version = "${src}"; ci.job = "shell"; })
+      (setAttrByPath ppath { override.version = "${src}"; ci.job = "main"; })
       i
       (mk-tasks [ "coqPackages" ] override)
       (mk-tasks [ "ocamlPackages" ] ocaml-override)

@@ -59,14 +59,21 @@ with initial.lib; let
       + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
       + optionalString ci-matrix "\nnixTasks; exit";
   jsonTasks = toJSON (attrNames setup.fixed-task);
-  jsonTask  = toJSON selected-instance.task;
+  jsonTaskSet = toJSON setup.fixed-task;
+  jsonTask = toJSON selected-instance.task;
   emacs = with selected-instance.pkgs; emacsWithPackages
     (epkgs: with epkgs.melpaStablePackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
 
+  jsonSetupConfig = toJSON setup.config;
+  jsonCI = toJSON (mapAttrs
+    (_: v: mapAttrs (_: x: map (x: x.name) x) v.ci.set)
+    setup.instances);
+
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
-    inherit jsonTask jsonTasks shellHook toolboxDir;
+    inherit jsonTask jsonTasks jsonSetupConfig jsonCI jsonTaskSet
+            shellHook toolboxDir;
 
     coq_version = pkgs.coqPackages.coq.coq-version;
 
