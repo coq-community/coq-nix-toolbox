@@ -4,10 +4,25 @@ Nix helper scripts to automate local builds and CI
 
 ## How to use
 
+There are two supported methods of using this toolbox.
+
+### With the coq-community templates
+
 Generate the Nix files using the templates available at: https://github.com/coq-community/templates
 
 You will need to put at least `nix: true` in your `meta.yml`.
 Everything else is optional and is documented in [`ref.yml`](https://github.com/coq-community/templates/blob/master/ref.yml).
+
+### Standalone
+
+Installing Nix locally is a prerequisite for this installation method (but a good thing to do anyway to take the most advantage of this toolbox). See https://nixos.org/download.html.
+
+Then, just run the following at the root of your project:
+
+```
+nix-shell https://github.com/coq-community/coq-nix-toolbox/tarball/master --run generateNixDefault
+nix-shell https://github.com/coq-community/coq-nix-toolbox/tarball/master --run "initNixConfig YOURPACKAGENAME"
+```
 
 ## Available shell hooks
 
