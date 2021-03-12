@@ -21,7 +21,7 @@ let
     tasks = config.tasks or { default = {}; };
     buildInputs = config.buildInputs or [];
     src = config.src or
-      (if pathExists (/. + (initial.src or ./.))
+      (if pathExists (/. + initial.src)
           -> pathExists (/. + initial.src + "/.git")
        then fetchGit (
          if false # replace by a version check when supported
