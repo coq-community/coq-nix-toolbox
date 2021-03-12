@@ -93,7 +93,7 @@ with initial.lib; let
 
   nix-ci = job: flatten (mapAttrsToList (_: i: i.ci.subpkgs job) instances);
   nix-ci-for = name: job: instances.${name}.ci.subpkgs job;
-  nix-default = selected-instance.this-pkg;
+  nix-default = selected-instance.this-shell-pkg;
   nix-auto = switch-if [
     { cond = inNixShell;  out = nix-shell; }
     { cond = ci == true;  out = nix-ci ci-job; }
