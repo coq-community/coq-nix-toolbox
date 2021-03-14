@@ -75,7 +75,10 @@ with initial.lib; let
     inherit jsonTask jsonTasks jsonSetupConfig jsonCI jsonTaskSet
             shellHook toolboxDir;
 
-    coq_version = pkgs.coqPackages.coq.coq-version;
+    COQBIN = optionalString (!do-nothing) "";
+
+    coq_version = optionalString (!do-nothing)
+       pkgs.coqPackages.coq.coq-version;
 
     nativeBuildInputs = optionals (!do-nothing)
       (old.propagatedBuildInputs or []);
