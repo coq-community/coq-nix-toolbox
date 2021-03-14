@@ -62,7 +62,7 @@ with initial.lib; let
   jsonTaskSet = toJSON setup.fixed-task;
   jsonTask = toJSON selected-instance.task;
   emacs = with selected-instance.pkgs; emacsWithPackages
-    (epkgs: with epkgs.melpaStablePackages; [ proof-general ]);
+    (epkgs: with epkgs.melpaPackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
 
   jsonSetupConfig = toJSON setup.config;
