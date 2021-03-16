@@ -25,14 +25,15 @@ in
   print-env ? false,
   do-nothing ? false,
   update-nixpkgs ? false,
-  ci-job ? null,
-  ci ? (!isNull ci-job),
+  job ? null,
+  task ? null,
   inNixShell ? null
 }@args:
 let
   optionalImport = f: d:
     if (isPath f || isString f) && pathExists f then import f else d;
   do-nothing = (args.do-nothing or false) || update-nixpkgs || ci-matrix;
+  unNull = default: value: if isNull value then default else value;
   initial = {
     config = (optionalImport config-file (optionalImport fallback-file {}))
               // config;
@@ -53,7 +54,8 @@ with initial.lib; let
     { case = x: !isString x; out = my-throw "config.format must be a string."; }
   ] (my-throw "config.format ${initial.config.format} not supported");
   instances = setup.instances;
-  selected-instance = instances."${setup.config.select}";
+  selectedTask = unNull setup.config.select task;
+  selected-instance = instances."${selectedTask}";
   shellHook = readFile shellHook-file
       + optionalString print-env "\nprintNixEnv; exit"
       + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
@@ -73,7 +75,7 @@ with initial.lib; let
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
     inherit jsonTask jsonTasks jsonSetupConfig jsonCI jsonTaskSet
-            shellHook toolboxDir;
+            shellHook toolboxDir selectedTask;
 
     COQBIN = optionalString (!do-nothing) "";
 
@@ -98,9 +100,9 @@ with initial.lib; let
   nix-ci-for = name: job: instances.${name}.ci.subpkgs job;
   nix-default = selected-instance.this-shell-pkg;
   nix-auto = switch-if [
-    { cond = inNixShell;  out = nix-shell; }
-    { cond = ci == true;  out = nix-ci ci-job; }
-    { cond = isString ci; out = nix-ci-for ci ci-job; }
+    { cond = inNixShell;                    out = nix-shell; }
+    { cond = isNull task && !isNull job;    out = nix-ci job; }
+    { cond = isString task && !isNull job ; out = nix-ci-for task job; }
   ] nix-default;
   in
 nix-shell.overrideAttrs (o: {
