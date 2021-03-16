@@ -3,35 +3,46 @@
 {lib, config, nixpkgs, src}@initial:
 with builtins; with lib;
 let
-  attribute-from = coq-attribute: "coqPackages.${coq-attribute}";
-  logpath-from = namespace: concatStringsSep "/" (splitString "." namespace);
-  config-unchecked = rec {
-    format = "1.0.0";
-    coq-attribute = config.coq-attribute or "template";
-    shell-coq-attribute = config.shell-coq-attribute or coq-attribute;
-    attribute = config.attribute or (attribute-from coq-attribute);
-    shell-attribute = config.shell-attribute or (attribute-from shell-coq-attribute);
-    nixpkgs = config.nixpkgs or initial.nixpkgs;
-    ppath = config.ppath or (splitString "." attribute);
-    shell-ppath = config.shell-ppath or (splitString "." shell-attribute);
-    pname = config.pname or (last ppath);
-    shell-pname = config.shell-pname or (last shell-ppath);
-    coqproject = config.coqproject or "_CoqProject";
-    select = config.select or "default";
-    tasks = config.tasks or { default = {}; };
-    buildInputs = config.buildInputs or [];
-    src = config.src or
-      (if pathExists (/. + initial.src)
-          -> pathExists (/. + initial.src + "/.git")
-       then fetchGit (
-         if false # replace by a version check when supported
-                  # cf https://github.com/NixOS/nix/issues/1837
-         then { url = initial.src; shallow = true; } else initial.src)
-       else /. + initial.src); };
-  config-checked = with config-unchecked; switch-if [
-    { cond = attribute-from coq-attribute != attribute;
-      out = throw "One cannot set both `coq-attribute` and `attribute`."; }
-    { cond = attribute-from shell-coq-attribute != shell-attribute;
-      out = throw "One cannot set both `shell-coq-attribute` and `shell-attribute`."; }
-    ] config-unchecked;
-in config-checked
+  normalize-pkg = name: pkg:
+    if name == "coqPackages" then mapAttrs normalize-coqpkg pkg else pkg;
+  normalize-coqpkg = name: pkg: let j = pkg.job or name; in
+    pkg // { job = switch j [
+               { case = true;     out = name; }
+               { case = false;    out = "_excluded"; }
+               { case = isString; out = j; }
+             ] (throw ''
+  config-parser-1.0.0 normalize: job must be either:
+  - true        (the given name is the one of the attribute
+  - false       (the package is excluded from CI, always)
+  - "_excluded" (the package is excluded from CI, always)
+  - "_deps"     (the package is considered by the CI as a dependency)
+  - "_allJobs"  (the job is triggered only when testing all existing jobs)
+  - "_all"      (the job is triggered only when testing all coqPackages)
+  - a string which corresponds to a package attribute.
+ ''); };
+in rec {
+  format = "1.0.0";
+  attribute = config.attribute or "template";
+  shell-attribute = config.shell-attribute or attribute;
+  path-to-attribute = config.path-to-attribute or [ "coqPackages" ];
+  path-to-shell-attribute = config.shell-attribute or path-to-attribute;
+  nixpkgs = config.nixpkgs or initial.nixpkgs;
+  pname = config.pname or attribute;
+  shell-pname = config.shell-pname or pname;
+  coqproject = config.coqproject or "_CoqProject";
+  select = config.select or "default";
+  tasks = mapAttrs (_: t: mapAttrs normalize-pkg t)
+    (config.tasks or { default = {}; });
+  buildInputs = config.buildInputs or [];
+  src = config.src or
+    (if pathExists (/. + initial.src)
+        -> pathExists (/. + initial.src + "/.git")
+     then fetchGit (
+       if false # replace by a version check when supported
+                # cf https://github.com/NixOS/nix/issues/1837
+       then { url = initial.src; shallow = true; } else initial.src)
+     else /. + initial.src);
+  # not configurable from config.nix:
+  ppath = path-to-attribute ++ [ attribute ];
+  shell-ppath = path-to-shell-attribute ++ [ shell-attribute ];
+}
