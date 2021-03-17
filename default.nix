@@ -54,7 +54,7 @@ with initial.lib; let
     { case = x: !isString x; out = my-throw "config.format must be a string."; }
   ] (my-throw "config.format ${initial.config.format} not supported");
   instances = setup.instances;
-  selectedTask = unNull setup.config.select task;
+  selectedTask = unNull setup.config.default-task task;
   selected-instance = instances."${selectedTask}";
   shellHook = readFile shellHook-file
       + optionalString print-env "\nprintNixEnv; exit"
@@ -79,7 +79,8 @@ with initial.lib; let
         flip mapAttrs tv (jn: jv: {${tn} = jv;})));
       push-list = foldAttrs (n: a: [n] ++ a) [];
     in
-      mapAttrs (jn: jv: push-list jv) (push-list jobs-list);
+      flip mapAttrs (push-list jobs-list)
+        (jn: jv: mapAttrs (_: flatten) (push-list jv));
   jsonCIbyJob = toJSON ciByJob;
 
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {

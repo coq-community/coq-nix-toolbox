@@ -25,12 +25,13 @@ in rec {
   attribute = config.attribute or "template";
   shell-attribute = config.shell-attribute or attribute;
   path-to-attribute = config.path-to-attribute or [ "coqPackages" ];
-  path-to-shell-attribute = config.shell-attribute or path-to-attribute;
+  path-to-shell-attribute =
+    config.path-to-shell-attribute or path-to-attribute;
   nixpkgs = config.nixpkgs or initial.nixpkgs;
   pname = config.pname or attribute;
   shell-pname = config.shell-pname or pname;
   coqproject = config.coqproject or "_CoqProject";
-  select = config.select or "default";
+  default-task = config.default-task or "default";
   tasks = mapAttrs (_: t: mapAttrs normalize-pkg t)
     (config.tasks or { default = {}; });
   buildInputs = config.buildInputs or [];

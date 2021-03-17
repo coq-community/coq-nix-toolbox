@@ -6,11 +6,11 @@
 
   ## The attribute to build, either from nixpkgs
   ## of from the overlays located in `.nix/coq-overlays`
-  coq-attribute = "template";
+  attribute = "template";
 
   ## If you want to select a different attribute
   ## to serve as a basis for nix-shell edit this
-  # coq-shell-attribute = "{{nix_name}}";
+  # shell-attribute = "{{nix_name}}";
 
   ## Maybe the shortname of the library is different from
   ## the name of the nixpkgs attribute, if so, set it here:
@@ -30,7 +30,7 @@
 
   ## select an entry to build in the following `tasks` set
   ## defaults to "default"
-  select = "default";
+  default-task = "default";
 
   ## write one `tasks.name` attribute set per
   ## alternative configuration, the can be used to
