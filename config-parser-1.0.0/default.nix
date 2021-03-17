@@ -25,9 +25,13 @@ in with config; let
     in mapAttrs
     (_: i: foldl recursiveUpdate {} [
       (setAttrByPath config.shell-ppath
-        { override.version = "${config.src}"; job = config.shell-attribute; })
+        { override.version = "${config.src}";
+          job = config.shell-attribute;
+          main-job = true; })
       (setAttrByPath config.ppath
-        { override.version = "${config.src}"; job = config.attribute; })
+        { override.version = "${config.src}";
+          job = config.attribute;
+          main-job = true; })
       i
       (mk-tasks [ "coqPackages" ] override)
       (mk-tasks [ "ocamlPackages" ] ocaml-override)
@@ -37,7 +41,7 @@ in with config; let
   buildInputFrom = pkgs: str:
     pkgs.coqPackages.${str} or pkgs.ocamlPackages.${str} or pkgs.${str};
 
-  mk-instance = task: let
+  mk-instance = taskName: task: let
     overlays = import ./overlays.nix
       { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir task;
         inherit (config) attribute pname shell-attribute shell-pname src; };
@@ -45,6 +49,27 @@ in with config; let
     pkgs = import config.nixpkgs { inherit overlays; };
 
     ci = import ./ci.nix { inherit lib this-shell-pkg pkgs task; };
+
+    genCI = import ../deps.nix
+      { inherit lib; inherit (pkgs) coqPackages; };
+    jsonPkgsDeps = toJSON genCI.pkgsDeps;
+    jsonPkgsRevDeps = toJSON genCI.pkgsRevDeps;
+    jsonPkgsSorted = toJSON genCI.pkgsSorted;
+
+    inherit (import ../action.nix { inherit lib; }) mkJobs mkAction;
+    action = mkAction {
+      inherit (config) cachix;
+      tasks = taskName;
+      jobs = let
+          jdeps = genAttrs ci.mains (n: genCI.pkgsRevDepsSet.${n} or {});
+        in
+        attrNames (removeAttrs
+          (jdeps // genAttrs ci.jobs (_: true)
+          // foldAttrs (_: _: true) true (attrValues jdeps))
+          ci.excluded);
+      deps = genCI.pkgsDeps;
+    };
+    jsonAction = toJSON action;
 
     patchBIPkg = pkg:
       let bi = map (buildInputFrom pkgs) (config.buildInputs or []); in
@@ -57,11 +82,13 @@ in with config; let
     this-shell-pkg = patchBIPkg (attrByPath config.shell-ppath notfound-shell-ppath pkgs);
 
     in rec {
-      inherit task pkgs this-pkg this-shell-pkg ci;
+      inherit task pkgs this-pkg this-shell-pkg ci genCI;
+      inherit jsonPkgsDeps jsonPkgsSorted jsonPkgsRevDeps;
+      inherit action jsonAction;
       jsonTask = toJSON task;
     };
   in
 {
-  instances = mapAttrs (_: mk-instance) tasks;
+  instances = mapAttrs mk-instance tasks;
   inherit tasks config;
 }

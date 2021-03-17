@@ -136,6 +136,30 @@ ppCIbyJob (){
 }
 addNixCommand ppCIbyJob
 
+ppDeps (){
+    echo $jsonPkgsDeps | json2yaml
+}
+addNixCommand ppDeps
+
+ppRevDeps (){
+    echo $jsonPkgsRevDeps | json2yaml
+}
+addNixCommand ppRevDeps
+
+ppNixAction (){
+  echo $jsonAction | json2yaml
+}
+addNixCommand ppNixAction
+
+genNixActions (){
+  mkdir -p $currentDir/.github/workflows/
+  for t in $tasks; do
+    echo "generating $currentDir/.github/workflows/nix-action-$t.yml"
+    nix-shell --arg do-nothing true --argstr task $t --run "ppNixAction > $currentDir/.github/workflows/nix-action-$t.yml"
+  done
+}
+addNixCommand genNixActions
+
 initNixConfig (){
   Orig=$toolboxDir/template-config.nix
   F=$configDir/config.nix;
@@ -166,7 +190,7 @@ addNixCommand fetchCoqOverlay
 cachedMake (){
   cproj=$currentDir/$coqproject
   cprojDir=$(dirname $cproj)
-  build=$(env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build --argstr task $selectedTask --no-out-link)
+  build=$(env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build --argstr task "$selectedTask" --no-out-link)
   grep -e "^-R.*" $cproj | while read -r line; do
     realpath=$(echo $line | cut -d" " -f2)
     namespace=$(echo $line | cut -d" " -f3)
