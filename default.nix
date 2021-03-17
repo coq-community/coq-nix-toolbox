@@ -60,8 +60,8 @@ with initial.lib; let
       + optionalString print-env "\nprintNixEnv; exit"
       + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
       + optionalString ci-matrix "\nnixTasks; exit";
-  jsonTasks = toJSON (attrNames setup.fixed-task);
-  jsonTaskSet = toJSON setup.fixed-task;
+  jsonTasks = toJSON (attrNames setup.tasks);
+  jsonTaskSet = toJSON setup.tasks;
   jsonTask = toJSON selected-instance.task;
   emacs = with selected-instance.pkgs; emacsWithPackages
     (epkgs: with epkgs.melpaPackages; [ proof-general ]);

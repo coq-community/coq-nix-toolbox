@@ -19,7 +19,7 @@ let config = import ./normalize.nix
 in with config; let
 
   # preparing tasks
-  overriden-tasks = let
+  tasks = let
       mk-tasks = pre: x:
         setAttrByPath pre (mapAttrs (n: v: {override.version = v;}) x);
     in mapAttrs
@@ -62,7 +62,6 @@ in with config; let
     };
   in
 {
-  instances = mapAttrs (_: mk-instance) overriden-tasks;
-  fixed-task = overriden-tasks;
-  inherit config;
+  instances = mapAttrs (_: mk-instance) tasks;
+  inherit tasks config;
 }
