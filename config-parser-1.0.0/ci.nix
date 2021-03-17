@@ -7,10 +7,11 @@ with builtins; with lib;
     collect-job = v: if v?job && v.job != "_excluded" then [ v.job ] else [];
     collect-jobs = p: flatten (map collect-job (attrValues p));
     jobs = collect-jobs (task.coqPackages or {});
-    keep_ = tgt: job: (job != "_excluded") &&
-      (tgt == "_all" || tgt == job || (tgt == "_allJobs" && job != "_all"));
+    keep_ = tgt: job: (job != "_excluded")
+      && (tgt == "_all" || tgt == job
+          || (tgt == "_allJobs" && elem job jobs));
     subpkgs = job:
-      let keep = n: v: keep_ job (task.coqPackages.${n}.job or "_all"); in
+      let keep = n: v: keep_ job (task.coqPackages.${n}.job or n); in
       attrValues (filterAttrs keep pkgs.coqPackages)
       ++ optionals (job == "_deps") dependencies;
 in

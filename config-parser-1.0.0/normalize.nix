@@ -12,13 +12,13 @@ let
                { case = isString; out = j; }
              ] (throw ''
   config-parser-1.0.0 normalize: job must be either:
-  - true        (the given name is the one of the attribute
+  - true        (the name of the job is the one of the attribute,
+                 this is the default behaviour)
   - false       (the package is excluded from CI, always)
   - "_excluded" (the package is excluded from CI, always)
   - "_deps"     (the package is considered by the CI as a dependency)
-  - "_allJobs"  (the job is triggered only when testing all existing jobs)
   - "_all"      (the job is triggered only when testing all coqPackages)
-  - a string which corresponds to a package attribute.
+  - a string which corresponds to the job name.
  ''); };
 in rec {
   format = "1.0.0";
