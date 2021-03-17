@@ -1,37 +1,18 @@
 { lib, pkgs, this-shell-pkg, task }:
-with builtins; with lib; let
-  to-job = n: switch n [
-    { case = -1;        out = "dependencies";}
-    { case = "job--1";  out = "dependencies";}
-    { case = "deps";    out = "dependencies";}
-    { case = 0;         out = "main";}
-    { case = "job-0";   out = "main";}
-    { case = true ;     out = "all"; }
-    { case = null;      out = "all"; }
-    { case = false;     out = "NOCI"; }
-    { case = isInt;     out = "job-${toString n}";}
-    { case = isString;  out = n;}
-    ] (throw "Step is not a string or an int ${toString n}");
-  dependencies = (this-shell-pkg.nativeBuildInputs or []) ++
-                 (this-shell-pkg.buildInputs or []) ++
-                 (this-shell-pkg.propagatedBuildInputs or []);
-  subpkgs = raw-job:
-      let
-        job = to-job raw-job;
-        keep = n: v:
-          let
-            ipkg-n = task.coqPackages.${n} or {};
-            job-n = switch-if [
-              { cond = !(ipkg-n?ci);             out = "NOCI";}
-              { cond = !((ipkg-n.ci or {})?job); out = n;}
-            ] (to-job ipkg-n.ci.job); in
-        (job-n != "NOCI") && (job-n != "exclude") &&
-        ((job == job-n) || (job == "all")); in
+with builtins; with lib;
+  let
+    dependencies = (this-shell-pkg.nativeBuildInputs or []) ++
+                   (this-shell-pkg.buildInputs or []) ++
+                   (this-shell-pkg.propagatedBuildInputs or []);
+    collect-job = v: if v?job && v.job != "_excluded" then [ v.job ] else [];
+    collect-jobs = p: flatten (map collect-job (attrValues p));
+    jobs = collect-jobs (task.coqPackages or {});
+    keep_ = tgt: job: (job != "_excluded") &&
+      (tgt == "_all" || tgt == job || (tgt == "_allJobs" && job != "_all"));
+    subpkgs = job:
+      let keep = n: v: keep_ job (task.coqPackages.${n}.job or "_all"); in
       attrValues (filterAttrs keep pkgs.coqPackages)
-      ++ optionals (job == "dependencies") dependencies;
-  collect-job = v: if v?ci && v.ci?job then [ (to-job v.ci.job) ] else [];
-  collect-jobs = p: flatten (map collect-job (attrValues p));
-  jobs = collect-jobs (task.coqPackages or {});
+      ++ optionals (job == "_deps") dependencies;
 in
 {
   inherit jobs subpkgs;

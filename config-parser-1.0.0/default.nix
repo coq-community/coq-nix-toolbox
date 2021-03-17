@@ -19,14 +19,15 @@ let config = import ./normalize.nix
 in with config; let
 
   # preparing tasks
-  overriden-tasks = let
+  tasks = let
       mk-tasks = pre: x:
         setAttrByPath pre (mapAttrs (n: v: {override.version = v;}) x);
     in mapAttrs
     (_: i: foldl recursiveUpdate {} [
-      (setAttrByPath shell-ppath
-        { override.version = "${config.src}"; ci.job = "shell"; })
-      (setAttrByPath ppath { override.version = "${config.src}"; ci.job = "main"; })
+      (setAttrByPath config.shell-ppath
+        { override.version = "${config.src}"; job = config.shell-attribute; })
+      (setAttrByPath config.ppath
+        { override.version = "${config.src}"; job = config.attribute; })
       i
       (mk-tasks [ "coqPackages" ] override)
       (mk-tasks [ "ocamlPackages" ] ocaml-override)
@@ -38,16 +39,22 @@ in with config; let
 
   mk-instance = task: let
     overlays = import ./overlays.nix
-      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir task; };
+      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir task;
+        inherit (config) attribute pname shell-attribute shell-pname src; };
+
     pkgs = import config.nixpkgs { inherit overlays; };
+
     ci = import ./ci.nix { inherit lib this-shell-pkg pkgs task; };
+
     patchBIPkg = pkg:
       let bi = map (buildInputFrom pkgs) (config.buildInputs or []); in
       if bi == [] then pkg else
       pkg.overrideAttrs (o: { buildInputs = o.buildInputs ++ bi;});
 
-    this-pkg = patchBIPkg (attrByPath config.ppath default-coq-derivation pkgs);
-    this-shell-pkg = patchBIPkg (attrByPath config.shell-ppath default-coq-derivation pkgs);
+    notfound-ppath = throw "config-parser-1.0.0: not found: ${config.ppath}";
+    notfound-shell-ppath = throw "config-parser-1.0.0: not found: ${config.shell-ppath}";
+    this-pkg = patchBIPkg (attrByPath config.ppath notfound-ppath pkgs);
+    this-shell-pkg = patchBIPkg (attrByPath config.shell-ppath notfound-shell-ppath pkgs);
 
     in rec {
       inherit task pkgs this-pkg this-shell-pkg ci;
@@ -55,7 +62,6 @@ in with config; let
     };
   in
 {
-  instances = mapAttrs (_: mk-instance) overriden-tasks;
-  fixed-task = overriden-tasks;
-  inherit config;
+  instances = mapAttrs (_: mk-instance) tasks;
+  inherit tasks config;
 }

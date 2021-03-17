@@ -54,28 +54,39 @@ with initial.lib; let
     { case = x: !isString x; out = my-throw "config.format must be a string."; }
   ] (my-throw "config.format ${initial.config.format} not supported");
   instances = setup.instances;
-  selectedTask = unNull setup.config.select task;
+  selectedTask = unNull setup.config.default-task task;
   selected-instance = instances."${selectedTask}";
   shellHook = readFile shellHook-file
       + optionalString print-env "\nprintNixEnv; exit"
       + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
       + optionalString ci-matrix "\nnixTasks; exit";
-  jsonTasks = toJSON (attrNames setup.fixed-task);
-  jsonTaskSet = toJSON setup.fixed-task;
+  jsonTasks = toJSON (attrNames setup.tasks);
+  jsonTaskSet = toJSON setup.tasks;
   jsonTask = toJSON selected-instance.task;
   emacs = with selected-instance.pkgs; emacsWithPackages
     (epkgs: with epkgs.melpaPackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
 
   jsonSetupConfig = toJSON setup.config;
-  jsonCI = toJSON (mapAttrs
-    (_: v: mapAttrs (_: x: map (x: x.name) x) v.ci.set)
-    setup.instances);
+
+  ciByTask = flip mapAttrs setup.instances (_: v:
+    mapAttrs (_: x: map (x: x.name) x) v.ci.set);
+  jsonCIbyTask = toJSON ciByTask;
+
+  ciByJob =
+    let
+      jobs-list = attrValues (flip mapAttrs ciByTask (tn: tv:
+        flip mapAttrs tv (jn: jv: {${tn} = jv;})));
+      push-list = foldAttrs (n: a: [n] ++ a) [];
+    in
+      flip mapAttrs (push-list jobs-list)
+        (jn: jv: mapAttrs (_: flatten) (push-list jv));
+  jsonCIbyJob = toJSON ciByJob;
 
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
-    inherit jsonTask jsonTasks jsonSetupConfig jsonCI jsonTaskSet
-            shellHook toolboxDir selectedTask;
+    inherit jsonTask jsonTasks jsonSetupConfig jsonCIbyTask jsonTaskSet
+            jsonCIbyJob shellHook toolboxDir selectedTask;
 
     COQBIN = optionalString (!do-nothing) "";
 
@@ -83,7 +94,7 @@ with initial.lib; let
        pkgs.coqPackages.coq.coq-version;
 
     nativeBuildInputs = optionals (!do-nothing)
-      (old.propagatedBuildInputs or []);
+      (old.propagatedBuildInputs or []) ++ [ pkgs.remarshal ];
 
     buildInputs = optionals (!do-nothing)
       (old.buildInputs or []);

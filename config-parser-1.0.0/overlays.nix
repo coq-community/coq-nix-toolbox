@@ -1,9 +1,15 @@
-{ overlays-dir, lib, coq-overlays-dir, ocaml-overlays-dir, task }:
+{ overlays-dir, lib, coq-overlays-dir, ocaml-overlays-dir, task,
+  attribute, pname, shell-attribute, shell-pname, src }:
 with builtins; with lib;
 let
   mk-overlay = path: self: super:
-    if !pathExists path then {}
-    else mapAttrs (x: _v: self.callPackage (path + "/${x}") {}) (readDir path);
+    if !pathExists path then {} else
+    let
+      hasDefault = p: (readDir p)?"default.nix";
+      isOverlay = x: ty: ty == "directory" && hasDefault (path + "/${x}");
+      overlays = filterAttrs isOverlay (readDir path);
+    in
+      mapAttrs (x: _: self.callPackage (path + "/${x}") {}) overlays;
   do-override = pkg: cfg:
     let pkg' = if cfg?override
         then pkg.override or (x: pkg) cfg.override else pkg; in
@@ -16,12 +22,16 @@ let
     self: super: mapAttrs (n: ov: do-override super.${n} ov)
       (task.ocamlPackages or {});
   coq-overrides =
-    self: super: mapAttrs
-      (n: ov: do-override (super.${n} or
-        (makeOverridable self.mkCoqDerivation {
-          pname = "${n}"; version = "${src}";
-        })) ov)
-      (task.coqPackages or {});
+    self: super:
+    let newCoqPkg = pname: args: makeOverridable self.mkCoqDerivation
+      { inherit pname; version = "${src}"; } // args;
+    in
+      mapAttrs (n: ov: do-override (super.${n} or
+        (switch n [
+          { case = attribute;       out = newCoqPkg pname {}; }
+          { case = shell-attribute; out = newCoqPkg shell-pname {}; }
+        ] (newCoqPkg n ((super.${n}.mk or (_: {})) self))
+      )) ov) (task.coqPackages or {});
   fold-override = foldl (fpkg: override: fpkg.overrideScope' override);
   in
 [
