@@ -4,7 +4,7 @@ with builtins; with lib;
     dependencies = (this-shell-pkg.nativeBuildInputs or []) ++
                    (this-shell-pkg.buildInputs or []) ++
                    (this-shell-pkg.propagatedBuildInputs or []);
-    collect-job = v: if v?job && v.job != "-" then [ v.job ] else [];
+    collect-job = v: if v?job && v.job != "_excluded" then [ v.job ] else [];
     collect-jobs = p: flatten (map collect-job (attrValues p));
     jobs = collect-jobs (task.coqPackages or {});
     keep_ = tgt: job: (job != "_excluded") &&
