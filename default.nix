@@ -68,13 +68,13 @@ with initial.lib; let
   emacsInit = ./emacs-init.el;
 
   jsonSetupConfig = toJSON setup.config;
-  jsonCI = toJSON (mapAttrs
+  jsonCIbyTask = toJSON (mapAttrs
     (_: v: mapAttrs (_: x: map (x: x.name) x) v.ci.set)
     setup.instances);
 
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
-    inherit jsonTask jsonTasks jsonSetupConfig jsonCI jsonTaskSet
+    inherit jsonTask jsonTasks jsonSetupConfig jsonCIbyTask jsonTaskSet
             shellHook toolboxDir selectedTask;
 
     COQBIN = optionalString (!do-nothing) "";
