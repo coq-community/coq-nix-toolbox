@@ -32,6 +32,8 @@ in rec {
   shell-pname = config.shell-pname or pname;
   coqproject = config.coqproject or "_CoqProject";
   default-task = config.default-task or "default";
+  cachix = config.cachix or { coq = {}; };
+  revdep-attribute = config.revdep-attribute or attribute;
   tasks = mapAttrs (_: t: mapAttrs normalize-pkg t)
     (config.tasks or { default = {}; });
   buildInputs = config.buildInputs or [];

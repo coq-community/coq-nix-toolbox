@@ -136,6 +136,30 @@ ppCIbyJob (){
 }
 addNixCommand ppCIbyJob
 
+ppDeps (){
+    echo $jsonPkgsDeps | json2yaml
+}
+addNixCommand ppDeps
+
+ppRevDeps (){
+    echo $jsonPkgsRevDeps | json2yaml
+}
+addNixCommand ppRevDeps
+
+ppNixAction (){
+  echo $jsonAction | json2yaml
+}
+addNixCommand ppNixAction
+
+genNixActions (){
+  mkdir -p $currentDir/.github/workflows/
+  for t in $tasks; do
+    echo "generating $currentDir/.github/workflows/nix-action-$t.yml"
+    nix-shell --arg do-nothing true --argstr task $t --run "ppNixAction > $currentDir/.github/workflows/nix-action-$t.yml"
+  done
+}
+addNixCommand genNixActions
+
 initNixConfig (){
   Orig=$toolboxDir/template-config.nix
   F=$configDir/config.nix;
