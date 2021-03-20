@@ -8,7 +8,7 @@ with builtins; with lib; let
   stepCachixInstall = {
     name =  "Cachix install";
     uses =  "cachix/install-nix-action@v12";
-    "with".nix_path = "nixpkgs=channel = nixpkgs-unstable";
+    "with".nix_path = "nixpkgs=channel:nixpkgs-unstable";
   };
   stepCachixUse = { name, authToken ? null, signingKey ? null }: {
     name =  "Cachix setup coq";
