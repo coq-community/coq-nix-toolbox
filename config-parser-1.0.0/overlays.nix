@@ -38,6 +38,9 @@ let
   (mk-overlay overlays-dir)
   nixpkgs-overrides
   (self: super: { coqPackages = fold-override super.coqPackages ([
+    (self: super: { mkCoqDerivation = { defaultVersion ? null, ... }@args:
+      super.mkCoqDerivation (args //
+       { defaultVersion = if isNull defaultVersion then "master" else defaultVersion; }); })
     (mk-overlay coq-overlays-dir)
     coq-overrides
     (self: super: { coq = super.coq.override {
