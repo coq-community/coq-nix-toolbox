@@ -190,7 +190,7 @@ addNixCommand fetchCoqOverlay
 cachedMake (){
   cproj=$currentDir/$coqproject
   cprojDir=$(dirname $cproj)
-  build=$(env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build --argstr task $selectedTask --no-out-link)
+  build=$(env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build --argstr task "$selectedTask" --no-out-link)
   grep -e "^-R.*" $cproj | while read -r line; do
     realpath=$(echo $line | cut -d" " -f2)
     namespace=$(echo $line | cut -d" " -f3)

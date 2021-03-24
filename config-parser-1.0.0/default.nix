@@ -25,9 +25,13 @@ in with config; let
     in mapAttrs
     (_: i: foldl recursiveUpdate {} [
       (setAttrByPath config.shell-ppath
-        { override.version = "${config.src}"; job = config.shell-attribute; })
+        { override.version = "${config.src}";
+          job = config.shell-attribute;
+          main-job = true; })
       (setAttrByPath config.ppath
-        { override.version = "${config.src}"; job = config.attribute; })
+        { override.version = "${config.src}";
+          job = config.attribute;
+          main-job = true; })
       i
       (mk-tasks [ "coqPackages" ] override)
       (mk-tasks [ "ocamlPackages" ] ocaml-override)
@@ -56,8 +60,13 @@ in with config; let
     action = mkAction {
       inherit (config) cachix;
       tasks = taskName;
-      jobs = [ config.revdep-attribute ]
-        ++ (genCI.pkgsRevDeps.${config.revdep-attribute} or []);
+      jobs = let
+          jdeps = genAttrs ci.mains (n: genCI.pkgsRevDepsSet.${n} or {});
+        in
+        attrNames (removeAttrs
+          (jdeps // genAttrs ci.jobs (_: true)
+          // foldAttrs (_: _: true) true (attrValues jdeps))
+          ci.excluded);
       deps = genCI.pkgsDeps;
     };
     jsonAction = toJSON action;

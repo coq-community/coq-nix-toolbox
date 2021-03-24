@@ -1,8 +1,7 @@
 { lib, coqPackages }:
 with builtins; with lib;
 let
-  initialCoqPkgs =
-    filterAttrs (_: v: isDerivation v && v != coqPackages.coq) coqPackages;
+  initialCoqPkgs = filterAttrs (_: isDerivation) coqPackages;
   pkgsRevmap =
      mapAttrs' (n: v: { name = "${v.name}"; value = n; }) initialCoqPkgs;
   coqPkgs = filterAttrs (n: v: elem n (attrValues pkgsRevmap)) initialCoqPkgs;
@@ -14,13 +13,16 @@ let
       flip mapAttrs coqPkgs (n: v:
         flatten (map findInput (v.buildInputs ++ v.propagatedBuildInputs))
       );
-  pkgsSorted = toposort (x: y: elem x pkgsDeps.${y}) (attrNames coqPkgs);
-  pkgsRevDepsAttrs = foldl (done: p: foldl (done: d:
-        done // { ${d} = (done.${d} or {}) // { ${p} = true;} // (done.${p} or {});}
+  pkgsSorted = (toposort (x: y: elem x pkgsDeps.${y}) (attrNames coqPkgs)).result;
+  pkgsRevDepsSetNoAlias = foldl (done: p: foldl (done: d:
+        done // { ${p} = done.${p} or {}; }
+        // { ${d} = (done.${d} or {}) // { ${p} = true;} // (done.${p} or {});}
       )  done pkgsDeps.${p}
-    ) {} (reverseList pkgsSorted.result);
-  pkgsRevDeps = mapAttrs (n: v: attrNames v) pkgsRevDepsAttrs;
+    ) {} (reverseList pkgsSorted);
+  pkgsRevDepsSet = mapAttrs
+     (_: p: pkgsRevDepsSetNoAlias.${pkgsRevmap.${p.name}}) initialCoqPkgs;
+  pkgsRevDeps = mapAttrs (n: v: attrNames v) pkgsRevDepsSet;
 in
 {
-  inherit pkgsDeps pkgsSorted pkgsRevDeps;
+  inherit pkgsDeps pkgsSorted pkgsRevDeps pkgsRevDepsSet;
 }

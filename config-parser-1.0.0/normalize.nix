@@ -18,7 +18,8 @@ let
   - "_excluded" (the package is excluded from CI, always)
   - "_deps"     (the package is considered by the CI as a dependency)
   - "_all"      (the job is triggered only when testing all coqPackages)
-  - a string which corresponds to the job name.
+  - a string which corresponds both to the job name
+    and an attribute in coqPackages.
  ''); };
 in rec {
   format = "1.0.0";
@@ -33,7 +34,6 @@ in rec {
   coqproject = config.coqproject or "_CoqProject";
   default-task = config.default-task or "default";
   cachix = config.cachix or { coq = {}; };
-  revdep-attribute = config.revdep-attribute or attribute;
   tasks = mapAttrs (_: t: mapAttrs normalize-pkg t)
     (config.tasks or { default = {}; });
   buildInputs = config.buildInputs or [];
