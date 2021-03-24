@@ -83,10 +83,13 @@ with initial.lib; let
         (jn: jv: mapAttrs (_: flatten) (push-list jv));
   jsonCIbyJob = toJSON ciByJob;
 
+  substituters = [ "https://cache.nixos.org" ]
+    ++ map (n: "https://${n}.cachix.org") (attrNames setup.config.cachix);
+
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
     inherit jsonTask jsonTasks jsonSetupConfig jsonCIbyTask jsonTaskSet
-            jsonCIbyJob shellHook toolboxDir selectedTask
+            jsonCIbyJob shellHook toolboxDir selectedTask substituters
             jsonPkgsDeps jsonPkgsRevDeps jsonPkgsSorted jsonAction;
 
     tasks = attrNames setup.tasks;
