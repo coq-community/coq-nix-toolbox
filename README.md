@@ -27,7 +27,7 @@ nix-shell --run "initNixConfig YOURPACKAGENAME"
 This will create an initial `.nix/config.yml` that you should now manually edit.
 This file contains comments explaining each available option.
 
-## Overrides
+## Overlays
 
 You can create directories named after a Coq package and containing `default.nix` files in `.nix/coq-overlays` to override the contents of `coqPackages`.
 This can be useful in the following case:
