@@ -18,9 +18,9 @@ let config = import ./normalize.nix
   { inherit (initial) src lib config nixpkgs; };
 in with config; let
 
-  # preparing tasks
-  tasks = let
-      mk-tasks = pre: x:
+  # preparing bundles
+  bundles = let
+      mk-bundles = pre: x:
         setAttrByPath pre (mapAttrs (n: v: {override.version = v;}) x);
     in mapAttrs
     (_: i: foldl recursiveUpdate {} [
@@ -33,22 +33,22 @@ in with config; let
           job = config.attribute;
           main-job = true; })
       i
-      (mk-tasks [ "coqPackages" ] override)
-      (mk-tasks [ "ocamlPackages" ] ocaml-override)
-      (mk-tasks [ ] global-override)
-    ]) config.tasks;
+      (mk-bundles [ "coqPackages" ] override)
+      (mk-bundles [ "ocamlPackages" ] ocaml-override)
+      (mk-bundles [ ] global-override)
+    ]) config.bundles;
 
   buildInputFrom = pkgs: str:
     pkgs.coqPackages.${str} or pkgs.ocamlPackages.${str} or pkgs.${str};
 
-  mk-instance = taskName: task: let
+  mk-instance = bundleName: bundle: let
     overlays = import ./overlays.nix
-      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir task;
+      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir bundle;
         inherit (config) attribute pname shell-attribute shell-pname src; };
 
     pkgs = import config.nixpkgs { inherit overlays; };
 
-    ci = import ./ci.nix { inherit lib this-shell-pkg pkgs task; };
+    ci = import ./ci.nix { inherit lib this-shell-pkg pkgs bundle; };
 
     genCI = import ../deps.nix
       { inherit lib; inherit (pkgs) coqPackages; };
@@ -59,7 +59,7 @@ in with config; let
     inherit (import ../action.nix { inherit lib; }) mkJobs mkAction;
     action = mkAction {
       inherit (config) cachix;
-      tasks = taskName;
+      bundles = bundleName;
       jobs = let
           jdeps = genAttrs ci.mains (n: genCI.pkgsRevDepsSet.${n} or {});
         in
@@ -82,13 +82,13 @@ in with config; let
     this-shell-pkg = patchBIPkg (attrByPath config.shell-ppath notfound-shell-ppath pkgs);
 
     in rec {
-      inherit task pkgs this-pkg this-shell-pkg ci genCI;
+      inherit bundle pkgs this-pkg this-shell-pkg ci genCI;
       inherit jsonPkgsDeps jsonPkgsSorted jsonPkgsRevDeps;
       inherit action jsonAction;
-      jsonTask = toJSON task;
+      jsonBundle = toJSON bundle;
     };
   in
 {
-  instances = mapAttrs mk-instance tasks;
-  inherit tasks config;
+  instances = mapAttrs mk-instance bundles;
+  inherit bundles config;
 }

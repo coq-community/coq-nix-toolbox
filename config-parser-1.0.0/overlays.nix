@@ -1,4 +1,4 @@
-{ overlays-dir, lib, coq-overlays-dir, ocaml-overlays-dir, task,
+{ overlays-dir, lib, coq-overlays-dir, ocaml-overlays-dir, bundle,
   attribute, pname, shell-attribute, shell-pname, src }:
 with builtins; with lib;
 let
@@ -17,10 +17,10 @@ let
       then pkg'.overrideAttrs cfg.overrideAttrs else pkg';
   nixpkgs-overrides =
     self: super: mapAttrs (n: ov: do-override super.${n} ov)
-      (removeAttrs task [ "coqPackages" "ocamlPackages" ]);
+      (removeAttrs bundle [ "coqPackages" "ocamlPackages" ]);
   ocaml-overrides =
     self: super: mapAttrs (n: ov: do-override super.${n} ov)
-      (task.ocamlPackages or {});
+      (bundle.ocamlPackages or {});
   coq-overrides =
     self: super:
     let newCoqPkg = pname: args: makeOverridable self.mkCoqDerivation
@@ -31,7 +31,7 @@ let
           { case = attribute;       out = newCoqPkg pname {}; }
           { case = shell-attribute; out = newCoqPkg shell-pname {}; }
         ] (newCoqPkg n ((super.${n}.mk or (_: {})) self))
-      )) ov) (task.coqPackages or {});
+      )) ov) (bundle.coqPackages or {});
   fold-override = foldl (fpkg: override: fpkg.overrideScope' override);
   in
 [

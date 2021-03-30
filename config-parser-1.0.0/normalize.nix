@@ -33,10 +33,10 @@ in rec {
   pname = config.pname or attribute;
   shell-pname = config.shell-pname or pname;
   coqproject = config.coqproject or "_CoqProject";
-  default-task = config.default-task or "default";
+  default-bundle = config.default-bundle or "default";
   cachix = config.cachix or { coq = {}; };
-  tasks = mapAttrs (_: t: mapAttrs normalize-pkg t)
-    (config.tasks or { default = {}; });
+  bundles = mapAttrs (_: t: mapAttrs normalize-pkg t)
+    (config.bundles or { default = {}; });
   buildInputs = config.buildInputs or [];
   src = config.src or
     (if pathExists (/. + initial.src)

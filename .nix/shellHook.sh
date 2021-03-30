@@ -101,35 +101,35 @@ updateNixpkgs (){
 }
 addNixCommand updateNixpkgs
 
-nixTask (){
-    echo $jsonTask
+nixBundle (){
+    echo $jsonBundle
 }
-addNixCommand nixTask
+addNixCommand nixBundle
 
-ppTask (){
-    echo $jsonTask | json2yaml
+ppBundle (){
+    echo $jsonBundle | json2yaml
 }
-addNixCommand ppTask
+addNixCommand ppBundle
 
-nixTasks (){
-    echo $jsonTasks
+nixBundles (){
+    echo $jsonBundles
 }
-addNixCommand nixTasks
+addNixCommand nixBundles
 
-ppTasks (){
-    echo $jsonTasks | json2yaml
+ppBundles (){
+    echo $jsonBundles | json2yaml
 }
-addNixCommand ppTasks
+addNixCommand ppBundles
 
-ppTaskSet (){
-    echo $jsonTaskSet | json2yaml
+ppBundleSet (){
+    echo $jsonBundleSet | json2yaml
 }
-addNixCommand ppTaskSet
+addNixCommand ppBundleSet
 
-ppCIbyTask (){
-    echo $jsonCIbyTask | json2yaml
+ppCIbyBundle (){
+    echo $jsonCIbyBundle | json2yaml
 }
-addNixCommand ppCIbyTask
+addNixCommand ppCIbyBundle
 
 ppCIbyJob (){
     echo $jsonCIbyJob | json2yaml
@@ -153,9 +153,9 @@ addNixCommand ppNixAction
 
 genNixActions (){
   mkdir -p $currentDir/.github/workflows/
-  for t in $tasks; do
+  for t in $bundles; do
     echo "generating $currentDir/.github/workflows/nix-action-$t.yml"
-    nix-shell --arg do-nothing true --argstr task $t --run "ppNixAction > $currentDir/.github/workflows/nix-action-$t.yml"
+    nix-shell --arg do-nothing true --argstr bundle $t --run "ppNixAction > $currentDir/.github/workflows/nix-action-$t.yml"
   done
 }
 addNixCommand genNixActions
@@ -190,7 +190,7 @@ addNixCommand fetchCoqOverlay
 cachedMake (){
   cproj=$currentDir/$coqproject
   cprojDir=$(dirname $cproj)
-  build=$(env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build --argstr task "$selectedTask" --no-out-link)
+  build=$(env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build --argstr bundle "$selectedBundle" --no-out-link)
   grep -e "^-R.*" $cproj | while read -r line; do
     realpath=$(echo $line | cut -d" " -f2)
     namespace=$(echo $line | cut -d" " -f3)

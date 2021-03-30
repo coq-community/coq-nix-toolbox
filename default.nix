@@ -26,7 +26,7 @@ in
   do-nothing ? false,
   update-nixpkgs ? false,
   job ? null,
-  task ? null,
+  bundle ? null,
   inNixShell ? null
 }@args:
 let
@@ -54,28 +54,28 @@ with initial.lib; let
     { case = x: !isString x; out = my-throw "config.format must be a string."; }
   ] (my-throw "config.format ${initial.config.format} not supported");
   instances = setup.instances;
-  selectedTask = unNull setup.config.default-task task;
-  selected-instance = instances."${selectedTask}";
+  selectedBundle = unNull setup.config.default-bundle bundle;
+  selected-instance = instances."${selectedBundle}";
   shellHook = readFile shellHook-file
       + optionalString print-env "\nprintNixEnv; exit"
       + optionalString update-nixpkgs "\nupdateNixpkgsUnstable; exit"
-      + optionalString ci-matrix "\nnixTasks; exit";
-  jsonTasks = toJSON (attrNames setup.tasks);
-  jsonTaskSet = toJSON setup.tasks;
-  jsonTask = toJSON selected-instance.task;
+      + optionalString ci-matrix "\nnixBundles; exit";
+  jsonBundles = toJSON (attrNames setup.bundles);
+  jsonBundleSet = toJSON setup.bundles;
+  jsonBundle = toJSON selected-instance.bundle;
   emacs = with selected-instance.pkgs; emacsWithPackages
     (epkgs: with epkgs.melpaPackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
 
   jsonSetupConfig = toJSON setup.config;
 
-  ciByTask = flip mapAttrs setup.instances (_: v:
+  ciByBundle = flip mapAttrs setup.instances (_: v:
     mapAttrs (_: x: map (x: x.name) x) v.ci.set);
-  jsonCIbyTask = toJSON ciByTask;
+  jsonCIbyBundle = toJSON ciByBundle;
 
   ciByJob =
     let
-      jobs-list = attrValues (flip mapAttrs ciByTask (tn: tv:
+      jobs-list = attrValues (flip mapAttrs ciByBundle (tn: tv:
         flip mapAttrs tv (jn: jv: {${tn} = jv;})));
       push-list = foldAttrs (n: a: [n] ++ a) [];
     in
@@ -85,11 +85,11 @@ with initial.lib; let
 
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
-    inherit jsonTask jsonTasks jsonSetupConfig jsonCIbyTask jsonTaskSet
-            jsonCIbyJob shellHook toolboxDir selectedTask
+    inherit jsonBundle jsonBundles jsonSetupConfig jsonCIbyBundle jsonBundleSet
+            jsonCIbyJob shellHook toolboxDir selectedBundle
             jsonPkgsDeps jsonPkgsRevDeps jsonPkgsSorted jsonAction;
 
-    tasks = attrNames setup.tasks;
+    bundles = attrNames setup.bundles;
 
     passthru = (old.passthru or {}) // {inherit action pkgs;};
 
@@ -117,8 +117,8 @@ with initial.lib; let
   nix-default = selected-instance.this-shell-pkg;
   nix-auto = switch-if [
     { cond = inNixShell;                    out = nix-shell; }
-    { cond = isNull task && !isNull job;    out = nix-ci job; }
-    { cond = isString task && !isNull job ; out = nix-ci-for task job; }
+    { cond = isNull bundle && !isNull job;    out = nix-ci job; }
+    { cond = isString bundle && !isNull job ; out = nix-ci-for bundle job; }
   ] nix-default;
   in
 nix-shell.overrideAttrs (o: {

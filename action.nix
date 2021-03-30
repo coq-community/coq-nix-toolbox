@@ -24,38 +24,38 @@ with builtins; with lib; let
   stepCachixUseAll = cachix: attrValues
     (mapAttrs (name: v: stepCachixUse ({inherit name;} // v)) cachix);
 
-  stepBuild = {job, tasks ? [], current ? false}:
-    let taskstr = if isList tasks then "\${{ matrix.task }}" else tasks; in {
+  stepBuild = {job, bundles ? [], current ? false}:
+    let bundlestr = if isList bundles then "\${{ matrix.bundle }}" else bundles; in {
     name = if current then "Building/fetching current CI target"
            else "Building/fetching previous CI target: ${job}";
-    run = "nix-build --no-out-link --argstr task \"${taskstr}\" --argstr job \"${job}\"";
+    run = "nix-build --no-out-link --argstr bundle \"${bundlestr}\" --argstr job \"${job}\"";
   };
 
-  mkJob = { job, jobs ? [], tasks ? [], deps ? {}, cachix ? {}, suffix ? false }:
+  mkJob = { job, jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }:
     let
-      suffixStr = optionalString (suffix && isString tasks) "-${tasks}";
+      suffixStr = optionalString (suffix && isString bundles) "-${bundles}";
       jdeps = deps.${job} or [];
     in {
     "${job}${suffixStr}" = rec {
       runs-on = "ubuntu-latest";
       needs = map (j: "${j}${suffixStr}") (filter (j: elem j jobs) jdeps);
       steps = [ stepCheckout stepCachixInstall ] ++ (stepCachixUseAll cachix)
-              ++ (map (job: stepBuild { inherit job tasks; }) jdeps)
-              ++ [ (stepBuild { inherit job tasks; current = true; }) ];
-    } // (optionalAttrs (isList tasks) {strategy.matrix.task = tasks;});
+              ++ (map (job: stepBuild { inherit job bundles; }) jdeps)
+              ++ [ (stepBuild { inherit job bundles; current = true; }) ];
+    } // (optionalAttrs (isList bundles) {strategy.matrix.bundle = bundles;});
   };
 
-  mkJobs = { jobs ? [], tasks ? [], deps ? {}, cachix ? {}, suffix ? false }@args:
+  mkJobs = { jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }@args:
     foldl (action: job: action // (mkJob ({ inherit job; } // args))) {} jobs;
 
-  mkActionFromJobs = { actionJobs, tasks ? [] }: {
-    name = "Nix CI for task ${toString tasks}";
+  mkActionFromJobs = { actionJobs, bundles ? [] }: {
+    name = "Nix CI for bundle ${toString bundles}";
     on.push.branches = [ "master" ];
     on.pull_request.branches = [ "**" ];
     jobs = actionJobs;
   };
 
-  mkAction = { jobs ? [], tasks ? [], deps ? {}, cachix ? {} }@args:
-    mkActionFromJobs {inherit tasks; actionJobs = mkJobs args; };
+  mkAction = { jobs ? [], bundles ? [], deps ? {}, cachix ? {} }@args:
+    mkActionFromJobs {inherit bundles; actionJobs = mkJobs args; };
 
 in { inherit mkJob mkJobs mkAction; }

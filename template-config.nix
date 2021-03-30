@@ -28,14 +28,14 @@
   ## If not specified, it defaults to "_CoqProject"
   # coqproject = "_CoqProject";
 
-  ## select an entry to build in the following `tasks` set
+  ## select an entry to build in the following `bundles` set
   ## defaults to "default"
-  default-task = "default";
+  default-bundle = "default";
 
-  ## write one `tasks.name` attribute set per
+  ## write one `bundles.name` attribute set per
   ## alternative configuration, the can be used to
   ## compute several ci jobs as well
-  tasks.default = {
+  bundles.default = {
 
   ## You can override Coq and other Coq coqPackages
   ## through the following attribute
