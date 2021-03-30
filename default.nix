@@ -86,7 +86,12 @@ with initial.lib; let
   nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
     inherit jsonTask jsonTasks jsonSetupConfig jsonCIbyTask jsonTaskSet
-            jsonCIbyJob shellHook toolboxDir selectedTask;
+            jsonCIbyJob shellHook toolboxDir selectedTask
+            jsonPkgsDeps jsonPkgsRevDeps jsonPkgsSorted jsonAction;
+
+    tasks = attrNames setup.tasks;
+
+    passthru = (old.passthru or {}) // {inherit action pkgs;};
 
     COQBIN = optionalString (!do-nothing) "";
 
