@@ -7,7 +7,7 @@ with builtins; with lib;
     collect-job = v: if v?job && v.job != "_excluded" then [ v.job ] else [];
     collect-jobs = p: flatten (map collect-job (attrValues p));
     jobs = collect-jobs (bundle.coqPackages or {});
-    excluded-job = v: if v.job == "_excluded" then [ v.job ] else [];
+    excluded-job = v: if v?job && v.job == "_excluded" then [ v.job ] else [];
     excluded-jobs = p: flatten (map excluded-job (attrValues p));
     excluded = excluded-jobs (bundle.coqPackages or {});
     main-job = v: if v.main-job or false then [ v.job ] else [];
