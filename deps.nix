@@ -20,7 +20,8 @@ let
       )  done pkgsDeps.${p}
     ) {} (reverseList pkgsSorted);
   pkgsRevDepsSet = mapAttrs
-     (_: p: pkgsRevDepsSetNoAlias.${pkgsRevmap.${p.name}}) initialCoqPkgs;
+     (_: p: let pname = pkgsRevmap.${p.name} or p.name; in
+       pkgsRevDepsSetNoAlias.${pname} or {}) initialCoqPkgs;
   pkgsRevDeps = mapAttrs (n: v: attrNames v) pkgsRevDepsSet;
 in
 {
