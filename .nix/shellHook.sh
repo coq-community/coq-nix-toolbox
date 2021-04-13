@@ -187,22 +187,33 @@ fetchCoqOverlay (){
 }
 addNixCommand fetchCoqOverlay
 
+my-nix-build (){
+  env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build \
+    --argstr bundle "$selectedBundle" --no-out-link\
+    --option narinfo-cache-negative-ttl 0 $*
+}
+
 cachedMake (){
   cproj=$currentDir/$coqproject
   cprojDir=$(dirname $cproj)
-  build=$(env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build --argstr bundle "$selectedBundle" --no-out-link)
-  grep -e "^-R.*" $cproj | while read -r line; do
-    realpath=$(echo $line | cut -d" " -f2)
-    namespace=$(echo $line | cut -d" " -f3)
-    logpath=${namespace/.//}
-    vopath="$build/lib/coq/$coq_version/user-contrib/$logpath"
-    dest=$cprojDir/$realpath
-    if [[ -d $vopath ]]
-    then echo "Compiling/Fetching and copying vo from $vopath to $realpath"
-         cp -nr --no-preserve=mode,ownership  $vopath/* $dest
-    else echo "Error: cannot find compiled $logpath, check your .nix/config.nix"
-    fi
-  done
+  nb_dry_run=$(my-nix-build --dry-run 2>&1 > /dev/null)
+  if echo $nb_dry_run | grep -q "built:"; then
+    echo "The compilation result is not in cache (check your cachix configuration)."
+  else
+    build=$(my-nix-build)
+    grep -e "^-R.*" $cproj | while read -r line; do
+      realpath=$(echo $line | cut -d" " -f2)
+      namespace=$(echo $line | cut -d" " -f3)
+      logpath=${namespace/.//}
+      vopath="$build/lib/coq/$coq_version/user-contrib/$logpath"
+      dest=$cprojDir/$realpath
+      if [[ -d $vopath ]]
+      then echo "Compiling/Fetching and copying vo from $vopath to $realpath"
+           cp -nr --no-preserve=mode,ownership  $vopath/* $dest
+      else echo "Error: cannot find compiled $logpath, check your .nix/config.nix"
+      fi
+    done
+  fi
 }
 addNixCommand cachedMake
 
