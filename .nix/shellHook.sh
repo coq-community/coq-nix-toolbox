@@ -198,7 +198,9 @@ cachedMake (){
   cprojDir=$(dirname $cproj)
   nb_dry_run=$(my-nix-build --dry-run 2>&1 > /dev/null)
   if echo $nb_dry_run | grep -q "built:"; then
-    echo "The compilation result is not in cache (check your cachix configuration)."
+    echo "The compilation result is not in cache."
+    echo "Either it is not in cache (yet) or your must check your cachix configuration."
+    kill -INT $$
   else
     build=$(my-nix-build)
     grep -e "^-R.*" $cproj | while read -r line; do
