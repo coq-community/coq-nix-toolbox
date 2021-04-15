@@ -20,7 +20,7 @@ Installing Nix locally is a prerequisite for this installation method (but a goo
 Then, just run the following at the root of your project:
 
 ```
-nix-shell https://coq.inria.fr/nix/toolbox --run generateNixDefault
+nix-shell https://coq.inria.fr/nix/toolbox --arg doNothing true --run generateNixDefault
 nix-shell --run "initNixConfig YOURPACKAGENAME"
 ```
 
