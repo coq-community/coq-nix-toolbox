@@ -1,0 +1,1188 @@
+jobs:
+  Cheerios:
+    needs:
+    - coq
+    - StructTact
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: StructTact'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "StructTact"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "Cheerios"
+  CoLoR:
+    needs:
+    - coq
+    - bignums
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: bignums'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "bignums"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "CoLoR"
+  InfSeqExt:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "InfSeqExt"
+  QuickChick:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - coq-ext-lib
+    - simple-io
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: coq-ext-lib'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq-ext-lib"
+    - name: 'Building/fetching previous CI target: simple-io'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "simple-io"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "QuickChick"
+  StructTact:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "StructTact"
+  VST:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "VST"
+  Verdi:
+    needs:
+    - coq
+    - Cheerios
+    - InfSeqExt
+    - mathcomp-ssreflect
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: Cheerios'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "Cheerios"
+    - name: 'Building/fetching previous CI target: InfSeqExt'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "InfSeqExt"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "Verdi"
+  bignums:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "bignums"
+  coq:
+    needs: []
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+  coq-bits:
+    needs:
+    - coq
+    - mathcomp-algebra
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq-bits"
+  coq-elpi:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq-elpi"
+  coq-ext-lib:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq-ext-lib"
+  coq-shell:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq-shell"
+  coqeal:
+    needs:
+    - coq
+    - mathcomp-algebra
+    - bignums
+    - paramcoq
+    - multinomials
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: 'Building/fetching previous CI target: bignums'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "bignums"
+    - name: 'Building/fetching previous CI target: paramcoq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "paramcoq"
+    - name: 'Building/fetching previous CI target: multinomials'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "multinomials"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coqeal"
+  coqhammer:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coqhammer"
+  coqprime:
+    needs:
+    - coq
+    - bignums
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: bignums'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "bignums"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coqprime"
+  coquelicot:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coquelicot"
+  corn:
+    needs:
+    - coq
+    - bignums
+    - math-classes
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: bignums'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "bignums"
+    - name: 'Building/fetching previous CI target: math-classes'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "math-classes"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "corn"
+  dpdgraph:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "dpdgraph"
+  equations:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "equations"
+  flocq:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "flocq"
+  fourcolor:
+    needs:
+    - coq
+    - mathcomp-algebra
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "fourcolor"
+  gappalib:
+    needs:
+    - coq
+    - flocq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: flocq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "flocq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "gappalib"
+  hierarchy-builder:
+    needs:
+    - coq
+    - coq-elpi
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: coq-elpi'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq-elpi"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "hierarchy-builder"
+  interval:
+    needs:
+    - coq
+    - bignums
+    - coquelicot
+    - flocq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: bignums'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "bignums"
+    - name: 'Building/fetching previous CI target: coquelicot'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coquelicot"
+    - name: 'Building/fetching previous CI target: flocq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "flocq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "interval"
+  iris:
+    needs:
+    - coq
+    - stdpp
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: stdpp'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "stdpp"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "iris"
+  math-classes:
+    needs:
+    - coq
+    - bignums
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: bignums'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "bignums"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "math-classes"
+  mathcomp:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
+    - mathcomp-algebra
+    - mathcomp-solvable
+    - mathcomp-field
+    - mathcomp-character
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-fingroup"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: 'Building/fetching previous CI target: mathcomp-solvable'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-solvable"
+    - name: 'Building/fetching previous CI target: mathcomp-field'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-field"
+    - name: 'Building/fetching previous CI target: mathcomp-character'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-character"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp"
+  mathcomp-abel:
+    needs:
+    - coq
+    - mathcomp-field
+    - mathcomp-real-closed
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-field'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-field"
+    - name: 'Building/fetching previous CI target: mathcomp-real-closed'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-real-closed"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-abel"
+  mathcomp-algebra:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-fingroup"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+  mathcomp-analysis:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-field
+    - mathcomp-finmap
+    - mathcomp-bigenough
+    - mathcomp-real-closed
+    - hierarchy-builder
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-field'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-field"
+    - name: 'Building/fetching previous CI target: mathcomp-finmap'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-finmap"
+    - name: 'Building/fetching previous CI target: mathcomp-bigenough'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-bigenough"
+    - name: 'Building/fetching previous CI target: mathcomp-real-closed'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-real-closed"
+    - name: 'Building/fetching previous CI target: hierarchy-builder'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "hierarchy-builder"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-analysis"
+  mathcomp-bigenough:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-bigenough"
+  mathcomp-character:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
+    - mathcomp-algebra
+    - mathcomp-solvable
+    - mathcomp-field
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-fingroup"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: 'Building/fetching previous CI target: mathcomp-solvable'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-solvable"
+    - name: 'Building/fetching previous CI target: mathcomp-field'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-field"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-character"
+  mathcomp-field:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
+    - mathcomp-algebra
+    - mathcomp-solvable
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-fingroup"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: 'Building/fetching previous CI target: mathcomp-solvable'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-solvable"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-field"
+  mathcomp-fingroup:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-fingroup"
+  mathcomp-finmap:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-finmap"
+  mathcomp-real-closed:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-field
+    - mathcomp-bigenough
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-field'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-field"
+    - name: 'Building/fetching previous CI target: mathcomp-bigenough'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-bigenough"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-real-closed"
+  mathcomp-solvable:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
+    - mathcomp-algebra
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-fingroup"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-solvable"
+  mathcomp-ssreflect:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+  metalib:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "metalib"
+  multinomials:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - mathcomp-algebra
+    - mathcomp-finmap
+    - mathcomp-bigenough
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-ssreflect"
+    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-algebra"
+    - name: 'Building/fetching previous CI target: mathcomp-finmap'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-finmap"
+    - name: 'Building/fetching previous CI target: mathcomp-bigenough'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-bigenough"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "multinomials"
+  odd-order:
+    needs:
+    - coq
+    - mathcomp-character
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: mathcomp-character'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "mathcomp-character"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "odd-order"
+  paco:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "paco"
+  paramcoq:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "paramcoq"
+  simple-io:
+    needs:
+    - coq
+    - coq-ext-lib
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: 'Building/fetching previous CI target: coq-ext-lib'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq-ext-lib"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "simple-io"
+  stdpp:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "stdpp"
+  tlc:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq
+      uses: cachix/cachix-action@v8
+      with:
+        name: coq
+    - name: 'Building/fetching previous CI target: coq'
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "tlc"
+name: Nix CI for bundle 8.11
+'on':
+  pull_request:
+    branches:
+    - '**'
+  push:
+    branches:
+    - master
