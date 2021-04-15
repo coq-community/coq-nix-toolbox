@@ -116,12 +116,13 @@ with initial.lib; let
   nix-ci-for = name: job: instances.${name}.ci.subpkgs job;
   nix-default = selected-instance.this-shell-pkg;
   nix-auto = switch-if [
-    { cond = inNixShell;                    out = nix-shell; }
+    { cond = inNixShell;                      out = nix-shell; }
     { cond = isNull bundle && !isNull job;    out = nix-ci job; }
     { cond = isString bundle && !isNull job ; out = nix-ci-for bundle job; }
   ] nix-default;
   in
-nix-shell.overrideAttrs (o: {
+if !isDerivation nix-auto then nix-auto
+else nix-auto.overrideAttrs (o: {
   passthru = (o.passthru or {})
              // { inherit initial setup shellHook;
                   inherit nix-shell nix-default;

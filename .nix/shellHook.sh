@@ -146,6 +146,11 @@ ppRevDeps (){
 }
 addNixCommand ppRevDeps
 
+ppSetupConfig (){
+  echo $jsonSetupConfig | json2yaml
+}
+addNixCommand ppSetupConfig
+
 ppNixAction (){
   echo $jsonAction | json2yaml
 }
