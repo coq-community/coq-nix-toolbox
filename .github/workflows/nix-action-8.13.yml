@@ -26,13 +26,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target Cheerios
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"Cheerios\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: StructTact'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: StructTact'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "StructTact"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "Cheerios"
   InfSeqExt:
@@ -61,10 +70,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target InfSeqExt
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"InfSeqExt\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "InfSeqExt"
   StructTact:
@@ -93,10 +110,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target StructTact
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"StructTact\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "StructTact"
   Verdi:
@@ -128,19 +153,30 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target Verdi
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"Verdi\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: Cheerios'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: Cheerios'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "Cheerios"
-    - name: 'Building/fetching previous CI target: InfSeqExt'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: InfSeqExt'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "InfSeqExt"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "Verdi"
   bignums:
@@ -169,10 +205,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target bignums
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"bignums\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "bignums"
   coq:
@@ -200,7 +244,14 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: Building/fetching current CI target
+    - id: stepCheck
+      name: Checking presence of CI target coq
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"coq\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
   coq-bits:
@@ -230,13 +281,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target coq-bits
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"coq-bits\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq-bits"
   coq-elpi:
@@ -265,10 +325,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target coq-elpi
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"coq-elpi\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq-elpi"
   coq-shell:
@@ -297,10 +365,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target coq-shell
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"coq-shell\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq-shell"
   coquelicot:
@@ -330,13 +406,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target coquelicot
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"coquelicot\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coquelicot"
   dpdgraph:
@@ -365,10 +450,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target dpdgraph
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"dpdgraph\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "dpdgraph"
   flocq:
@@ -397,10 +490,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target flocq
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"flocq\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "flocq"
   fourcolor:
@@ -430,13 +531,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target fourcolor
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"fourcolor\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "fourcolor"
   gappalib:
@@ -466,13 +576,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target gappalib
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"gappalib\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: flocq'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: flocq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "flocq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "gappalib"
   hierarchy-builder:
@@ -502,13 +621,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target hierarchy-builder
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"hierarchy-builder\" \\\n --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: coq-elpi'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq-elpi'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq-elpi"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "hierarchy-builder"
   interval:
@@ -540,19 +668,30 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target interval
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"interval\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: bignums'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: bignums'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "bignums"
-    - name: 'Building/fetching previous CI target: coquelicot'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coquelicot'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coquelicot"
-    - name: 'Building/fetching previous CI target: flocq'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: flocq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "flocq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "interval"
   iris:
@@ -582,13 +721,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target iris
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"iris\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: stdpp'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: stdpp'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "stdpp"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "iris"
   mathcomp:
@@ -623,28 +771,42 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-fingroup"
-    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - name: 'Building/fetching previous CI target: mathcomp-solvable'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-solvable'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-solvable"
-    - name: 'Building/fetching previous CI target: mathcomp-field'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-field'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-field"
-    - name: 'Building/fetching previous CI target: mathcomp-character'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-character'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-character"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp"
   mathcomp-abel:
@@ -675,16 +837,26 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-abel
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-abel\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-field'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-field'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-field"
-    - name: 'Building/fetching previous CI target: mathcomp-real-closed'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-real-closed'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-real-closed"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-abel"
   mathcomp-algebra:
@@ -715,16 +887,26 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-algebra
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-algebra\" \\\n --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-fingroup"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
   mathcomp-analysis:
@@ -759,28 +941,42 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-analysis
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-analysis\" \\\n --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-field'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-field'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-field"
-    - name: 'Building/fetching previous CI target: mathcomp-finmap'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-finmap'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-finmap"
-    - name: 'Building/fetching previous CI target: mathcomp-bigenough'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-bigenough'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-bigenough"
-    - name: 'Building/fetching previous CI target: mathcomp-real-closed'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-real-closed'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-real-closed"
-    - name: 'Building/fetching previous CI target: hierarchy-builder'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: hierarchy-builder'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "hierarchy-builder"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-analysis"
   mathcomp-bigenough:
@@ -810,13 +1006,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-bigenough
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-bigenough\" \\\n --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-bigenough"
   mathcomp-character:
@@ -850,25 +1055,38 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-character
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-character\" \\\n --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-fingroup"
-    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - name: 'Building/fetching previous CI target: mathcomp-solvable'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-solvable'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-solvable"
-    - name: 'Building/fetching previous CI target: mathcomp-field'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-field'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-field"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-character"
   mathcomp-field:
@@ -901,22 +1119,34 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-field
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-field\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-fingroup"
-    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - name: 'Building/fetching previous CI target: mathcomp-solvable'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-solvable'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-solvable"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-field"
   mathcomp-fingroup:
@@ -946,13 +1176,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-fingroup
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-fingroup\" \\\n --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-fingroup"
   mathcomp-finmap:
@@ -982,13 +1221,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-finmap
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-finmap\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-finmap"
   mathcomp-real-closed:
@@ -1020,19 +1268,30 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-real-closed
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-real-closed\" \\\n --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-field'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-field'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-field"
-    - name: 'Building/fetching previous CI target: mathcomp-bigenough'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-bigenough'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-bigenough"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-real-closed"
   mathcomp-solvable:
@@ -1064,19 +1323,30 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-solvable
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-solvable\" \\\n --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-fingroup'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-fingroup"
-    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-solvable"
   mathcomp-ssreflect:
@@ -1105,10 +1375,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target mathcomp-ssreflect
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"mathcomp-ssreflect\" \\\n --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
   multinomials:
@@ -1141,22 +1419,34 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target multinomials
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"multinomials\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-ssreflect"
-    - name: 'Building/fetching previous CI target: mathcomp-algebra'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - name: 'Building/fetching previous CI target: mathcomp-finmap'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-finmap'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-finmap"
-    - name: 'Building/fetching previous CI target: mathcomp-bigenough'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-bigenough'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-bigenough"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "multinomials"
   odd-order:
@@ -1186,13 +1476,22 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target odd-order
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"odd-order\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: 'Building/fetching previous CI target: mathcomp-character'
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-character'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-character"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "odd-order"
   paco:
@@ -1221,10 +1520,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target paco
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"paco\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "paco"
   stdpp:
@@ -1253,10 +1560,18 @@ jobs:
       uses: cachix/cachix-action@v8
       with:
         name: math-comp
-    - name: 'Building/fetching previous CI target: coq'
+    - id: stepCheck
+      name: Checking presence of CI target stdpp
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
+        \ bundle \"8.13\" --argstr job \"stdpp\" \\\n --dry-run 2>&1 > /dev/null)\n\
+        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
+        \ \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - name: Building/fetching current CI target
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "stdpp"
 name: Nix CI for bundle 8.13

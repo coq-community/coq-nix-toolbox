@@ -24,11 +24,24 @@ with builtins; with lib; let
   stepCachixUseAll = cachix: attrValues
     (mapAttrs (name: v: stepCachixUse ({inherit name;} // v)) cachix);
 
+  stepCheck = { job, bundles ? [] }:
+    let bundlestr = if isList bundles then "\${{ matrix.bundle }}" else bundles; in {
+    name = "Checking presence of CI target ${job}";
+    id = "stepCheck";
+    run = ''
+      nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \
+         --argstr bundle "${bundlestr}" --argstr job "${job}" \
+         --dry-run 2>&1 > /dev/null)
+      echo ::set-output name=status::$(echo $nb_dry_run | grep "built:" | sed "s/.*/built/")
+    '';
+  };
+
   stepBuild = {job, bundles ? [], current ? false}:
     let bundlestr = if isList bundles then "\${{ matrix.bundle }}" else bundles; in {
     name = if current then "Building/fetching current CI target"
            else "Building/fetching previous CI target: ${job}";
-    run = "NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle \"${bundlestr}\" --argstr job \"${job}\"";
+    "if" = "steps.stepCheck.outputs.status == 'built'";
+    run  = "NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle \"${bundlestr}\" --argstr job \"${job}\"";
   };
 
   mkJob = { job, jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }:
@@ -40,6 +53,7 @@ with builtins; with lib; let
       runs-on = "ubuntu-latest";
       needs = map (j: "${j}${suffixStr}") (filter (j: elem j jobs) jdeps);
       steps = [ stepCheckout stepCachixInstall ] ++ (stepCachixUseAll cachix)
+              ++ [ (stepCheck { inherit job bundles; }) ]
               ++ (map (job: stepBuild { inherit job bundles; }) jdeps)
               ++ [ (stepBuild { inherit job bundles; current = true; }) ];
     } // (optionalAttrs (isList bundles) {strategy.matrix.bundle = bundles;});
