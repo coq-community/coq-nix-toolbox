@@ -24,6 +24,6 @@
   };
 
   cachix.coq = {};
-  cachix.mathcomp = {};
+  cachix.math-comp = {};
   cachix.coq-community.authToken = "CACHIX_AUTH_TOKEN";
 }
