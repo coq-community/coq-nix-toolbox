@@ -28,7 +28,7 @@ with builtins; with lib; let
     let bundlestr = if isList bundles then "\${{ matrix.bundle }}" else bundles; in {
     name = if current then "Building/fetching current CI target"
            else "Building/fetching previous CI target: ${job}";
-    run = "nix-build --no-out-link --argstr bundle \"${bundlestr}\" --argstr job \"${job}\"";
+    run = "NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle \"${bundlestr}\" --argstr job \"${job}\"";
   };
 
   mkJob = { job, jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }:
