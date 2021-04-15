@@ -10,7 +10,8 @@ with builtins; with lib;
     excluded-job = v: if v?job && v.job == "_excluded" then [ v.job ] else [];
     excluded-jobs = p: flatten (map excluded-job (attrValues p));
     excluded = excluded-jobs (bundle.coqPackages or {});
-    main-job = v: if v.main-job or false then [ v.job ] else [];
+    main-job = v: if (v.main-job or false) && (v.job or "" != "_excluded")
+                  then [ v.job ] else [];
     main-jobs = p: flatten (map main-job (attrValues p));
     mains = main-jobs (bundle.coqPackages or {});
     keep_ = tgt: job: (job != "_excluded")
