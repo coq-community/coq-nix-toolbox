@@ -21,7 +21,7 @@ Then, just run the following at the root of your project:
 
 ```
 nix-shell https://coq.inria.fr/nix/toolbox --arg doNothing true --run generateNixDefault
-nix-shell --run "initNixConfig YOURPACKAGENAME"
+nix-shell --arg doNothing true --run "initNixConfig YOURPACKAGENAME"
 ```
 
 This will create an initial `.nix/config.yml` that you should now manually edit.
