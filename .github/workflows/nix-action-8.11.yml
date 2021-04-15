@@ -22,10 +22,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: StructTact'
@@ -55,10 +55,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: bignums'
@@ -87,10 +87,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -120,10 +120,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -156,10 +156,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -186,10 +186,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -219,10 +219,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: Cheerios'
@@ -255,10 +255,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -284,10 +284,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: Building/fetching current CI target
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
   coq-bits:
@@ -313,10 +313,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-algebra'
@@ -345,10 +345,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -375,10 +375,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -405,10 +405,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -439,10 +439,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-algebra'
@@ -477,10 +477,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -508,10 +508,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: bignums'
@@ -541,10 +541,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -575,10 +575,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: bignums'
@@ -609,10 +609,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -639,10 +639,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -669,10 +669,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -700,10 +700,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-algebra'
@@ -733,10 +733,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: flocq'
@@ -766,10 +766,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: coq-elpi'
@@ -801,10 +801,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: bignums'
@@ -838,10 +838,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: stdpp'
@@ -871,10 +871,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: bignums'
@@ -909,10 +909,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -953,10 +953,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-field'
@@ -989,10 +989,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1029,10 +1029,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1072,10 +1072,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1109,10 +1109,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1153,10 +1153,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1192,10 +1192,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1225,10 +1225,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1260,10 +1260,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1299,10 +1299,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1335,10 +1335,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -1365,10 +1365,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -1399,10 +1399,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-ssreflect'
@@ -1438,10 +1438,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: mathcomp-character'
@@ -1470,10 +1470,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -1500,10 +1500,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -1531,10 +1531,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: 'Building/fetching previous CI target: coq-ext-lib'
@@ -1563,10 +1563,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
@@ -1593,10 +1593,10 @@ jobs:
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         name: coq-community
-    - name: Cachix setup mathcomp
+    - name: Cachix setup math-comp
       uses: cachix/cachix-action@v8
       with:
-        name: mathcomp
+        name: math-comp
     - name: 'Building/fetching previous CI target: coq'
       run: nix-build --no-out-link --argstr bundle "8.11" --argstr job "coq"
     - name: Building/fetching current CI target
