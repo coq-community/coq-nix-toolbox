@@ -11,7 +11,7 @@ with builtins; with lib; let
     "with".nix_path = "nixpkgs=channel:nixpkgs-unstable";
   };
   stepCachixUse = { name, authToken ? null, signingKey ? null }: {
-    name =  "Cachix setup coq";
+    name =  "Cachix setup ${name}";
     uses =  "cachix/cachix-action@v8";
     "with" = { inherit name; }
        // (optionalAttrs (!isNull authToken) {
