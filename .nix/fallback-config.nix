@@ -22,4 +22,8 @@
     coqPackages.coq.job = true;
     coqPackages.coq-shell.job = false;
   };
+
+  cachix.coq = {};
+  cachix.mathcomp = {};
+  cachix.coq-community.authToken = "CACHIX_AUTH_TOKEN";
 }
