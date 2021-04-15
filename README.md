@@ -47,6 +47,24 @@ To create a package from scratch, refer to the nixpkgs documentation available a
 
 ## Bundles and jobs
 
+Bundles are defined in your `config.nix` file. If you didn't change this part of the auto-generated file, you have a single bundle called "default".
+Bundles are used to create sets of compatible packages. You can override the version of some packages and you can explicitly exclude some incompatible packages.
+
+Jobs represent buildable outputs. You can build any package in `coqPackages` (including any package defined in your `.nix/coq-overlays` directory) with the following command:
+
+```
+nix-build --argstr job PACKAGENAME
+```
+
+If the package depends on your main package, then it will use its local version as a dependency.
+
+You can also specify the bundle to use like this:
+```
+nix-build --argstr bundle BUNDLENAME --argstr job PACKAGENAME
+```
+
+A default bundle is defined in `config.nix` and is used if you do not specify it on the command-line.
+
 ## Available shell hooks
 
 When you run `nix-shell`, you get an environment with a few available commands:
