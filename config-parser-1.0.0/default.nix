@@ -76,8 +76,8 @@ in with config; let
       if bi == [] then pkg else
       pkg.overrideAttrs (o: { buildInputs = o.buildInputs ++ bi;});
 
-    notfound-ppath = throw "config-parser-1.0.0: not found: ${config.ppath}";
-    notfound-shell-ppath = throw "config-parser-1.0.0: not found: ${config.shell-ppath}";
+    notfound-ppath = throw "config-parser-1.0.0: not found: ${toString config.ppath}";
+    notfound-shell-ppath = throw "config-parser-1.0.0: not found: ${toString config.shell-ppath}";
     this-pkg = patchBIPkg (attrByPath config.ppath notfound-ppath pkgs);
     this-shell-pkg = patchBIPkg (attrByPath config.shell-ppath notfound-shell-ppath pkgs);
 
