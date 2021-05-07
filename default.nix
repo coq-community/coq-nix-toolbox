@@ -83,7 +83,7 @@ with initial.lib; let
         (jn: jv: mapAttrs (_: flatten) (push-list jv));
   jsonCIbyJob = toJSON ciByJob;
 
-  nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
+  mkDeriv = shell: if !inNixShell then shell else with selected-instance; shell.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
     inherit jsonBundle jsonBundles jsonSetupConfig jsonCIbyBundle jsonBundleSet
             jsonCIbyJob shellHook toolboxDir selectedBundle
@@ -112,14 +112,12 @@ with initial.lib; let
       emacsBin = "${emacs}" + "/bin/emacs";
   });
 
-  nix-ci = job: flatten (mapAttrsToList (_: i: i.ci.subpkgs job) instances);
-  nix-ci-for = name: job: instances.${name}.ci.subpkgs job;
+  nix-ci = job:
+    if selectedBundle == "_all"
+    then flatten (mapAttrsToList (_: i: i.ci.subpkgs job) instances)
+    else instances.${selectedBundle}.ci.subpkgs job;
   nix-default = selected-instance.this-shell-pkg;
-  nix-auto = switch-if [
-    { cond = inNixShell;                      out = nix-shell; }
-    { cond = isNull bundle && !isNull job;    out = nix-ci job; }
-    { cond = isString bundle && !isNull job ; out = nix-ci-for bundle job; }
-  ] nix-default;
+  nix-auto = if isNull job then mkDeriv nix-default else map mkDeriv (nix-ci job);
   in
 if !isDerivation nix-auto then nix-auto
 else nix-auto.overrideAttrs (o: {
