@@ -54,7 +54,9 @@ with initial.lib; let
     { case = x: !isString x; out = my-throw "config.format must be a string."; }
   ] (my-throw "config.format ${initial.config.format} not supported");
   instances = setup.instances;
-  selectedBundle = unNull setup.config.default-bundle bundle;
+  selectedBundle = let dflt = setup.config.default-bundle; in
+    if isNull bundle || bundle == "_all" then dflt else bundle;
+  allBundles = bundle == "_all";
   selected-instance = instances."${selectedBundle}";
   shellHook = readFile shellHook-file
       + optionalString print-env "\nprintNixEnv; exit"
@@ -83,7 +85,9 @@ with initial.lib; let
         (jn: jv: mapAttrs (_: flatten) (push-list jv));
   jsonCIbyJob = toJSON ciByJob;
 
-  nix-shell = with selected-instance; this-shell-pkg.overrideAttrs (old: {
+  mkDeriv = shell:
+  if !inNixShell then shell
+  else with selected-instance; shell.overrideAttrs (old: {
     inherit (setup.config) nixpkgs coqproject;
     inherit jsonBundle jsonBundles jsonSetupConfig jsonCIbyBundle jsonBundleSet
             jsonCIbyJob shellHook toolboxDir selectedBundle
@@ -101,8 +105,7 @@ with initial.lib; let
     nativeBuildInputs = optionals (!do-nothing)
       (old.propagatedBuildInputs or []) ++ [ pkgs.remarshal ];
 
-    buildInputs = optionals (!do-nothing)
-      (old.buildInputs or []);
+    buildInputs = optionals (!do-nothing) (old.buildInputs or []);
 
     propagatedBuildInputs = optionals (!do-nothing)
       (old.propagatedBuildInputs or []);
@@ -112,19 +115,17 @@ with initial.lib; let
       emacsBin = "${emacs}" + "/bin/emacs";
   });
 
-  nix-ci = job: flatten (mapAttrsToList (_: i: i.ci.subpkgs job) instances);
-  nix-ci-for = name: job: instances.${name}.ci.subpkgs job;
-  nix-default = selected-instance.this-shell-pkg;
-  nix-auto = switch-if [
-    { cond = inNixShell;                      out = nix-shell; }
-    { cond = isNull bundle && !isNull job;    out = nix-ci job; }
-    { cond = isString bundle && !isNull job ; out = nix-ci-for bundle job; }
-  ] nix-default;
+  nix-ci = job: map mkDeriv (if allBundles
+    then flatten (mapAttrsToList (_: i: i.ci.subpkgs job) instances)
+    else instances.${selectedBundle}.ci.subpkgs job);
+  nix-default = if allBundles
+    then mapAttrsToList (_: i: mkDeriv i.this-shell-pkg) instances
+    else mkDeriv selected-instance.this-shell-pkg;
+  nix-auto = if isNull job then nix-default else nix-ci job;
   in
 if !isDerivation nix-auto then nix-auto
 else nix-auto.overrideAttrs (o: {
   passthru = (o.passthru or {})
              // { inherit initial setup shellHook;
-                  inherit nix-shell nix-default;
-                  inherit nix-ci nix-ci-for nix-auto; };
+                  inherit nix-default nix-ci nix-auto; };
 })
