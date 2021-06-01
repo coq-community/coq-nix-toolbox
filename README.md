@@ -55,6 +55,9 @@ Jobs represent buildable outputs. You can build any package in `coqPackages` (in
 ```
 nix-build --argstr job PACKAGENAME
 ```
+One can replace `PACKAGENAME` with:
+- `_allJobs` to compile all coq packages that are explicitly mentioned in the `config.nix` and not explicitly excluded
+- `_all` to compile all coq packages that are not explicitly excluded
 
 If the package depends on your main package, then it will use its local version as a dependency.
 
