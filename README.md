@@ -33,13 +33,15 @@ Once you have finished editing `.nix/config.yml`, you may generate GitHub Action
 nix-shell --arg do-nothing true --run "genNixActions"
 ```
 
+Do not forget to commit the new files.
+
 ## Overlays
 
 You can create directories named after a Coq package and containing `default.nix` files in `.nix/coq-overlays` to override the contents of `coqPackages`.
 This can be useful in the following case:
 
 - You depend on a package or a version of a package that is not yet available in nixpkgs.
-- The package that you are building is available in nixpkgs but its dependencies changed.
+- The package that you are building is available in nixpkgs but its dependencies have changed.
 - The package that you are building is not yet available in nixpkgs.
 
 To amend a package already present in nixpkgs, just run `nix-shell --run "fetchCoqOverlay PACKAGENAME"`.
@@ -56,8 +58,8 @@ Jobs represent buildable outputs. You can build any package in `coqPackages` (in
 nix-build --argstr job PACKAGENAME
 ```
 One can replace `PACKAGENAME` with:
-- `_allJobs` to compile all coq packages that are explicitly mentioned in the `config.nix` and not explicitly excluded
-- `_all` to compile all coq packages that are not explicitly excluded
+- `_allJobs` to compile all Coq packages that are explicitly mentioned in the `config.nix` file and not explicitly excluded
+- `_all` to compile all Coq packages that are not explicitly excluded
 
 If the package depends on your main package, then it will use its local version as a dependency.
 
@@ -66,7 +68,17 @@ You can also specify the bundle to use like this:
 nix-build --argstr bundle BUNDLENAME --argstr job PACKAGENAME
 ```
 
-A default bundle is defined in `config.nix` and is used if you do not specify it on the command-line.
+In case the `bundle` argument is omitted, the default bundle defined in `config.nix` is used.
+
+If, for instance, you need to fix a reverse dependency of your project because it fails in CI, you can use the following command to get the dependencies for this reverse dependency:
+
+```
+nix-shell --argstr bundle BUNDLENAME --argstr job PACKAGENAME
+```
+
+This command will build all the dependencies of `PACKAGENAME`, including your project from the current sources. If these correspond to a version that has been tested in CI and you have activated Cachix (both so that CI pushes to it and on your local machine to use it), then this step should only fetch pre-built dependencies.
+
+Again, the `bundle` argument is optional.
 
 ## Available shell hooks
 
@@ -91,11 +103,9 @@ These three commands update the nixpkgs version to use (will create or override 
 
 ## Arguments accepted by `nix-shell`
 
-One can pass the following arguments to `nix-shell`:
+One can pass the following arguments to `nix-shell` or `nix-build`:
 - `--arg do-nothing true`: do not even provide Coq, just enough context to execute the above commands.
 - `--argstr bundle t`: select the bundle `t` (one can use the above commands `ppBundles` to know the options and `ppBundleSet` to see their contents)
 - `--arg override '{p1 = v1; ...; pn = vn;}'`: a very condensed inline way to select specific versions of `coq` or any package from `coqPackages` or `ocamlPackages`. E.g. `--arg override '{coq = "8.12"; ...; mathcomp = "1.12.0";}'` to override the current default bundle with the given versions.
-- `--arg withEmacs true`: provide a ready to use version of emacs with proofgeneral; for the sake of reproducibility this will **not** use your system emacs nor will it use your user configuration. 
-
-One can instead use `nix-build` to build the current project, in addition to the previous options, the following options are then available
-- `--argstr job p`: build coq package `p` instead of the current project, but using the current version of the current project. Combined with `--argstr bundle t` this gives a fully configurable way to test reverse dependencies for various configurations.
+- `--arg withEmacs true`: provide a ready to use version of emacs with proofgeneral; for the sake of reproducibility this will **not** use your system emacs nor will it use your user configuration.
+- `--argstr job p`: provide the dependencies for (in case of `nix-shell`) or build (in case of `nix-build`) Coq package `p` instead of the current project, but using the current version of the current project. Combined with `--argstr bundle t` this gives a fully configurable way to test reverse dependencies for various configurations.
