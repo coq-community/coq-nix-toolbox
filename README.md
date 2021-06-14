@@ -101,6 +101,8 @@ These three commands update the nixpkgs version to use (will create or override 
 - `updateNixpkgsMaster`: update to the head of `master` of nixpkgs.
 - `updateNixpkgs`: update to the specified owner and ref.
 
+After one of these three commands, you should leave and re-enter `nix-shell` if you want the update to be taken into account (e.g., before calling `genNixActions`).
+
 ## Arguments accepted by `nix-shell`
 
 One can pass the following arguments to `nix-shell` or `nix-build`:
