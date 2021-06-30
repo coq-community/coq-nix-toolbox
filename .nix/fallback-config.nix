@@ -7,7 +7,8 @@ with (import <nixpkgs> {}).lib;
 
   ## The attribute to build, either from nixpkgs
   ## of from the overlays located in `.nix/coq-overlays`
-  attribute = "coq-shell";
+  attribute = "coq";
+  shell-attribute = "coq-shell";
   src = ../coq-shell;
 
   ## select an entry to build in the following `bundles` set
@@ -20,9 +21,6 @@ with (import <nixpkgs> {}).lib;
   bundles = genAttrs [ "8.10" "8.11" "8.12" "8.13" ]
     (v: {
       coqPackages.coq.override.version = v;
-      coqPackages.coq.main-job = true;
-      coqPackages.coq.job = true;
-      coqPackages.coq-shell.job = false;
     });
 
   cachix.coq = {};
