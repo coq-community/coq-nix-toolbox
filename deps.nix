@@ -9,9 +9,12 @@ let
     let
       findInput = x: let n = pkgsRevmap."${x.name}" or null; in
                      if isNull n then [ ] else [ n ];
+      deepFlatten = l: if !isList l then l else if l == [] then []  else
+        (if isList (head l) then deepFlatten (head l) else [ (head l) ])
+        ++ deepFlatten (tail l);
     in
-      flip mapAttrs coqPkgs (n: v:
-        flatten (map findInput (v.buildInputs ++ v.propagatedBuildInputs))
+      flip mapAttrs coqPkgs (n: v: flatten
+        (map findInput (deepFlatten [v.buildInputs v.propagatedBuildInputs]))
       );
   pkgsSorted = (toposort (x: y: elem x pkgsDeps.${y}) (attrNames coqPkgs)).result;
   pkgsRevDepsSetNoAlias = foldl (done: p: foldl (done: d:
