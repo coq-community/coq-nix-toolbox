@@ -4,12 +4,13 @@
   ## unless you made an automated or manual update
   ## to another supported format.
 
-  ## The attribute to build, either from nixpkgs
-  ## of from the overlays located in `.nix/coq-overlays`
+  ## The attribute to build from the local sources,
+  ## either using nixpkgs data or the overlays located in `.nix/coq-overlays`
+  ## Will determine the default main-job of the bundles defined below
   attribute = "template";
 
-  ## If you want to select a different attribute
-  ## to serve as a basis for nix-shell edit this
+  ## If you want to select a different attribute (to build from the local sources as well)
+  ## when calling `nix-shell` and `nix-build` without the `--argstr job` argument
   # shell-attribute = "{{nix_name}}";
 
   ## Maybe the shortname of the library is different from
@@ -33,8 +34,9 @@
   default-bundle = "default";
 
   ## write one `bundles.name` attribute set per
-  ## alternative configuration, the can be used to
-  ## compute several ci jobs as well
+  ## alternative configuration
+  ## When generating GitHub Action CI, one workflow file
+  ## will be created per bundle
   bundles.default = {
 
     ## You can override Coq and other Coq coqPackages
@@ -49,9 +51,9 @@
     ## to automatically retrieve the one from nixpkgs
     ## if it exists and is correctly named/located
 
-    ## You can override Coq and other Coq coqPackages
-    ## throught the following attribute
-    ## If <ocaml-pkg> does not support lights overrides,
+    ## You can override Coq and other coqPackages
+    ## through the following attribute
+    ## If <ocaml-pkg> does not support light overrides,
     ## you may use `overrideAttrs` or long overlays
     ## located in `.nix/ocaml-overlays`
     ## (there is no automation for this one)
@@ -68,7 +70,7 @@
 
     ## you may mark a package as a CI job as follows
     #  coqPackages.<another-pkg>.job = "test";
-    ## It can then built throught
+    ## It can then built through
     ## nix-build --argstr bundle "default" --arg job "test";
     ## in the absence of such a directive, the job "another-pkg" will
     ## is still available, but will be automatically included in the CI
