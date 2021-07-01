@@ -4,8 +4,8 @@
   ## unless you made an automated or manual update
   ## to another supported format.
 
-  ## The attribute to build from the local sources, either from nixpkgs
-  ## of from the overlays located in `.nix/coq-overlays`
+  ## The attribute to build from the local sources,
+  ## either using nixpkgs data or the overlays located in `.nix/coq-overlays`
   ## Will determine the default main-job of the bundles defined below
   attribute = "template";
 
