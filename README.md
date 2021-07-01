@@ -1,4 +1,4 @@
-# nix-toolbox
+# Coq Nix Toolbox
 
 Nix helper scripts to automate local builds and CI
 
