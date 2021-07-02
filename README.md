@@ -7,10 +7,14 @@ Nix helper scripts to automate local builds and CI
 ### Standalone
 
 Installing Nix locally is a prerequisite for this installation method (but a good thing to do anyway to take the most advantage of this toolbox). See https://nixos.org/download.html.
+Additionally, in order to use binary caches from recognized organizations, please do
+```bash
+nix-env -iA nixpkgs.cachix && cachix use coq && cachix use coq-community && cachix use math-comp
+```
 
 Then, just run the following at the root of your project:
 
-```
+```bash
 nix-shell https://coq.inria.fr/nix/toolbox --arg do-nothing true --run generateNixDefault
 nix-shell --arg do-nothing true --run "initNixConfig YOURPACKAGENAME"
 ```
@@ -20,7 +24,7 @@ This file contains comments explaining each available option.
 
 Once you have finished editing `.nix/config.yml`, you may generate GitHub Actions workflow(s) by running:
 
-```
+```bash
 nix-shell --arg do-nothing true --run "genNixActions"
 ```
 
