@@ -1,4 +1,4 @@
-with (import <nixpkgs> {}).lib;
+with (import (import ./nixpkgs.nix) {}).lib;
 {
   ## DO NOT CHANGE THIS
   format = "1.0.0";
