@@ -90,6 +90,7 @@ When you run `nix-shell`, you get an environment with a few available commands:
 - `nixEnv`: displays the list of Nix store locations for all the available packages.
 - `fetchCoqOverlay`: fetch a derivation file from nixpkgs that you may then edit locally to override a package.
 - `cachedMake`: compile the project by reusing build outputs cached (generally thanks to Cachix).
+- `genNixActions`: generates GitHub one actions file per bundle, for testing dependencies and reverse depndencies.
 
 These three commands update the nixpkgs version to use (will create or override `.nix/nixpkgs.nix`):
 - `updateNixpkgsUnstable`: update to the latest nixpkgs-unstable.
