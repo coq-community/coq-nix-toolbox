@@ -1,7 +1,10 @@
+strategy:
+  matrix:
+    os: [ubuntu-latest, macos-latest]
 jobs:
   coq:
     needs: []
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -37,7 +40,7 @@ jobs:
   coq-shell:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -78,7 +81,7 @@ jobs:
     needs:
     - coq
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -122,7 +125,7 @@ jobs:
   mathcomp-bigenough:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
