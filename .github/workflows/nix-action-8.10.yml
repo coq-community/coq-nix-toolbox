@@ -1,9 +1,12 @@
+strategy:
+  matrix:
+    os: [ubuntu-latest, macos-latest]
 jobs:
   Cheerios:
     needs:
     - coq
     - StructTact
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -48,7 +51,7 @@ jobs:
     needs:
     - coq
     - bignums
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -94,7 +97,7 @@ jobs:
     - coq
     - coq-ext-lib
     - paco
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -142,7 +145,7 @@ jobs:
   InfSeqExt:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -185,7 +188,7 @@ jobs:
     - mathcomp-ssreflect
     - coq-ext-lib
     - simple-io
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -237,7 +240,7 @@ jobs:
   StructTact:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -280,7 +283,7 @@ jobs:
     - Cheerios
     - InfSeqExt
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -332,7 +335,7 @@ jobs:
   aac-tactics:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -373,7 +376,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -417,7 +420,7 @@ jobs:
   bignums:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -458,7 +461,7 @@ jobs:
     needs:
     - coq
     - flocq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -501,7 +504,7 @@ jobs:
         job "compcert"
   coq:
     needs: []
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -538,7 +541,7 @@ jobs:
     needs:
     - coq
     - mathcomp-algebra
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -582,7 +585,7 @@ jobs:
   coq-ext-lib:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -622,7 +625,7 @@ jobs:
   coq-shell:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -666,7 +669,7 @@ jobs:
     - bignums
     - paramcoq
     - multinomials
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -722,7 +725,7 @@ jobs:
   coqhammer:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -763,7 +766,7 @@ jobs:
     needs:
     - coq
     - bignums
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -808,7 +811,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -854,7 +857,7 @@ jobs:
     - coq
     - bignums
     - math-classes
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -902,7 +905,7 @@ jobs:
   dpdgraph:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -942,7 +945,7 @@ jobs:
   equations:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -982,7 +985,7 @@ jobs:
   flocq:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1023,7 +1026,7 @@ jobs:
     needs:
     - coq
     - mathcomp-algebra
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1068,7 +1071,7 @@ jobs:
     needs:
     - coq
     - flocq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1115,7 +1118,7 @@ jobs:
     - bignums
     - coquelicot
     - flocq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1168,7 +1171,7 @@ jobs:
     needs:
     - coq
     - stdpp
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1212,7 +1215,7 @@ jobs:
   ltac2:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1253,7 +1256,7 @@ jobs:
     needs:
     - coq
     - bignums
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1303,7 +1306,7 @@ jobs:
     - mathcomp-solvable
     - mathcomp-field
     - mathcomp-character
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1369,7 +1372,7 @@ jobs:
     - coq
     - mathcomp-field
     - mathcomp-real-closed
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1419,7 +1422,7 @@ jobs:
     - coq
     - mathcomp-ssreflect
     - mathcomp-fingroup
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1472,7 +1475,7 @@ jobs:
     - mathcomp-finmap
     - mathcomp-bigenough
     - mathcomp-real-closed
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1533,7 +1536,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1582,7 +1585,7 @@ jobs:
     - mathcomp-algebra
     - mathcomp-solvable
     - mathcomp-field
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1646,7 +1649,7 @@ jobs:
     - mathcomp-fingroup
     - mathcomp-algebra
     - mathcomp-solvable
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1703,7 +1706,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1748,7 +1751,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1795,7 +1798,7 @@ jobs:
     - mathcomp-ssreflect
     - mathcomp-field
     - mathcomp-bigenough
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1850,7 +1853,7 @@ jobs:
     - mathcomp-ssreflect
     - mathcomp-fingroup
     - mathcomp-algebra
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1902,7 +1905,7 @@ jobs:
   mathcomp-ssreflect:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1942,7 +1945,7 @@ jobs:
   metalib:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -1986,7 +1989,7 @@ jobs:
     - mathcomp-algebra
     - mathcomp-finmap
     - mathcomp-bigenough
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2043,7 +2046,7 @@ jobs:
     needs:
     - coq
     - mathcomp-character
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2087,7 +2090,7 @@ jobs:
   paco:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2127,7 +2130,7 @@ jobs:
   paramcoq:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2167,7 +2170,7 @@ jobs:
   pocklington:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2208,7 +2211,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2254,7 +2257,7 @@ jobs:
     - coq
     - aac-tactics
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2303,7 +2306,7 @@ jobs:
     needs:
     - coq
     - coq-ext-lib
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2347,7 +2350,7 @@ jobs:
   stdpp:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2387,7 +2390,7 @@ jobs:
   tlc:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2428,7 +2431,7 @@ jobs:
     needs:
     - coq
     - zorns-lemma
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
@@ -2472,7 +2475,7 @@ jobs:
   zorns-lemma:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
