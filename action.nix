@@ -1,9 +1,42 @@
 { lib }:
 with builtins; with lib; let
+  stepCommitToTest = {
+    name = "Determine which commit to test";
+    run = ''
+      if [ ''${{ github.event_name }} = "push" ]; then
+        echo "tested_commit=''${{ github.sha }}" >> $GITHUB_ENV
+      else
+        merge_commit=$(git ls-remote ''${{ github.event.repository.html_url }} refs/pull/''${{ github.event.number }}/merge | cut -f1)
+        if [ -z "$merge_commit" ]; then
+          echo "tested_commit=''${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+        else
+          echo "tested_commit=$merge_commit" >> $GITHUB_ENV
+        fi
+      fi
+    '';
+  };
+  stepRefToTest = {
+    name = "Determine which ref to test";
+    run = ''
+      if [ ''${{ github.event_name }} = "push" ]; then
+        echo "tested_ref=''${{ github.ref }}" >> $GITHUB_ENV
+      else
+        merge_commit=$(git ls-remote ''${{ github.event.repository.html_url }} refs/pull/''${{ github.event.number }}/merge | cut -f1)
+        if [ -z "$merge_commit" ]; then
+          echo "tested_ref=refs/pull/''${{ github.event.number }}/head" >> $GITHUB_ENV
+        else
+          echo "tested_ref=refs/pull/''${{ github.event.number }}/merge" >> $GITHUB_ENV
+        fi
+      fi
+    '';
+  };
   stepCheckout = {
     name =  "Git checkout";
     uses =  "actions/checkout@v2";
-    "with".fetch-depth =  0;
+    "with" = {
+      fetch-depth = 0;
+      ref = "\${{ env.tested_ref }}";
+    };
   };
   stepCachixInstall = {
     name =  "Cachix install";
@@ -52,7 +85,8 @@ with builtins; with lib; let
     "${job}${suffixStr}" = rec {
       runs-on = "ubuntu-latest";
       needs = map (j: "${j}${suffixStr}") (filter (j: elem j jobs) jdeps);
-      steps = [ stepCheckout stepCachixInstall ] ++ (stepCachixUseAll cachix)
+      steps = [ stepRefToTest stepCheckout stepCachixInstall ]
+              ++ (stepCachixUseAll cachix)
               ++ [ (stepCheck { inherit job bundles; }) ]
               ++ (map (job: stepBuild { inherit job bundles; }) jdeps)
               ++ [ (stepBuild { inherit job bundles; current = true; }) ];
@@ -65,7 +99,7 @@ with builtins; with lib; let
   mkActionFromJobs = { actionJobs, bundles ? [] }: {
     name = "Nix CI for bundle ${toString bundles}";
     on.push.branches = [ "master" ];
-    on.pull_request.branches = [ "**" ];
+    on.pull_request_target.branches = [ "**" ];
     jobs = actionJobs;
   };
 
