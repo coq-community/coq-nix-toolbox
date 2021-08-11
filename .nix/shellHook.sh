@@ -159,8 +159,11 @@ addNixCommand ppNixAction
 genNixActions (){
   mkdir -p $currentDir/.github/workflows/
   for t in $bundles; do
-    echo "generating $currentDir/.github/workflows/nix-action-$t.yml"
-    nix-shell --arg do-nothing true --argstr bundle $t --run "ppNixAction > $currentDir/.github/workflows/nix-action-$t.yml"
+    for p in ubuntu macos; do
+      echo "generating $currentDir/.github/workflows/nix-action-$t-$p.yml"
+      nix-shell --arg do-nothing true --argstr bundle $t --run "ppNixAction > $currentDir/.github/workflows/nix-action-$t-$p.yml"
+      sed -i "s/ubuntu/$p/" "$currentDir/.github/workflows/nix-action-$t-$p.yml"
+    done
   done
 }
 addNixCommand genNixActions
