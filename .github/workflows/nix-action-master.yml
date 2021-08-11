@@ -193,9 +193,12 @@ jobs:
         --argstr job "mathcomp-bigenough"
 name: Nix CI for bundle master
 'on':
+  pull_request:
+    paths:
+    - .github/workflows/**
   pull_request_target:
-    branches:
-    - '**'
+    paths:
+    - '!.github/workflows/**'
   push:
     branches:
     - master

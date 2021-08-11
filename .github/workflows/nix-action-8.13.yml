@@ -3561,9 +3561,12 @@ jobs:
         job "zorns-lemma"
 name: Nix CI for bundle 8.13
 'on':
+  pull_request:
+    paths:
+    - .github/workflows/**
   pull_request_target:
-    branches:
-    - '**'
+    paths:
+    - '!.github/workflows/**'
   push:
     branches:
     - master
