@@ -1,5 +1,3 @@
-# Coq Nix Toolbox
-
 Nix helper scripts to automate local builds and CI
 
 ## How to use
