@@ -3369,8 +3369,10 @@ name: Nix CI for bundle 8.12
     paths:
     - .github/workflows/**
   pull_request_target:
-    paths:
-    - '!.github/workflows/**'
+    types:
+    - opened
+    - synchronize
+    - reopened
   push:
     branches:
     - master

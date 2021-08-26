@@ -98,9 +98,11 @@ with builtins; with lib; let
 
   mkActionFromJobs = { actionJobs, bundles ? [] }: {
     name = "Nix CI for bundle ${toString bundles}";
-    on.push.branches = [ "master" ];
-    on.pull_request.paths = [ ".github/workflows/**" ];
-    on.pull_request_target.paths = [ "!.github/workflows/**" ];
+    on = {
+      push.branches = [ "master" ];
+      pull_request.paths = [ ".github/workflows/**" ];
+      pull_request_target.types = [ "opened" "synchronize" "reopened" ];
+    };
     jobs = actionJobs;
   };
 
