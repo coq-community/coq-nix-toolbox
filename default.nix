@@ -91,7 +91,7 @@ with initial.lib; let
     inherit (setup.config) nixpkgs coqproject;
     inherit jsonBundle jsonBundles jsonSetupConfig jsonCIbyBundle jsonBundleSet
             jsonCIbyJob shellHook toolboxDir selectedBundle
-            jsonPkgsDeps jsonPkgsRevDeps jsonPkgsSorted jsonAction;
+            jsonPkgsDeps jsonPkgsRevDeps jsonPkgsSorted jsonActionFile;
 
     bundles = attrNames setup.bundles;
 

@@ -152,7 +152,7 @@ ppSetupConfig (){
 addNixCommand ppSetupConfig
 
 ppNixAction (){
-  echo $jsonAction | json2yaml
+  cat $jsonActionFile | json2yaml
 }
 addNixCommand ppNixAction
 
