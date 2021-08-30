@@ -6,12 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -36,8 +36,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target Cheerios
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"Cheerios\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"Cheerios\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -59,12 +59,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -89,8 +89,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target CoLoR
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"CoLoR\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"CoLoR\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -113,12 +113,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -143,8 +143,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target ITree
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"ITree\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"ITree\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -169,12 +169,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -199,8 +199,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target InfSeqExt
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"InfSeqExt\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"InfSeqExt\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -220,12 +220,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -250,8 +250,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target QuickChick
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"QuickChick\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"QuickChick\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -280,12 +280,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -310,8 +310,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target StructTact
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"StructTact\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"StructTact\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -330,12 +330,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -360,8 +360,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target VST
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"VST\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"VST\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -389,12 +389,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -419,8 +419,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target Verdi
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"Verdi\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"Verdi\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -449,12 +449,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -479,8 +479,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target aac-tactics
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"aac-tactics\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"aac-tactics\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -499,10 +499,18 @@ jobs:
     - paramcoq
     runs-on: ubuntu-latest
     steps:
+    - name: Determine which ref to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+        ref: ${{ env.tested_ref }}
     - name: Cachix install
       uses: cachix/install-nix-action@v12
       with:
@@ -522,10 +530,10 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target addition-chains
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"addition-chains\" \\\n --dry-run 2>&1 > /dev/null)\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"addition-chains\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
@@ -553,12 +561,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -583,8 +591,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target autosubst
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"autosubst\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"autosubst\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -605,12 +613,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -635,8 +643,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target bignums
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"bignums\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"bignums\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -654,10 +662,18 @@ jobs:
     - equations
     runs-on: ubuntu-latest
     steps:
+    - name: Determine which ref to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+        ref: ${{ env.tested_ref }}
     - name: Cachix install
       uses: cachix/install-nix-action@v12
       with:
@@ -677,10 +693,10 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target category-theory
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"category-theory\" \\\n --dry-run 2>&1 > /dev/null)\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"category-theory\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
@@ -704,12 +720,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -734,8 +750,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target compcert
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"compcert\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"compcert\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -755,12 +771,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -785,8 +801,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coq
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coq\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coq\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -800,12 +816,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -830,8 +846,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coq-bits
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coq-bits\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coq-bits\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -852,12 +868,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -882,8 +898,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coq-elpi
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coq-elpi\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coq-elpi\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -900,12 +916,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -930,8 +946,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coq-ext-lib
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coq-ext-lib\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coq-ext-lib\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -948,12 +964,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -978,8 +994,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coq-shell
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coq-shell\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coq-shell\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1000,12 +1016,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1030,8 +1046,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coqeal
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coqeal\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coqeal\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1064,12 +1080,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1094,8 +1110,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coqhammer
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coqhammer\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coqhammer\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1113,12 +1129,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1143,8 +1159,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coqprime
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coqprime\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coqprime\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1166,12 +1182,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1196,8 +1212,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target coquelicot
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"coquelicot\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"coquelicot\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1220,12 +1236,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1250,8 +1266,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target corn
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"corn\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"corn\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1276,12 +1292,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1306,8 +1322,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target dpdgraph
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"dpdgraph\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"dpdgraph\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1324,12 +1340,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1354,8 +1370,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target equations
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"equations\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"equations\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1372,12 +1388,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1402,8 +1418,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target flocq
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"flocq\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"flocq\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1421,12 +1437,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1451,8 +1467,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target fourcolor
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"fourcolor\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"fourcolor\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1474,10 +1490,18 @@ jobs:
     - mathcomp-algebra
     runs-on: ubuntu-latest
     steps:
+    - name: Determine which ref to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+        ref: ${{ env.tested_ref }}
     - name: Cachix install
       uses: cachix/install-nix-action@v12
       with:
@@ -1497,8 +1521,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target gaia
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"gaia\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"gaia\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1524,12 +1548,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1554,8 +1578,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target gappalib
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"gappalib\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"gappalib\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1578,12 +1602,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1608,8 +1632,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target goedel
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"goedel\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"goedel\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1635,12 +1659,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1665,9 +1689,9 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target hierarchy-builder
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"hierarchy-builder\" \\\n --dry-run 2>&1 >\
-        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"hierarchy-builder\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
@@ -1688,12 +1712,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1718,8 +1742,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target hydra-battles
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"hydra-battles\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"hydra-battles\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1743,12 +1767,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1773,8 +1797,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target interval
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"interval\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"interval\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1804,12 +1828,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1834,8 +1858,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target iris
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"iris\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"iris\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1857,12 +1881,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1887,8 +1911,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target math-classes
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"math-classes\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"math-classes\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1915,12 +1939,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -1945,8 +1969,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -1989,12 +2013,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2019,8 +2043,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-abel
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-abel\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-abel\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2047,12 +2071,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2077,9 +2101,9 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-algebra
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-algebra\" \\\n --dry-run 2>&1 >\
-        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-algebra\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
@@ -2109,12 +2133,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2139,9 +2163,9 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-analysis
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-analysis\" \\\n --dry-run 2>&1 >\
-        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-analysis\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
@@ -2182,12 +2206,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2212,8 +2236,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-bigenough
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-bigenough\" \\\n --dry-run 2>&1\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-bigenough\" \\\n   --dry-run 2>&1\
         \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2239,12 +2263,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2269,8 +2293,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-character
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-character\" \\\n --dry-run 2>&1\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-character\" \\\n   --dry-run 2>&1\
         \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2311,12 +2335,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2341,10 +2365,10 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-field
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-field\" \\\n --dry-run 2>&1 > /dev/null)\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-field\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
@@ -2376,12 +2400,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2406,9 +2430,9 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-fingroup
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-fingroup\" \\\n --dry-run 2>&1 >\
-        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-fingroup\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
@@ -2429,12 +2453,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2459,10 +2483,10 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-finmap
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-finmap\" \\\n --dry-run 2>&1 > /dev/null)\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-finmap\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+        built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
@@ -2484,12 +2508,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2514,8 +2538,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-real-closed
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-real-closed\" \\\n --dry-run 2>&1\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-real-closed\" \\\n   --dry-run 2>&1\
         \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2547,12 +2571,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2577,9 +2601,9 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-solvable
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-solvable\" \\\n --dry-run 2>&1 >\
-        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-solvable\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
@@ -2607,12 +2631,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2637,8 +2661,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target mathcomp-ssreflect
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"mathcomp-ssreflect\" \\\n --dry-run 2>&1\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"mathcomp-ssreflect\" \\\n   --dry-run 2>&1\
         \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2655,12 +2679,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2685,8 +2709,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target metalib
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"metalib\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"metalib\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2707,12 +2731,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2737,8 +2761,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target multinomials
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"multinomials\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"multinomials\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2772,12 +2796,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2802,8 +2826,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target odd-order
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"odd-order\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"odd-order\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2824,12 +2848,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2854,8 +2878,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target paco
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"paco\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"paco\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2872,12 +2896,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2902,8 +2926,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target paramcoq
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"paramcoq\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"paramcoq\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2920,12 +2944,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2950,8 +2974,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target pocklington
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"pocklington\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"pocklington\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -2969,12 +2993,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -2999,8 +3023,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target reglang
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"reglang\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"reglang\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -3023,12 +3047,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -3053,9 +3077,9 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target relation-algebra
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"relation-algebra\" \\\n --dry-run 2>&1 >\
-        \ /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"relation-algebra\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho ::set-output name=status::$(echo $nb_dry_run | grep \"\
         built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
@@ -3078,10 +3102,18 @@ jobs:
     - coq
     runs-on: ubuntu-latest
     steps:
+    - name: Determine which ref to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+        ref: ${{ env.tested_ref }}
     - name: Cachix install
       uses: cachix/install-nix-action@v12
       with:
@@ -3101,8 +3133,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target serapi
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"serapi\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"serapi\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -3120,12 +3152,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -3150,8 +3182,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target simple-io
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"simple-io\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"simple-io\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -3172,12 +3204,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -3202,8 +3234,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target stdpp
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"stdpp\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"stdpp\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -3220,12 +3252,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -3250,8 +3282,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target tlc
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"tlc\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"tlc\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -3269,12 +3301,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -3299,8 +3331,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target topology
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"topology\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"topology\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
@@ -3321,12 +3353,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Determine which ref to test
-      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n echo \"tested_ref=${{\
-        \ github.ref }}\" >> $GITHUB_ENV\nelse\n merge_commit=$(git ls-remote ${{\
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_ref=${{\
+        \ github.ref }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
         \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
-        \ | cut -f1)\n if [ -z \"$merge_commit\" ]; then\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/head\" >> $GITHUB_ENV\n else\n echo \"tested_ref=refs/pull/${{\
-        \ github.event.number }}/merge\" >> $GITHUB_ENV\n fi\nfi\n"
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/head\" >> $GITHUB_ENV\n  else\n    echo \"tested_ref=refs/pull/${{\
+        \ github.event.number }}/merge\" >> $GITHUB_ENV\n  fi\nfi\n"
     - name: Git checkout
       uses: actions/checkout@v2
       with:
@@ -3351,8 +3383,8 @@ jobs:
         name: math-comp
     - id: stepCheck
       name: Checking presence of CI target zorns-lemma
-      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n --argstr\
-        \ bundle \"8.12\" --argstr job \"zorns-lemma\" \\\n --dry-run 2>&1 > /dev/null)\n\
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.12\" --argstr job \"zorns-lemma\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
         \ \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'

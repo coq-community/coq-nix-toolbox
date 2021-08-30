@@ -70,6 +70,10 @@ in with config; let
       deps = genCI.pkgsDeps;
     };
     jsonAction = toJSON action;
+    jsonActionFile = pkgs.writeTextFile {
+      name = "jsonAction";
+      text = jsonAction;
+    };
 
     patchBIPkg = pkg:
       let bi = map (buildInputFrom pkgs) (config.buildInputs or []); in
@@ -84,7 +88,7 @@ in with config; let
     in rec {
       inherit bundle pkgs this-pkg this-shell-pkg ci genCI;
       inherit jsonPkgsDeps jsonPkgsSorted jsonPkgsRevDeps;
-      inherit action jsonAction;
+      inherit action jsonAction jsonActionFile;
       jsonBundle = toJSON bundle;
     };
   in
