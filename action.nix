@@ -25,12 +25,12 @@ with builtins; with lib; let
   };
   stepCachixInstall = {
     name =  "Cachix install";
-    uses =  "cachix/install-nix-action@v12";
+    uses =  "cachix/install-nix-action@v14";
     "with".nix_path = "nixpkgs=channel:nixpkgs-unstable";
   };
   stepCachixUse = { name, authToken ? null, signingKey ? null }: {
     name =  "Cachix setup ${name}";
-    uses =  "cachix/cachix-action@v8";
+    uses =  "cachix/cachix-action@v10";
     "with" = { inherit name; }
        // (optionalAttrs (!isNull authToken) {
           authToken = "\${{ secrets.${authToken} }}";
