@@ -15,27 +15,12 @@ with builtins; with lib; let
       fi
     '';
   };
-  stepRefToTest = {
-    name = "Determine which ref to test";
-    run = ''
-      if [ ''${{ github.event_name }} = "push" ]; then
-        echo "tested_ref=''${{ github.ref }}" >> $GITHUB_ENV
-      else
-        merge_commit=$(git ls-remote ''${{ github.event.repository.html_url }} refs/pull/''${{ github.event.number }}/merge | cut -f1)
-        if [ -z "$merge_commit" ]; then
-          echo "tested_ref=refs/pull/''${{ github.event.number }}/head" >> $GITHUB_ENV
-        else
-          echo "tested_ref=refs/pull/''${{ github.event.number }}/merge" >> $GITHUB_ENV
-        fi
-      fi
-    '';
-  };
   stepCheckout = {
     name =  "Git checkout";
     uses =  "actions/checkout@v2";
     "with" = {
       fetch-depth = 0;
-      ref = "\${{ env.tested_ref }}";
+      ref = "\${{ env.tested_commit }}";
     };
   };
   stepCachixInstall = {
@@ -85,7 +70,7 @@ with builtins; with lib; let
     "${job}${suffixStr}" = rec {
       runs-on = "ubuntu-latest";
       needs = map (j: "${j}${suffixStr}") (filter (j: elem j jobs) jdeps);
-      steps = [ stepRefToTest stepCheckout stepCachixInstall ]
+      steps = [ stepCommitToTest stepCheckout stepCachixInstall ]
               ++ (stepCachixUseAll cachix)
               ++ [ (stepCheck { inherit job bundles; }) ]
               ++ (map (job: stepBuild { inherit job bundles; }) jdeps)
