@@ -28,19 +28,34 @@ with builtins; with lib; let
     uses =  "cachix/install-nix-action@v14";
     "with".nix_path = "nixpkgs=channel:nixpkgs-unstable";
   };
-  stepCachixUse = { name, authToken ? null, signingKey ? null }: {
+  stepCachixUse = { name, authToken ? null,
+                    signingKey ? null, extraPullNames ? [] }: {
     name =  "Cachix setup ${name}";
     uses =  "cachix/cachix-action@v10";
+    inherit extraPullNames;
     "with" = { inherit name; }
        // (optionalAttrs (!isNull authToken) {
           authToken = "\${{ secrets.${authToken} }}";
        })
        // (optionalAttrs (!isNull signingKey) {
-          authToken = "\${{ secrets.${signingKey} }}";
+          signingKey = "\${{ secrets.${signingKey} }}";
        });
   };
-  stepCachixUseAll = cachix: attrValues
-    (mapAttrs (name: v: stepCachixUse ({inherit name;} // v)) cachix);
+  stepCachixUseAll = cachixAttrs: let
+    cachixList = attrValues
+      (mapAttrs (name: v: {inherit name;} // v) cachixAttrs); in
+    if cachixList == [] then [] else  let
+      writableAuth = filter (v: v?authToken) cachixList;
+      writableToken = filter (v: v?signingKey) cachixList;
+      readonly = filter (v: !v?authToken && !v?signingKey) cachixList;
+      reordered = writableAuth ++ writableToken ++ readonly;
+    in
+      if length writableToken + length writableAuth > 1 then
+        throw ("Cannot have more than one authToken " +
+              "or signingKey over all cachix")
+      else [ (stepCachixUse (head reordered // {
+        extraPullNames = map (v: v.name) (tail reordered);
+      })) ];
 
   stepCheck = { job, bundles ? [] }:
     let bundlestr = if isList bundles then "\${{ matrix.bundle }}" else bundles; in {
