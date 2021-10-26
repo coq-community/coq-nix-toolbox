@@ -21,13 +21,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target Cheerios
@@ -69,13 +67,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target CoLoR
@@ -118,13 +114,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target ITree
@@ -169,13 +163,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target InfSeqExt
@@ -215,13 +207,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target QuickChick
@@ -270,13 +260,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target StructTact
@@ -316,13 +304,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target Verdi
@@ -371,13 +357,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target aac-tactics
@@ -415,13 +399,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target autosubst
@@ -462,13 +444,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target bignums
@@ -507,13 +487,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target category-theory
@@ -558,13 +536,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target ceres
@@ -602,13 +578,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target compcert
@@ -648,13 +622,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coq
@@ -688,13 +660,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coq-bits
@@ -735,13 +705,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coq-ext-lib
@@ -778,13 +746,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coq-shell
@@ -825,13 +791,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coqeal
@@ -884,13 +848,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coqhammer
@@ -928,13 +890,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coqprime
@@ -976,13 +936,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coquelicot
@@ -1025,13 +983,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target corn
@@ -1076,13 +1032,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target dpdgraph
@@ -1119,13 +1073,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target equations
@@ -1163,13 +1115,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target extructures
@@ -1210,13 +1160,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target flocq
@@ -1254,13 +1202,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target fourcolor
@@ -1303,13 +1249,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target gaia
@@ -1355,13 +1299,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target gappalib
@@ -1405,13 +1347,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target interval
@@ -1461,13 +1401,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target iris
@@ -1508,13 +1446,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target ltac2
@@ -1552,13 +1488,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target math-classes
@@ -1605,13 +1539,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp
@@ -1674,13 +1606,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-abel
@@ -1727,13 +1657,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-algebra
@@ -1779,13 +1707,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-bigenough
@@ -1831,13 +1757,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-character
@@ -1898,13 +1822,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-field
@@ -1958,13 +1880,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-fingroup
@@ -2006,13 +1926,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-finmap
@@ -2056,13 +1974,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-real-closed
@@ -2114,13 +2030,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-solvable
@@ -2169,13 +2083,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-ssreflect
@@ -2212,13 +2124,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target metalib
@@ -2259,13 +2169,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target multinomials
@@ -2319,13 +2227,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target odd-order
@@ -2366,13 +2272,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target paco
@@ -2409,13 +2313,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target paramcoq
@@ -2452,13 +2354,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target pocklington
@@ -2496,13 +2396,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target reglang
@@ -2545,13 +2443,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target relation-algebra
@@ -2596,13 +2492,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target semantics
@@ -2639,13 +2533,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target serapi
@@ -2683,13 +2575,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target simple-io
@@ -2730,13 +2620,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target stdpp
@@ -2773,13 +2661,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target tlc
@@ -2817,13 +2703,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target topology
@@ -2864,13 +2748,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target zorns-lemma

@@ -29,17 +29,17 @@ with builtins; with lib; let
     "with".nix_path = "nixpkgs=channel:nixpkgs-unstable";
   };
   stepCachixUse = { name, authToken ? null,
-                    signingKey ? null, extraPullNames ? [] }: {
+                    signingKey ? null, extraPullNames ? null }: {
     name =  "Cachix setup ${name}";
     uses =  "cachix/cachix-action@v10";
-    inherit extraPullNames;
-    "with" = { inherit name; }
-       // (optionalAttrs (!isNull authToken) {
-          authToken = "\${{ secrets.${authToken} }}";
-       })
-       // (optionalAttrs (!isNull signingKey) {
-          signingKey = "\${{ secrets.${signingKey} }}";
-       });
+    "with" = { inherit name; } //
+             (optionalAttrs (!isNull authToken) {
+               authToken = "\${{ secrets.${authToken} }}";
+             }) // (optionalAttrs (!isNull signingKey) {
+               signingKey = "\${{ secrets.${signingKey} }}";
+             }) // (optionalAttrs (!isNull extraPullNames) {
+               extraPullNames = concatStringsSep ", " extraPullNames;
+             });
   };
   stepCachixUseAll = cachixAttrs: let
     cachixList = attrValues
