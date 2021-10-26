@@ -19,13 +19,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coq
@@ -58,13 +56,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target coq-shell
@@ -102,13 +98,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target heq
@@ -149,13 +143,11 @@ jobs:
       uses: cachix/install-nix-action@v14
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - extraPullNames:
-      - coq
-      - math-comp
-      name: Cachix setup coq-community
+    - name: Cachix setup coq-community
       uses: cachix/cachix-action@v10
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
         name: coq-community
     - id: stepCheck
       name: Checking presence of CI target mathcomp-bigenough
