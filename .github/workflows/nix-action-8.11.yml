@@ -30,9 +30,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target Cheerios
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"Cheerios\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"Cheerios\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -76,9 +76,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target CoLoR
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"CoLoR\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"CoLoR\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -123,9 +123,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target ITree
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"ITree\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"ITree\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -172,9 +172,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target InfSeqExt
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"InfSeqExt\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"InfSeqExt\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -216,9 +216,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target QuickChick
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"QuickChick\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"QuickChick\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -269,9 +269,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target StructTact
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"StructTact\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"StructTact\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -313,9 +313,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target Verdi
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"Verdi\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"Verdi\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -366,9 +366,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target aac-tactics
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"aac-tactics\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"aac-tactics\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -410,9 +410,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target addition-chains
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"addition-chains\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"addition-chains\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -464,9 +464,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target autosubst
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"autosubst\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"autosubst\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -509,9 +509,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target bignums
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"bignums\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"bignums\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -552,9 +552,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target category-theory
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"category-theory\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"category-theory\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -601,9 +601,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target ceres
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"ceres\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"ceres\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -643,9 +643,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target compcert
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"compcert\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"compcert\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -687,9 +687,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coq
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coq\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coq\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -725,9 +725,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coq-bits
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coq-bits\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coq-bits\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -770,9 +770,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coq-elpi
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coq-elpi\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coq-elpi\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -811,9 +811,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coq-ext-lib
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coq-ext-lib\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coq-ext-lib\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -852,9 +852,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coq-shell
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coq-shell\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coq-shell\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -897,9 +897,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coqeal
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coqeal\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coqeal\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -954,9 +954,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coqhammer
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coqhammer\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coqhammer\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -996,9 +996,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coqprime
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coqprime\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coqprime\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1042,9 +1042,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target coquelicot
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"coquelicot\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"coquelicot\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1089,9 +1089,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target corn
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"corn\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"corn\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1139,9 +1139,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target deriving
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"deriving\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"deriving\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1184,9 +1184,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target dpdgraph
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"dpdgraph\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"dpdgraph\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1225,9 +1225,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target equations
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"equations\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"equations\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1268,9 +1268,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target extructures
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"extructures\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"extructures\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1317,9 +1317,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target flocq
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"flocq\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"flocq\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1359,9 +1359,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target fourcolor
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"fourcolor\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"fourcolor\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1406,9 +1406,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target gaia
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"gaia\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"gaia\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1456,9 +1456,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target gappalib
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"gappalib\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"gappalib\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1503,9 +1503,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target goedel
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"goedel\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"goedel\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1553,9 +1553,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target hierarchy-builder
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"hierarchy-builder\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"hierarchy-builder\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1599,9 +1599,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target hydra-battles
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"hydra-battles\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"hydra-battles\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1647,9 +1647,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target interval
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"interval\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"interval\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1701,9 +1701,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target iris
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"iris\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"iris\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1747,9 +1747,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target math-classes
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"math-classes\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"math-classes\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1798,9 +1798,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1865,9 +1865,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-abel
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-abel\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-abel\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1916,9 +1916,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-algebra
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-algebra\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-algebra\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -1971,9 +1971,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-analysis
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-analysis\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-analysis\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2037,9 +2037,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-bigenough
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-bigenough\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-bigenough\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2087,9 +2087,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-character
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-character\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-character\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2152,9 +2152,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-field
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-field\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-field\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2210,9 +2210,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-fingroup
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-fingroup\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-fingroup\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2256,9 +2256,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-finmap
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-finmap\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-finmap\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2304,9 +2304,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-real-closed
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-real-closed\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-real-closed\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2360,9 +2360,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-solvable
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-solvable\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-solvable\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2413,9 +2413,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-ssreflect
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-ssreflect\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-ssreflect\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2456,9 +2456,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target mathcomp-tarjan
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"mathcomp-tarjan\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"mathcomp-tarjan\" \\\n   --dry-run 2>&1 >\
+        \ /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2505,9 +2505,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target metalib
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"metalib\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"metalib\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2550,9 +2550,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target multinomials
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"multinomials\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"multinomials\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2608,9 +2608,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target odd-order
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"odd-order\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"odd-order\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2653,9 +2653,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target paco
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"paco\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"paco\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2694,9 +2694,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target paramcoq
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"paramcoq\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"paramcoq\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2735,9 +2735,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target pocklington
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"pocklington\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"pocklington\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2777,9 +2777,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target reglang
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"reglang\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"reglang\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2824,9 +2824,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target relation-algebra
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"relation-algebra\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"relation-algebra\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2873,9 +2873,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target semantics
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"semantics\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"semantics\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2914,9 +2914,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target serapi
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"serapi\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"serapi\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -2956,9 +2956,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target simple-io
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"simple-io\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"simple-io\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -3001,9 +3001,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target stdpp
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"stdpp\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"stdpp\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -3042,9 +3042,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target tlc
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"tlc\" --dry-run)\necho $nb_dry_run\necho\
-        \ ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed \"\
-        s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"tlc\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -3084,9 +3084,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target topology
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"topology\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"topology\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
@@ -3129,9 +3129,9 @@ jobs:
     - id: stepCheck
       name: Checking presence of CI target zorns-lemma
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
-        \ bundle \"8.11\" --argstr job \"zorns-lemma\" --dry-run)\necho $nb_dry_run\n\
-        echo ::set-output name=status::$(echo $nb_dry_run | grep \"built:\" | sed\
-        \ \"s/.*/built/\")\n"
+        \ bundle \"8.11\" --argstr job \"zorns-lemma\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
