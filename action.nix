@@ -63,7 +63,8 @@ with builtins; with lib; let
     id = "stepCheck";
     run = ''
       nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \
-         --argstr bundle "${bundlestr}" --argstr job "${job}" --dry-run)
+         --argstr bundle "${bundlestr}" --argstr job "${job}" \
+         --dry-run 2>&1 > /dev/null)
       echo $nb_dry_run
       echo ::set-output name=status::$(echo $nb_dry_run | grep "built:" | sed "s/.*/built/")
     '';
