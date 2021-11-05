@@ -19,10 +19,10 @@ nix-shell https://coq.inria.fr/nix/toolbox --arg do-nothing true --run generateN
 nix-shell --arg do-nothing true --run "initNixConfig YOURPACKAGENAME"
 ```
 
-This will create an initial `.nix/config.yml` that you should now manually edit.
+This will create an initial `.nix/config.nix` that you should now manually edit.
 This file contains comments explaining each available option.
 
-Once you have finished editing `.nix/config.yml`, you may generate GitHub Actions workflow(s) by running:
+Once you have finished editing `.nix/config.nix`, you may generate GitHub Actions workflow(s) by running:
 
 ```bash
 nix-shell --arg do-nothing true --run "genNixActions"
