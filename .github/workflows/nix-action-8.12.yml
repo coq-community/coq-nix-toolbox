@@ -921,6 +921,7 @@ jobs:
     - bignums
     - paramcoq
     - multinomials
+    - mathcomp-real-closed
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -971,6 +972,10 @@ jobs:
       name: 'Building/fetching previous CI target: multinomials'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
         job "multinomials"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-real-closed'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
+        job "mathcomp-real-closed"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
