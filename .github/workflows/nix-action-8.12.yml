@@ -284,7 +284,6 @@ jobs:
     needs:
     - coq
     - ITree
-    - compcert
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -323,10 +322,6 @@ jobs:
       name: 'Building/fetching previous CI target: ITree'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
         job "ITree"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: compcert'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
-        job "compcert"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
