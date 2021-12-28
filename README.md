@@ -93,14 +93,15 @@ When you run `nix-shell`, you get an environment with a few available commands:
 - `fetchCoqOverlay`: fetch a derivation file from nixpkgs that you may then edit locally to override a package.
 - `createOverlay`: create a fresh derivation file from a template, which could then be added to nixpkgs.
 - `cachedMake`: compile the project by reusing build outputs cached (generally thanks to Cachix).
-- `genNixActions`: generates GitHub one actions file per bundle, for testing dependencies and reverse depndencies.
+- `genNixActions`: generates GitHub one actions file per bundle, for testing dependencies and reverse dependencies.
+- `genCrossPlatformNixActions`: duplicate generated workflows to run on both Ubuntu and macOS (useful when macOS users want to get cached artifacts as well).
 
 These three commands update the nixpkgs version to use (will create or override `.nix/nixpkgs.nix`):
 - `updateNixpkgsUnstable`: update to the latest nixpkgs-unstable.
 - `updateNixpkgsMaster`: update to the head of `master` of nixpkgs.
 - `updateNixpkgs`: update to the specified owner and ref.
 
-After one of these three commands, you should leave and re-enter `nix-shell` if you want the update to be taken into account (e.g., before calling `genNixActions`).
+After one of these three commands, you should leave and re-enter `nix-shell` if you want the update to be taken into account.
 
 ## Arguments accepted by `nix-shell`
 
@@ -117,7 +118,7 @@ To test a PR on nixpkgs that modifies the `coqPackages` set, clone this reposito
 
 ```
 nix-shell --arg do-nothing true --run "updateNixpkgs <pr_owner> <pr_branch>"
-nix-shell --arg do-nothing true --run "genNixActions"
+nix-shell --arg do-nothing true --run "genCrossPlatformNixActions"
 ```
 
 Then, open a draft PR with the generated changes here.
@@ -126,5 +127,5 @@ Once the PR on nixpkgs has been merged, you can transform the draft PR into one 
 
 ```
 nix-shell --arg do-nothing true --run "updateNixpkgsMaster"
-nix-shell --arg do-nothing true --run "genNixActions"
+nix-shell --arg do-nothing true --run "genCrossPlatformNixActions"
 ```

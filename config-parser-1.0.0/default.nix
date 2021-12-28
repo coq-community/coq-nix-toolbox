@@ -11,6 +11,7 @@ with builtins;
   override ? {},
   ocaml-override ? {},
   global-override ? {},
+  ci-platform,
   lib,
 }@initial:
 with lib;
@@ -59,6 +60,7 @@ in with config; let
     inherit (import ../action.nix { inherit lib; }) mkJobs mkAction;
     action = mkAction {
       inherit (config) cachix;
+      inherit ci-platform;
       bundles = bundleName;
       jobs = let
           jdeps = genAttrs ci.mains (n: genCI.pkgsRevDepsSet.${n} or {});

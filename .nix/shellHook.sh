@@ -179,6 +179,17 @@ genNixActions (){
 }
 addNixCommand genNixActions
 
+genCrossPlatformNixActions (){
+  mkdir -p $currentDir/.github/workflows/
+  for t in $bundles; do
+    for p in "ubuntu" "macos"; do
+      echo "generating $currentDir/.github/workflows/nix-action-$t-$p.yml"
+      nix-shell --arg do-nothing true --argstr bundle $t --argstr ci-platform "$p-latest" --run "ppNixAction > $currentDir/.github/workflows/nix-action-$t-$p.yml"
+    done
+  done
+}
+addNixCommand genCrossPlatformNixActions
+
 initNixConfig (){
   Orig=$toolboxDir/template-config.nix
   F=$configDir/config.nix;

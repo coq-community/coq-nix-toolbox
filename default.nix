@@ -17,6 +17,7 @@ in
   coq-overlays-dir ? get-path src "coq-overlays",
   ocaml-overlays-dir ? get-path src "ocaml-overlays",
   ci-matrix ? false,
+  ci-platform ? null,
   config ? {},
   override ? {},
   ocaml-override ? {},
@@ -44,6 +45,7 @@ let
           // { diag = f: x: f x x; };
     inherit overlays-dir coq-overlays-dir ocaml-overlays-dir;
     inherit global-override override ocaml-override;
+    inherit ci-platform;
   };
   my-throw = x: throw "Coq nix toolbox error: ${x}";
 in
