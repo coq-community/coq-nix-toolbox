@@ -180,6 +180,18 @@ initNixConfig (){
 }
 addNixCommand initNixConfig
 
+createOverlay (){
+  Orig=$toolboxDir/template-overlay.nix
+  if [[ -n "$1" ]]; then
+       D=$configDir/coq-overlays/$1;
+       mkdir -p $D
+       cat $Orig > $D/default.nix
+       sed -i "s/template/$1/" $D/default.nix
+    else echo "usage: createOverlay pname"
+  fi
+}
+addNixCommand createOverlay
+
 fetchCoqOverlay (){
   F=$nixpkgs/pkgs/development/coq-modules/$1/default.nix
   D=$configDir/coq-overlays/$1/

@@ -39,8 +39,9 @@ This can be useful in the following case:
 - The package that you are building is available in nixpkgs but its dependencies have changed.
 - The package that you are building is not yet available in nixpkgs.
 
+
 To amend a package already present in nixpkgs, just run `nix-shell --run "fetchCoqOverlay PACKAGENAME"`.
-To create a package from scratch, refer to the nixpkgs documentation available at https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq.
+To create a package from scratch, run `nix-shell --run "createOverlay PACKAGENAME"` and refer to the nixpkgs documentation available at https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq.
 
 ## Bundles and jobs
 
@@ -89,6 +90,7 @@ When you run `nix-shell`, you get an environment with a few available commands:
 - `initNixConfig`: create an initial `.nix/config.nix` file.
 - `nixEnv`: displays the list of Nix store locations for all the available packages.
 - `fetchCoqOverlay`: fetch a derivation file from nixpkgs that you may then edit locally to override a package.
+- `createOverlay`: create a fresh derivation file from a template, which could then be added to nixpkgs.
 - `cachedMake`: compile the project by reusing build outputs cached (generally thanks to Cachix).
 - `genNixActions`: generates GitHub one actions file per bundle, for testing dependencies and reverse depndencies.
 
