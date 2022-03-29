@@ -7,7 +7,7 @@
 { lib, mkCoqDerivation, which, coq
   ## declare extra dependencies here, to be used in propagateBuildInputs e.g.
   # , mathcomp, coq-elpi
-  , version ? null, shim ? false }:
+  , version ? null }:
 
 with lib; mkCoqDerivation {
   pname = "template";
@@ -27,23 +27,25 @@ with lib; mkCoqDerivation {
   ## leave sha256 empty at first and then copy paste
   ## the resulting sha given by the error message
   # release."1.1.1".sha256 = "";
-  ## if the tag is not exactly the version number you can amend here
-  # release."1.1.1".rev = "1.1.1"; # e.g. `= "v1.1.1"`
-  ## perhaps the tags all have a different name, that you can modify it here
-  # releaseRev = v: "${v}"; # e.g. `= v: "v${v}"`
+  ## if the tag is not exactly the version number you can amend like this
+  # release."1.1.1".rev = "v1.1.1";
+  ## if a consistent scheme gives the tag from the release number, you can do like this:
+  # releaseRev = v: "v${v}";
 
   ## Add dependencies in here (declare them first at the begining of the file
   # propagatedBuildInputs = [ ]; ## e.g. `= [ mathcomp coq-elpi ]`
 
-  ## Does the package contain
+  ## Does the package contain OCaml code?
   # mlPlugin = false;
 
   ## Give some meta data
+  ## This is needed for submitting the package to nixpkgs but not required for local use.
   meta = {
     ## Describe your package in one sentence
     # description = "";
-    ## Kindly ask one of these people if they want to be a maintainer
-    # maintainers = with maintainers; [ cohencyril siraben vbgl Zimmy48 ];
+    ## Kindly ask one of these people if they want to be an official maintainer.
+    ## (You might also consider adding yourself to the list of maintainers)
+    # maintainers = with maintainers; [ cohencyril siraben vbgl Zimmi48 ];
     ## Pick a license from
     ## https://github.com/NixOS/nixpkgs/blob/master/lib/licenses.nix
     # license = licenses.mit;
