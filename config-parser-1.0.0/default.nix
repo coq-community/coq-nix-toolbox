@@ -82,8 +82,9 @@ in with config; let
 
     notfound-ppath = throw "config-parser-1.0.0: not found: ${toString config.ppath}";
     notfound-shell-ppath = throw "config-parser-1.0.0: not found: ${toString config.shell-ppath}";
-    this-pkg = patchBIPkg (attrByPath config.ppath notfound-ppath pkgs);
-    this-shell-pkg = patchBIPkg (attrByPath config.shell-ppath notfound-shell-ppath pkgs);
+    hack = x: ((if head x == "ocamlPackages" then ["coq"] else []) ++ x);
+    this-pkg = patchBIPkg (attrByPath (hack config.ppath) notfound-ppath pkgs);
+    this-shell-pkg = patchBIPkg (attrByPath (hack config.shell-ppath) notfound-shell-ppath pkgs);
 
     in rec {
       inherit bundle pkgs this-pkg this-shell-pkg ci genCI;
