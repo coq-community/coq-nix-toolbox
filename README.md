@@ -11,8 +11,9 @@ Additionally, in order to use binary caches from recognized organizations, pleas
 ```bash
 nix-env -iA nixpkgs.cachix && cachix use coq && cachix use coq-community && cachix use math-comp
 ```
+This only needs to be peformed once, after the installation of Nix.
 
-Then, just run the following at the root of your project:
+Then, run the following commands at the root of your project (using a project-specific name instead of YOURPACKAGENAME, below) :
 
 ```bash
 nix-shell https://coq.inria.fr/nix/toolbox --arg do-nothing true --run generateNixDefault
