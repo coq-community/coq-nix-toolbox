@@ -17,6 +17,10 @@ with lib; mkCoqDerivation {
   # domain = "github.com";
 
   inherit version;
+## The `defaultVersion` attribute is important for nixpkgs but can be kept unchanged
+## for local usage since it will be ignored locally if
+## - this derivation corresponds to the main attribute,
+## - or its version is overridden (by a branch, PR, url or path) in `.nix/config.nix`.
   defaultVersion = with versions; switch coq.coq-version [
     ## Example of possible dependencies
     # { case = range "8.13" "8.14"; out = "1.2.0"; }
@@ -32,7 +36,10 @@ with lib; mkCoqDerivation {
   ## if a consistent scheme gives the tag from the release number, you can do like this:
   # releaseRev = v: "v${v}";
 
-  ## Add dependencies in here (declare them first at the begining of the file
+  ## Add dependencies in here. In particular you can add
+  ## - arbitrary nix packages (you need to require them at the beginning of the file)
+  ## - Coq packages (require them at the beginning of the file)
+  ## - OCaml packages (use `coq.ocamlPackages.xxx`, no need to require them at the beginning of the file)
   # propagatedBuildInputs = [ ]; ## e.g. `= [ mathcomp coq-elpi ]`
 
   ## Does the package contain OCaml code?
