@@ -17,6 +17,8 @@ printNixEnv () {
   echo "Here is your work environement"
   echo "nativeBuildInputs:"
   for x in $nativeBuildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
+  echo "propagatedNativeBuildInputs:"
+  for x in $propagatedNativeBuildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
   echo "buildInputs:"
   for x in $buildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
   echo "propagatedBuildInputs:"
@@ -27,6 +29,16 @@ addNixCommand printNixEnv
 
 ppNixEnv () {
   echo "Available packages:"
+  for x in $nativeBuildInputs
+  do printf -- "- "
+     pkgv=$(echo $x | cut -d "-" -f "2-")
+     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+  done
+  for x in $propagatedNativeBuildInputs
+  do printf -- "- "
+     pkgv=$(echo $x | cut -d "-" -f "2-")
+     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+  done
   for x in $buildInputs
   do printf -- "- "
      pkgv=$(echo $x | cut -d "-" -f "2-")
@@ -41,6 +53,8 @@ ppNixEnv () {
 addNixCommand ppNixEnv
 
 nixEnv () {
+  for x in $nativeBuildInputs; do echo $x; done
+  for x in $propagatedNativeBuildInputs; do echo $x; done
   for x in $buildInputs; do echo $x; done
   for x in $propagatedBuildInputs; do echo $x; done
 }
