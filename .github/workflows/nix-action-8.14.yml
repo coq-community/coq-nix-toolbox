@@ -45,6 +45,52 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "Cheerios"
+  CoLoR:
+    needs:
+    - coq
+    - bignums
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target CoLoR
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"CoLoR\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: bignums'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "bignums"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "CoLoR"
   ITree:
     needs:
     - coq
@@ -178,6 +224,62 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "LibHyps"
+  QuickChick:
+    needs:
+    - coq
+    - mathcomp-ssreflect
+    - coq-ext-lib
+    - simple-io
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target QuickChick
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"QuickChick\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-ssreflect"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq-ext-lib'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq-ext-lib"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: simple-io'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "simple-io"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "QuickChick"
   StructTact:
     needs:
     - coq
@@ -372,6 +474,7 @@ jobs:
     - coq
     - mathcomp-ssreflect
     - mathcomp-algebra
+    - mathcomp-fingroup
     - paramcoq
     runs-on: ubuntu-latest
     steps:
@@ -415,6 +518,10 @@ jobs:
       name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-algebra"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: paramcoq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
@@ -605,6 +712,7 @@ jobs:
   compcert:
     needs:
     - coq
+    - coq
     - flocq
     runs-on: ubuntu-latest
     steps:
@@ -636,6 +744,10 @@ jobs:
         \ bundle \"8.14\" --argstr job \"compcert\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
         \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
@@ -1047,6 +1159,47 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "coqprime"
+  coqtail-math:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target coqtail-math
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"coqtail-math\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coqtail-math"
   coquelicot:
     needs:
     - coq
@@ -1368,6 +1521,8 @@ jobs:
     needs:
     - coq
     - mathcomp-algebra
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -1407,6 +1562,14 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-algebra"
     - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-ssreflect"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
+    - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "fourcolor"
@@ -1415,6 +1578,7 @@ jobs:
     - coq
     - mathcomp-ssreflect
     - mathcomp-algebra
+    - mathcomp-fingroup
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -1457,6 +1621,10 @@ jobs:
       name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-algebra"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
@@ -1619,6 +1787,7 @@ jobs:
     - coq
     - mathcomp-algebra
     - mathcomp-finmap
+    - mathcomp-fingroup
     - hierarchy-builder
     runs-on: ubuntu-latest
     steps:
@@ -1662,6 +1831,10 @@ jobs:
       name: 'Building/fetching previous CI target: mathcomp-finmap'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-finmap"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: hierarchy-builder'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
@@ -1773,6 +1946,8 @@ jobs:
     - bignums
     - coquelicot
     - flocq
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -1819,6 +1994,14 @@ jobs:
       name: 'Building/fetching previous CI target: flocq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "flocq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-ssreflect"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
@@ -1869,6 +2052,47 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "iris"
+  itauto:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target itauto
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"itauto\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "itauto"
   math-classes:
     needs:
     - coq
@@ -2428,7 +2652,10 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
+    - mathcomp-algebra
     - mathcomp-field
+    - mathcomp-fingroup
+    - mathcomp-solvable
     - mathcomp-bigenough
     runs-on: ubuntu-latest
     steps:
@@ -2469,9 +2696,21 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-ssreflect"
     - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-algebra"
+    - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: mathcomp-field'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-field"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-solvable'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-solvable"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: mathcomp-bigenough'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
@@ -2632,6 +2871,8 @@ jobs:
     needs:
     - coq
     - mathcomp-algebra
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -2671,6 +2912,14 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-algebra"
     - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-ssreflect"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
+    - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-word"
@@ -2678,6 +2927,8 @@ jobs:
     needs:
     - coq
     - mathcomp-algebra
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -2717,15 +2968,65 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-algebra"
     - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-ssreflect"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
+    - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-zify"
+  metalib:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target metalib
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"metalib\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "metalib"
   multinomials:
     needs:
     - coq
     - mathcomp-ssreflect
     - mathcomp-algebra
     - mathcomp-finmap
+    - mathcomp-fingroup
     - mathcomp-bigenough
     runs-on: ubuntu-latest
     steps:
@@ -2774,6 +3075,10 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-finmap"
     - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
+    - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: mathcomp-bigenough'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-bigenough"
@@ -2785,6 +3090,12 @@ jobs:
     needs:
     - coq
     - mathcomp-character
+    - mathcomp-ssreflect
+    - mathcomp-fingroup
+    - mathcomp-algebra
+    - mathcomp-solvable
+    - mathcomp-field
+    - mathcomp
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to test
@@ -2823,6 +3134,30 @@ jobs:
       name: 'Building/fetching previous CI target: mathcomp-character'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "mathcomp-character"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-ssreflect"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-fingroup'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-fingroup"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-algebra'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-algebra"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-solvable'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-solvable"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-field'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-field"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
@@ -2909,6 +3244,57 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "paramcoq"
+  parsec:
+    needs:
+    - coq
+    - ceres
+    - coq-ext-lib
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target parsec
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"parsec\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: ceres'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "ceres"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq-ext-lib'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq-ext-lib"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "parsec"
   pocklington:
     needs:
     - coq
@@ -2996,6 +3382,57 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "reglang"
+  relation-algebra:
+    needs:
+    - coq
+    - aac-tactics
+    - mathcomp-ssreflect
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target relation-algebra
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"relation-algebra\" \\\n   --dry-run 2>&1\
+        \ > /dev/null)\necho $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run\
+        \ | grep \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: aac-tactics'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "aac-tactics"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "mathcomp-ssreflect"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "relation-algebra"
   semantics:
     needs:
     - coq
@@ -3078,6 +3515,93 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "serapi"
+  simple-io:
+    needs:
+    - coq
+    - coq-ext-lib
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target simple-io
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"simple-io\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq-ext-lib'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq-ext-lib"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "simple-io"
+  smpl:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target smpl
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"smpl\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "smpl"
   stdpp:
     needs:
     - coq
@@ -3119,6 +3643,47 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "stdpp"
+  tlc:
+    needs:
+    - coq
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target tlc
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"tlc\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "tlc"
   topology:
     needs:
     - coq
@@ -3165,6 +3730,52 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
         job "topology"
+  trakt:
+    needs:
+    - coq
+    - coq-elpi
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine which commit to test
+      run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
+        \ github.sha }}\" >> $GITHUB_ENV\nelse\n  merge_commit=$(git ls-remote ${{\
+        \ github.event.repository.html_url }} refs/pull/${{ github.event.number }}/merge\
+        \ | cut -f1)\n  if [ -z \"$merge_commit\" ]; then\n    echo \"tested_commit=${{\
+        \ github.event.pull_request.head.sha }}\" >> $GITHUB_ENV\n  else\n    echo\
+        \ \"tested_commit=$merge_commit\" >> $GITHUB_ENV\n  fi\nfi\n"
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        ref: ${{ env.tested_commit }}
+    - name: Cachix install
+      uses: cachix/install-nix-action@v16
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: Cachix setup coq-community
+      uses: cachix/cachix-action@v10
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        extraPullNames: coq, math-comp
+        name: coq-community
+    - id: stepCheck
+      name: Checking presence of CI target trakt
+      run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
+        \ bundle \"8.14\" --argstr job \"trakt\" \\\n   --dry-run 2>&1 > /dev/null)\n\
+        echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
+        \ \"built:\" | sed \"s/.*/built/\")\n"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq-elpi'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "coq-elpi"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: Building/fetching current CI target
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.14" --argstr
+        job "trakt"
   zorns-lemma:
     needs:
     - coq
