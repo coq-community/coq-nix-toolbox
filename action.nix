@@ -78,13 +78,13 @@ with builtins; with lib; let
     run  = "NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle \"${bundlestr}\" --argstr job \"${job}\"";
   };
 
-  mkJob = { job, jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }:
+  mkJob = { job, jobs ? [], bundles ? [], deps ? {}, cachix ? {}, ci-platform, suffix ? false }:
     let
       suffixStr = optionalString (suffix && isString bundles) "-${bundles}";
       jdeps = deps.${job} or [];
     in {
     "${job}${suffixStr}" = rec {
-      runs-on = "ubuntu-latest";
+      runs-on = if ci-platform == null then "ubuntu-latest" else ci-platform;
       needs = map (j: "${j}${suffixStr}") (filter (j: elem j jobs) jdeps);
       steps = [ stepCommitToTest stepCheckout stepCachixInstall ]
               ++ (stepCachixUseAll cachix)
@@ -94,11 +94,11 @@ with builtins; with lib; let
     } // (optionalAttrs (isList bundles) {strategy.matrix.bundle = bundles;});
   };
 
-  mkJobs = { jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }@args:
+  mkJobs = { jobs ? [], bundles ? [], deps ? {}, cachix ? {}, ci-platform, suffix ? false }@args:
     foldl (action: job: action // (mkJob ({ inherit job; } // args))) {} jobs;
 
-  mkActionFromJobs = { actionJobs, bundles ? [] }: {
-    name = "Nix CI for bundle ${toString bundles}";
+  mkActionFromJobs = { actionJobs, bundles ? [], ci-platform }: {
+    name = "Nix CI for bundle ${toString bundles}${if ci-platform == null then "" else " on platform ${ci-platform}"}";
     on = {
       push.branches = [ "master" ];
       pull_request.paths = [ ".github/workflows/**" ];
@@ -107,7 +107,7 @@ with builtins; with lib; let
     jobs = actionJobs;
   };
 
-  mkAction = { jobs ? [], bundles ? [], deps ? {}, cachix ? {} }@args:
-    mkActionFromJobs {inherit bundles; actionJobs = mkJobs args; };
+  mkAction = { jobs ? [], bundles ? [], deps ? {}, cachix ? {}, ci-platform ? null }@args:
+    mkActionFromJobs {inherit bundles ci-platform; actionJobs = mkJobs args; };
 
 in { inherit mkJob mkJobs mkAction; }

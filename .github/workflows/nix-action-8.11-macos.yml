@@ -3,7 +3,7 @@ jobs:
     needs:
     - coq
     - StructTact
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -49,7 +49,7 @@ jobs:
     needs:
     - coq
     - bignums
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -96,7 +96,7 @@ jobs:
     - coq
     - coq-ext-lib
     - paco
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -145,7 +145,7 @@ jobs:
   InfSeqExt:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -186,7 +186,7 @@ jobs:
   LibHyps:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -230,7 +230,7 @@ jobs:
     - mathcomp-ssreflect
     - coq-ext-lib
     - simple-io
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -283,7 +283,7 @@ jobs:
   StructTact:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -327,7 +327,7 @@ jobs:
     - Cheerios
     - InfSeqExt
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -380,7 +380,7 @@ jobs:
   aac-tactics:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -425,7 +425,7 @@ jobs:
     - mathcomp-algebra
     - mathcomp-fingroup
     - paramcoq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -483,7 +483,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -528,7 +528,7 @@ jobs:
   bignums:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -571,7 +571,7 @@ jobs:
     - coq
     - mathcomp-ssreflect
     - equations
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -620,7 +620,7 @@ jobs:
   ceres:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -663,7 +663,7 @@ jobs:
     - coq
     - coq
     - flocq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -711,7 +711,7 @@ jobs:
         job "compcert"
   coq:
     needs: []
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -749,7 +749,7 @@ jobs:
     needs:
     - coq
     - mathcomp-algebra
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -794,7 +794,7 @@ jobs:
   coq-elpi:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -835,7 +835,7 @@ jobs:
   coq-ext-lib:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -876,7 +876,7 @@ jobs:
   coq-record-update:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -917,7 +917,7 @@ jobs:
   coq-shell:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -963,7 +963,7 @@ jobs:
     - paramcoq
     - multinomials
     - mathcomp-real-closed
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1024,7 +1024,7 @@ jobs:
   coqhammer:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1066,7 +1066,7 @@ jobs:
     needs:
     - coq
     - bignums
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1111,7 +1111,7 @@ jobs:
   coqtail-math:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1153,7 +1153,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1200,7 +1200,7 @@ jobs:
     - coq
     - bignums
     - math-classes
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1250,7 +1250,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1295,7 +1295,7 @@ jobs:
   dpdgraph:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1336,7 +1336,7 @@ jobs:
   equations:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1379,7 +1379,7 @@ jobs:
     - coq
     - mathcomp-ssreflect
     - deriving
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1428,7 +1428,7 @@ jobs:
   flocq:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1472,7 +1472,7 @@ jobs:
     - mathcomp-algebra
     - mathcomp-ssreflect
     - mathcomp-fingroup
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1528,7 +1528,7 @@ jobs:
     - mathcomp-ssreflect
     - mathcomp-algebra
     - mathcomp-fingroup
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1582,7 +1582,7 @@ jobs:
     needs:
     - coq
     - flocq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1629,7 +1629,7 @@ jobs:
     - coq
     - hydra-battles
     - pocklington
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1679,7 +1679,7 @@ jobs:
     needs:
     - coq
     - coq-elpi
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1725,7 +1725,7 @@ jobs:
     needs:
     - coq
     - equations
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1775,7 +1775,7 @@ jobs:
     - flocq
     - mathcomp-ssreflect
     - mathcomp-fingroup
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1837,7 +1837,7 @@ jobs:
     needs:
     - coq
     - stdpp
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1883,7 +1883,7 @@ jobs:
     needs:
     - coq
     - bignums
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -1934,7 +1934,7 @@ jobs:
     - mathcomp-solvable
     - mathcomp-field
     - mathcomp-character
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2001,7 +2001,7 @@ jobs:
     - coq
     - mathcomp-field
     - mathcomp-real-closed
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2052,7 +2052,7 @@ jobs:
     - coq
     - mathcomp-ssreflect
     - mathcomp-fingroup
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2107,7 +2107,7 @@ jobs:
     - mathcomp-bigenough
     - mathcomp-real-closed
     - hierarchy-builder
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2173,7 +2173,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2223,7 +2223,7 @@ jobs:
     - mathcomp-algebra
     - mathcomp-solvable
     - mathcomp-field
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2288,7 +2288,7 @@ jobs:
     - mathcomp-fingroup
     - mathcomp-algebra
     - mathcomp-solvable
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2346,7 +2346,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2392,7 +2392,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2443,7 +2443,7 @@ jobs:
     - mathcomp-fingroup
     - mathcomp-solvable
     - mathcomp-bigenough
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2511,7 +2511,7 @@ jobs:
     - mathcomp-ssreflect
     - mathcomp-fingroup
     - mathcomp-algebra
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2564,7 +2564,7 @@ jobs:
   mathcomp-ssreflect:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2607,7 +2607,7 @@ jobs:
     - coq
     - mathcomp-ssreflect
     - mathcomp-fingroup
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2657,7 +2657,7 @@ jobs:
     needs:
     - coq
     - equations
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2702,7 +2702,7 @@ jobs:
   metalib:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2748,7 +2748,7 @@ jobs:
     - mathcomp-finmap
     - mathcomp-fingroup
     - mathcomp-bigenough
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2816,7 +2816,7 @@ jobs:
     - mathcomp-solvable
     - mathcomp-field
     - mathcomp
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2885,7 +2885,7 @@ jobs:
   paco:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2926,7 +2926,7 @@ jobs:
   paramcoq:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -2967,7 +2967,7 @@ jobs:
   pocklington:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3009,7 +3009,7 @@ jobs:
     needs:
     - coq
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3056,7 +3056,7 @@ jobs:
     - coq
     - aac-tactics
     - mathcomp-ssreflect
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3105,7 +3105,7 @@ jobs:
   semantics:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3146,7 +3146,7 @@ jobs:
   serapi:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3188,7 +3188,7 @@ jobs:
     needs:
     - coq
     - coq-ext-lib
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3233,7 +3233,7 @@ jobs:
   stdpp:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3274,7 +3274,7 @@ jobs:
   tlc:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3316,7 +3316,7 @@ jobs:
     needs:
     - coq
     - zorns-lemma
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3361,7 +3361,7 @@ jobs:
   zorns-lemma:
     needs:
     - coq
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - name: Determine which commit to test
       run: "if [ ${{ github.event_name }} = \"push\" ]; then\n  echo \"tested_commit=${{\
@@ -3399,7 +3399,7 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.11" --argstr
         job "zorns-lemma"
-name: Nix CI for bundle 8.11
+name: Nix CI for bundle 8.11 on platform macos-latest
 'on':
   pull_request:
     paths:
