@@ -76,7 +76,7 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "master"
         --argstr job "coq-shell"
-name: Nix CI for bundle master
+name: Nix CI for bundle master on platform ubuntu-latest
 'on':
   pull_request:
     paths:
