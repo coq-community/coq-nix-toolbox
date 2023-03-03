@@ -712,7 +712,6 @@ jobs:
   compcert:
     needs:
     - coq
-    - coq
     - flocq
     runs-on: ubuntu-latest
     steps:
@@ -744,10 +743,6 @@ jobs:
         \ bundle \"8.12\" --argstr job \"compcert\" \\\n   --dry-run 2>&1 > /dev/null)\n\
         echo $nb_dry_run\necho ::set-output name=status::$(echo $nb_dry_run | grep\
         \ \"built:\" | sed \"s/.*/built/\")\n"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: coq'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
-        job "coq"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.12" --argstr
