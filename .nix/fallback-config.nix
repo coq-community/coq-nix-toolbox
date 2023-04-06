@@ -21,9 +21,11 @@ with (import (import ./nixpkgs.nix) {}).lib;
   bundles = (genAttrs [ "8.10" "8.11" "8.12" "8.13" "8.14" "8.15" "8.16" "8.17" ]
     (v: {
       coqPackages.coq.override.version = v;
+      coqPackages.coq.override.native-compiler = true;
     })) // {
     master = {
       coqPackages.coq.override.version = "master";
+      coqPackages.coq.override.native-compiler = true;
       coqPackages.heq.job = false;
     };
   };
