@@ -17,7 +17,7 @@ with builtins; with lib; let
   };
   stepCheckout = {
     name =  "Git checkout";
-    uses =  "actions/checkout@v2";
+    uses =  "actions/checkout@v3";
     "with" = {
       fetch-depth = 0;
       ref = "\${{ env.tested_commit }}";
