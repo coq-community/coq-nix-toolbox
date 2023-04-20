@@ -77,6 +77,8 @@
     ## via the command genNixActions only if it is a dependency or a
     ## reverse dependency of a job flagged as "main-job" (see above).
 
+    ## Run on push on following branches (default [ "master" ])
+    # push-branches = [ "master" "branch2" ];
   };
 
   ## Cachix caches to use in CI

@@ -97,10 +97,10 @@ with builtins; with lib; let
   mkJobs = { jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }@args:
     foldl (action: job: action // (mkJob ({ inherit job; } // args))) {} jobs;
 
-  mkActionFromJobs = { actionJobs, bundles ? [] }: {
+  mkActionFromJobs = { actionJobs, bundles ? [], push-branches ? [] }: {
     name = "Nix CI for bundle ${toString bundles}";
     on = {
-      push.branches = [ "master" ];
+      push.branches = push-branches;
       pull_request.paths = [ ".github/workflows/**" ];
       pull_request_target.types = [ "opened" "synchronize" "reopened" ];
     };
@@ -108,6 +108,7 @@ with builtins; with lib; let
   };
 
   mkAction = { jobs ? [], bundles ? [], deps ? {}, cachix ? {} }@args:
-    mkActionFromJobs {inherit bundles; actionJobs = mkJobs args; };
+      { push-branches ? [] }:
+    mkActionFromJobs {inherit bundles push-branches; actionJobs = mkJobs args; };
 
 in { inherit mkJob mkJobs mkAction; }
