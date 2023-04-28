@@ -1,5 +1,23 @@
 { lib }:
 with builtins; with lib; let
+  stepCommitToInitiallyCheckout = {
+    name = "Determine which commit to initially checkout";
+    run = ''
+      if [ ''${{ github.event_name }} = "push" ]; then
+        echo "target_commit=''${{ github.sha }}" >> $GITHUB_ENV
+      else
+        echo "target_commit=''${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+      fi
+    '';
+  };
+  stepCheckout1 = {
+    name =  "Git checkout";
+    uses =  "actions/checkout@v3";
+    "with" = {
+      fetch-depth = 0;
+      ref = "\${{ env.target_commit }}";
+    };
+  };
   stepCommitToTest = {
     name = "Determine which commit to test";
     run = ''
@@ -7,7 +25,8 @@ with builtins; with lib; let
         echo "tested_commit=''${{ github.sha }}" >> $GITHUB_ENV
       else
         merge_commit=$(git ls-remote ''${{ github.event.repository.html_url }} refs/pull/''${{ github.event.number }}/merge | cut -f1)
-        if [ -z "$merge_commit" ]; then
+        mergeable=$(git merge --no-commit --no-ff ''${{ github.event.pull_request.base.sha }} > /dev/null 2>&1; echo $?; git merge --abort > /dev/null 2>&1 || true)
+        if [ -z "$merge_commit" -o "x$mergeable" != "x0" ]; then
           echo "tested_commit=''${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
         else
           echo "tested_commit=$merge_commit" >> $GITHUB_ENV
@@ -15,7 +34,7 @@ with builtins; with lib; let
       fi
     '';
   };
-  stepCheckout = {
+  stepCheckout2 = {
     name =  "Git checkout";
     uses =  "actions/checkout@v3";
     "with" = {
@@ -86,7 +105,8 @@ with builtins; with lib; let
     "${job}${suffixStr}" = rec {
       runs-on = "ubuntu-latest";
       needs = map (j: "${j}${suffixStr}") (filter (j: elem j jobs) jdeps);
-      steps = [ stepCommitToTest stepCheckout stepCachixInstall ]
+      steps = [ stepCommitToInitiallyCheckout stepCheckout1
+                stepCommitToTest stepCheckout2 stepCachixInstall ]
               ++ (stepCachixUseAll cachix)
               ++ [ (stepCheck { inherit job bundles; }) ]
               ++ (map (job: stepBuild { inherit job bundles; }) jdeps)
