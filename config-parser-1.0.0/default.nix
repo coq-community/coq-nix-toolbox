@@ -68,6 +68,8 @@ in with config; let
           // foldAttrs (_: _: true) true (attrValues jdeps))
           ci.excluded);
       deps = genCI.pkgsDeps;
+    } {
+      push-branches = bundle.push-branches or [ "master" ];
     };
     jsonAction = toJSON action;
     jsonActionFile = pkgs.writeTextFile {
