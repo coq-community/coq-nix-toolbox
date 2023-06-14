@@ -13,7 +13,7 @@ with (import (import ./nixpkgs.nix) {}).lib;
 
   ## select an entry to build in the following `bundles` set
   ## defaults to "default"
-  default-bundle = "8.11";
+  default-bundle = "8.16";
 
   ## write one `bundles.name` attribute set per
   ## alternative configuration, the can be used to
