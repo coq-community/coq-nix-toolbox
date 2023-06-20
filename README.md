@@ -11,7 +11,7 @@ Additionally, in order to use binary caches from recognized organizations, pleas
 ```bash
 nix-env -iA nixpkgs.cachix && cachix use coq && cachix use coq-community && cachix use math-comp
 ```
-This only needs to be peformed once, after the installation of Nix.
+This only needs to be performed once, after the installation of Nix.
 
 Then, run the following commands at the root of your project (using a project-specific name instead of YOURPACKAGENAME, below) :
 
@@ -93,7 +93,7 @@ When you run `nix-shell`, you get an environment with a few available commands:
 - `fetchCoqOverlay`: fetch a derivation file from nixpkgs that you may then edit locally to override a package.
 - `createOverlay`: create a fresh derivation file from a template, which could then be added to nixpkgs.
 - `cachedMake`: compile the project by reusing build outputs cached (generally thanks to Cachix).
-- `genNixActions`: generates GitHub one actions file per bundle, for testing dependencies and reverse depndencies.
+- `genNixActions`: generates GitHub one actions file per bundle, for testing dependencies and reverse dependencies.
 
 These three commands update the nixpkgs version to use (will create or override `.nix/nixpkgs.nix`):
 - `updateNixpkgsUnstable`: update to the latest nixpkgs-unstable.
