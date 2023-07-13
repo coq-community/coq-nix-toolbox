@@ -36,6 +36,8 @@ jobs:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
         name: coq-community
+    - name: GitHub caching
+      uses: DeterminateSystems/magic-nix-cache-action@v2
     - id: stepCheck
       name: Checking presence of CI target coq
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
@@ -84,6 +86,8 @@ jobs:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
         name: coq-community
+    - name: GitHub caching
+      uses: DeterminateSystems/magic-nix-cache-action@v2
     - id: stepCheck
       name: Checking presence of CI target coq-shell
       run: "nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr\
