@@ -59,7 +59,6 @@ jobs:
   CoLoR:
     needs:
     - coq
-    - bignums
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to initially checkout
@@ -105,10 +104,6 @@ jobs:
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "coq"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: bignums'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
-        job "bignums"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
@@ -1242,7 +1237,6 @@ jobs:
     needs:
     - coq
     - mathcomp-algebra
-    - bignums
     - paramcoq
     - multinomials
     - mathcomp-real-closed
@@ -1295,10 +1289,6 @@ jobs:
       name: 'Building/fetching previous CI target: mathcomp-algebra'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
         job "mathcomp-algebra"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: bignums'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
-        job "bignums"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: paramcoq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.13" --argstr
