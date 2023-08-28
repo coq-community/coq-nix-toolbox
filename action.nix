@@ -85,7 +85,7 @@ with builtins; with lib; let
          --argstr bundle "${bundlestr}" --argstr job "${job}" \
          --dry-run 2>&1 > /dev/null)
       echo $nb_dry_run
-      echo ::set-output name=status::$(echo $nb_dry_run | grep "built:" | sed "s/.*/built/")
+      echo name=status::$(echo $nb_dry_run | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     '';
   };
 
