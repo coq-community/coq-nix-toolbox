@@ -105,7 +105,7 @@ with initial.lib; let
        pkgs.coqPackages.coq.coq-version;
 
     nativeBuildInputs = optionals (!do-nothing)
-      (old.nativeBuildInputs or []) ++ [ pkgs.remarshal ] ++ coq-lsp;
+      ((old.nativeBuildInputs or []) ++ coq-lsp) ++ [ pkgs.remarshal ];
 
     propagatedNativeBuildInputs = optionals (!do-nothing)
       (old.propagatedNativeBuildInputs or []);
