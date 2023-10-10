@@ -65,6 +65,8 @@ with initial.lib; let
   jsonBundles = toJSON (attrNames setup.bundles);
   jsonBundleSet = toJSON setup.bundles;
   jsonBundle = toJSON selected-instance.bundle;
+  coq-lsp = if selected-instance.pkgs.coqPackages?coq-lsp then
+     [ selected-instance.pkgs.coqPackages.coq-lsp ] else [];
   emacs = with selected-instance.pkgs; emacsWithPackages
     (epkgs: with epkgs.melpaPackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
@@ -103,7 +105,7 @@ with initial.lib; let
        pkgs.coqPackages.coq.coq-version;
 
     nativeBuildInputs = optionals (!do-nothing)
-      (old.nativeBuildInputs or []) ++ [ pkgs.remarshal ];
+      (old.nativeBuildInputs or []) ++ [ pkgs.remarshal ] ++ coq-lsp;
 
     propagatedNativeBuildInputs = optionals (!do-nothing)
       (old.propagatedNativeBuildInputs or []);
