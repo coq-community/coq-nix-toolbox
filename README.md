@@ -16,7 +16,7 @@ This only needs to be performed once, after the installation of Nix.
 Then, run the following commands at the root of your project (using a project-specific name instead of YOURPACKAGENAME, below) :
 
 ```bash
-nix-shell https://coq.inria.fr/nix/toolbox --arg do-nothing true --run generateNixDefault
+nix-shell https://github.com/coq-community/coq-nix-toolbox/archive/master.tar.gz --arg do-nothing true --run generateNixDefault
 nix-shell --arg do-nothing true --run "initNixConfig YOURPACKAGENAME"
 ```
 
