@@ -117,15 +117,21 @@ with builtins; with lib; let
   mkJobs = { jobs ? [], bundles ? [], deps ? {}, cachix ? {}, suffix ? false }@args:
     foldl (action: job: action // (mkJob ({ inherit job; } // args))) {} jobs;
 
-  mkActionFromJobs = { actionJobs, bundles ? [], push-branches ? [] }: {
-    name = "Nix CI for bundle ${toString bundles}";
-    on = {
-      push.branches = push-branches;
-      pull_request.paths = [ ".github/workflows/**" ];
-      pull_request_target.types = [ "opened" "synchronize" "reopened" ];
+  mkActionFromJobs = { actionJobs, bundles ? [], push-branches ? [] }:
+    let
+      workflow_path = ".github/workflows/nix-action-${toString bundles}.yml";
+    in {
+      name = "Nix CI for bundle ${toString bundles}";
+      on = {
+        push.branches = push-branches;
+        pull_request.paths = [ workflow_path ];
+        pull_request_target = {
+          types = [ "opened" "synchronize" "reopened" ];
+          paths-ignore = [ workflow_path ];
+        };
+      };
+      jobs = actionJobs;
     };
-    jobs = actionJobs;
-  };
 
   mkAction = { jobs ? [], bundles ? [], deps ? {}, cachix ? {} }@args:
       { push-branches ? [] }:
