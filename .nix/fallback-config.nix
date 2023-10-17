@@ -26,6 +26,22 @@ with (import (import ./nixpkgs.nix) {}).lib;
       coqPackages.coq.override.version = "master";
       coqPackages.heq.job = false;
     };
+    "8.17-mathcomp2" = {
+      coqPackages.coq.override.version = "8.17";
+      coqPackages.mathcomp.override.version = "2.1.0";
+      coqPackages.mathcomp-classical.job = false;
+      coqPackages.mathcomp-analysis.job = false;
+      coqPackages.mathcomp-infotheo.job = false;
+      coqPackages.mathcomp-word.job = false;
+    };
+    "8.18-mathcomp2" = {
+      coqPackages.coq.override.version = "8.18";
+      coqPackages.mathcomp.override.version = "2.1.0";
+      coqPackages.mathcomp-classical.job = false;
+      coqPackages.mathcomp-analysis.job = false;
+      coqPackages.mathcomp-infotheo.job = false;
+      coqPackages.mathcomp-word.job = false;
+    };
   };
 
   cachix.coq = {};
