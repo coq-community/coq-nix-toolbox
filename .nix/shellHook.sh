@@ -219,7 +219,13 @@ fetchCoqOverlay (){
 addNixCommand fetchCoqOverlay
 
 my-nix-build (){
-  env -i PATH=$PATH NIX_PATH=$NIX_PATH nix-build \
+  if [ ${NIX_PATH} ]; then
+    SET_NIX_PATH=NIX_PATH="${NIX_PATH}"
+  fi
+  if [ ${https_proxy} ]; then
+    SET_https_proxy=https_proxy="${https_proxy}"
+  fi
+  env -i PATH=$PATH ${SET_NIX_PATH} ${SET_https_proxy} nix-build \
     --argstr bundle "$selectedBundle" --no-out-link\
     --option narinfo-cache-negative-ttl 0 $*
 }
