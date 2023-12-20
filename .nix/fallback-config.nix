@@ -13,12 +13,12 @@ with (import (import ./nixpkgs.nix) {}).lib;
 
   ## select an entry to build in the following `bundles` set
   ## defaults to "default"
-  default-bundle = "8.16";
+  default-bundle = "8.18";
 
   ## write one `bundles.name` attribute set per
   ## alternative configuration, the can be used to
   ## compute several ci jobs as well
-  bundles = (genAttrs [ "8.10" "8.11" "8.12" "8.13" "8.14" "8.15" "8.16" "8.17" "8.18" ]
+  bundles = (genAttrs [ "8.10" "8.11" "8.12" "8.13" "8.14" "8.15" "8.16" "8.17" "8.18" "8.19" ]
     (v: {
       coqPackages.coq.override.version = v;
     })) // {
