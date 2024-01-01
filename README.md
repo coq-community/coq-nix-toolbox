@@ -31,6 +31,12 @@ nix-shell --arg do-nothing true --run "genNixActions"
 
 Do not forget to commit the new files.
 
+Later, you may want to update to the latest version of the toolbox and regenerate GitHub Action workflow(s) by running:
+
+```bash
+nix-shell --arg do-nothing true --run "updateNixToolBox & genNixActions"
+```
+
 ## Overlays
 
 You can create directories named after a Coq package and containing `default.nix` files in `.nix/coq-overlays` to override the contents of `coqPackages`.
