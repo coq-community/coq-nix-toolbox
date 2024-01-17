@@ -38,6 +38,10 @@ with (import (import ./nixpkgs.nix) {}).lib;
       coqPackages.coq.override.version = "8.18";
       coqPackages.mathcomp.override.version = "2.1.0";
     };
+    "8.19-mathcomp2" = {
+      coqPackages.coq.override.version = "8.19";
+      coqPackages.mathcomp.override.version = "2.2.0";
+    };
   };
 
   cachix.coq = {};
