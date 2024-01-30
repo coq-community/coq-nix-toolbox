@@ -75,7 +75,10 @@ with builtins; with lib; let
       else [ (stepCachixUse (head reordered // {
         extraPullNames = map (v: v.name) (tail reordered);
       })) ];
-
+  stepMagicNixCache = {
+    name =  "GitHub caching";
+    uses =  "DeterminateSystems/magic-nix-cache-action@v2";
+  };
   stepCheck = { job, bundles ? [] }:
     let bundlestr = if isList bundles then "\${{ matrix.bundle }}" else bundles; in {
     name = "Checking presence of CI target ${job}";
@@ -108,6 +111,7 @@ with builtins; with lib; let
       steps = [ stepCommitToInitiallyCheckout stepCheckout1
                 stepCommitToTest stepCheckout2 stepCachixInstall ]
               ++ (stepCachixUseAll cachix)
+              ++ [ stepMagicNixCache ]
               ++ [ (stepCheck { inherit job bundles; }) ]
               ++ (map (job: stepBuild { inherit job bundles; }) jdeps)
               ++ [ (stepBuild { inherit job bundles; current = true; }) ];
