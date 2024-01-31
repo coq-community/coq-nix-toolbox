@@ -126,7 +126,7 @@ nix-shell --arg do-nothing true --run "updateNixpkgs <pr_owner> <pr_branch>"
 nix-shell --arg do-nothing true --run "genNixActions"
 ```
 
-Then, open a draft PR with the generated changes here.
+Then, open a draft PR with the generated changes here, please include a reference to the nixpkgs PR in the first message of the coq-nix-toolbox PR.
 
 Once the PR on nixpkgs has been merged, you can transform the draft PR into one that updates the version in use in coq-nix-toolbox by running the following commands, adapting the commit message and marking the PR as ready to merge:
 
