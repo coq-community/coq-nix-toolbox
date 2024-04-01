@@ -4641,7 +4641,6 @@ jobs:
   vcfloat:
     needs:
     - coq
-    - interval
     - compcert
     - flocq
     - bignums
@@ -4690,10 +4689,6 @@ jobs:
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
         --argstr job "coq"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: interval'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
-        --argstr job "interval"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: compcert'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
