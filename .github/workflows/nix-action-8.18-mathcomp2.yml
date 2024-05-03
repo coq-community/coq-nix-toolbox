@@ -4377,7 +4377,7 @@ jobs:
     needs:
     - coq
     - equations
-    - mathcomp
+    - mathcomp-ssreflect
     - mathcomp-analysis
     - extructures
     - deriving
@@ -4431,9 +4431,9 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18-mathcomp2"
         --argstr job "equations"
     - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: mathcomp'
+      name: 'Building/fetching previous CI target: mathcomp-ssreflect'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18-mathcomp2"
-        --argstr job "mathcomp"
+        --argstr job "mathcomp-ssreflect"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: mathcomp-analysis'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18-mathcomp2"
