@@ -32,11 +32,11 @@ with (import (import ./nixpkgs.nix) {}).lib;
     };
     "8.17-mathcomp2" = {
       coqPackages.coq.override.version = "8.17";
-      coqPackages.mathcomp.override.version = "2.1.0";
+      coqPackages.mathcomp.override.version = "2.2.0";
     };
     "8.18-mathcomp2" = {
       coqPackages.coq.override.version = "8.18";
-      coqPackages.mathcomp.override.version = "2.1.0";
+      coqPackages.mathcomp.override.version = "2.2.0";
     };
     "8.19-mathcomp2" = {
       coqPackages.coq.override.version = "8.19";
