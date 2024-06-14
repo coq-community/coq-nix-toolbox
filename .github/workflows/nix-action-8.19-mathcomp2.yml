@@ -29,11 +29,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -86,11 +86,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -142,11 +142,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -196,11 +196,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -256,11 +256,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -308,11 +308,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -363,11 +363,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -427,11 +427,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -480,11 +480,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -536,11 +536,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -588,11 +588,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -640,11 +640,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -693,11 +693,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -748,11 +748,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -796,11 +796,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -848,11 +848,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -901,11 +901,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -957,11 +957,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1009,11 +1009,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1066,11 +1066,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1138,11 +1138,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1191,11 +1191,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1248,11 +1248,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1306,11 +1306,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1367,11 +1367,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1423,11 +1423,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1475,11 +1475,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1529,11 +1529,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1589,11 +1589,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1644,11 +1644,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1709,11 +1709,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1770,11 +1770,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1843,11 +1843,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1904,11 +1904,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -1977,11 +1977,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2034,11 +2034,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2090,11 +2090,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2143,11 +2143,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2206,11 +2206,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2289,11 +2289,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2356,11 +2356,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2424,11 +2424,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2493,11 +2493,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2555,11 +2555,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2634,11 +2634,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2703,11 +2703,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2777,11 +2777,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2838,11 +2838,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2896,11 +2896,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -2962,11 +2962,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3042,11 +3042,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3111,11 +3111,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3169,11 +3169,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3232,11 +3232,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3299,11 +3299,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3368,11 +3368,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3444,11 +3444,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3514,11 +3514,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3577,11 +3577,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3642,11 +3642,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3703,11 +3703,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3775,11 +3775,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3827,11 +3827,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3881,11 +3881,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3942,11 +3942,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -3998,11 +3998,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -4051,11 +4051,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -4112,11 +4112,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -4184,11 +4184,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -4240,11 +4240,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -4308,11 +4308,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
@@ -4360,11 +4360,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v20
+      uses: cachix/install-nix-action@v27
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup coq-community
-      uses: cachix/cachix-action@v12
+      uses: cachix/cachix-action@v15
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, math-comp
