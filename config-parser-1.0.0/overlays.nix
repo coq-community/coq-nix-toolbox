@@ -32,7 +32,7 @@ let
           { case = shell-attribute; out = newCoqPkg shell-pname {}; }
         ] (newCoqPkg n ((super.${n}.mk or (_: {})) self))
       )) ov) (bundle.coqPackages or {});
-  fold-override = foldl (fpkg: override: fpkg.overrideScope' override);
+  fold-override = foldl (fpkg: override: fpkg.overrideScope override);
   in
 [
   (mk-overlay overlays-dir)
