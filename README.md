@@ -12,7 +12,7 @@ The Coq Nix Toolbox has mainly two purposes:
    This CI uses the Nix packaging system and a caching mechanism called "cachix".
 
 2. It generates configurations so that dependencies are handled by the shell.
-   The shell in questions is called "nix-shell",
+   The shell in question is called "nix-shell",
    the configurations are called "bundles", and
    local compilation is optimized using caching as provided by "cachix".
 
