@@ -1,6 +1,20 @@
 # Coq Nix Toolbox
 
-Nix helper scripts to automate local builds and CI
+## General presentation
+
+The Coq Nix Toolbox is a set of Nix helper scripts to automate local builds and CI.
+
+The Coq Nix Toolbox has mainly two purposes:
+
+1. It generates configuration files to trigger a CI for your Coq project.
+   These files are generated in `.github/workflows` and,
+   when pushed to github, they trigger a CI using "github actions".
+   This CI uses the Nix packaging system and a caching mechanism called "cachix".
+
+2. It generates configurations so that dependencies are handled by the shell.
+   The shell in questions is called "nix-shell",
+   the configurations are called "bundles", and
+   local compilation is optimized using caching as provided by "cachix".
 
 ## How to use
 
