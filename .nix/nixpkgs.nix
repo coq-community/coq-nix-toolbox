@@ -1,4 +1,4 @@
 fetchTarball {
-    url = https://github.com/NixOS/nixpkgs/archive/e2ca8d5a95a8858b79df1a30486476e82e101ffb.tar.gz;
-    sha256 = "09bz1k15fy2rsvaq022lcz44m05kl9bbwzwfdjj0pnrjsb3b761v";
+    url = https://github.com/NixOS/nixpkgs/archive/c94b214471d3a7afd817983bd655fdf13d53de32.tar.gz;
+    sha256 = "146j0daz0jh7kjgl725dqi3csgqjzm0pqm6xmfsksjyhyxsbi6a3";
   }
