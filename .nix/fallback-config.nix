@@ -42,6 +42,10 @@ with (import (import ./nixpkgs.nix) {}).lib;
       coqPackages.coq.override.version = "8.19";
       coqPackages.mathcomp.override.version = "2.2.0";
     };
+    "8.20-mathcomp2" = {
+      coqPackages.coq.override.version = "8.20";
+      coqPackages.mathcomp.override.version = "2.2.0";
+    };
   };
 
   cachix.coq = {};
