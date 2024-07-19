@@ -7,7 +7,7 @@ It is based on the [Nix package manager](https://nixos.org/) and its [nixpkgs pa
 
 The Coq Nix Toolbox has mainly two purposes:
 
-1. It generates configuration files to trigger a CI for your Coq project.
+1. It generates [GitHub actions](https://github.com/features/actions) configuration files to trigger a CI for your Coq project and its reverse dependencies.
    These files are generated in `.github/workflows` and,
    when pushed to github, they trigger a CI using "github actions".
    This CI uses the Nix packaging system and a caching mechanism called "cachix".
