@@ -2,7 +2,8 @@
 
 ## General presentation
 
-The Coq Nix Toolbox is a set of Nix helper scripts to automate local builds and CI.
+The Coq Nix Toolbox is a set of helper scripts to ease setting of CI for developments and their reverse dependencies.
+It is based on the [Nix package manager](https://nixos.org/) and its [nixpkgs package repository](https://github.com/NixOS/nixpkgs).
 
 The Coq Nix Toolbox has mainly two purposes:
 
