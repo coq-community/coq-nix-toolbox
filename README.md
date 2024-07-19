@@ -12,10 +12,11 @@ The Coq Nix Toolbox has mainly two purposes:
    when pushed to github, they trigger a CI using "github actions".
    This CI uses the Nix packaging system and a caching mechanism called "cachix".
 
-2. It generates configurations so that dependencies are handled by the shell.
-   The shell in question is called "nix-shell",
-   the configurations are called "bundles", and
-   local compilation is optimized using caching as provided by "cachix".
+2. It offers Nix configurations files so that one can locally obtain a shell with all dependencies preloaded by simply running `nix-shell` in the development root directory.
+
+3. Multiple cases of dependencies (typically different versions of Coq) can be easily handled with "bundles" of (reverse) dependency versions/git refs.
+
+4 One can retrieve locally builds already performed on CI through "cachix".
 
 ## How to use
 
