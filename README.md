@@ -16,7 +16,7 @@ The Coq Nix Toolbox has mainly two purposes:
 
 3. Multiple cases of dependencies (typically different versions of Coq) can be easily handled with "bundles" of (reverse) dependency versions/git refs.
 
-4 One can retrieve locally builds already performed on CI through "cachix".
+4. One can retrieve locally builds already performed on CI through "cachix".
 
 ## How to use
 
