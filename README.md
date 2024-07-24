@@ -2,21 +2,21 @@
 
 ## General presentation
 
-The Coq Nix Toolbox is a set of helper scripts to ease setting of CI for developments and their reverse dependencies.
-It is based on the [Nix package manager](https://nixos.org/) and its [nixpkgs package repository](https://github.com/NixOS/nixpkgs).
+The [Nix package manager](https://nixos.org/) is a package manager with a strong focus on reproducibility and isolation.
 
-The Coq Nix Toolbox has mainly two purposes:
+The Coq Nix Toolbox is a set of helper scripts to ease setting up a Coq project for use with Nix, for Nix and non-Nix users alike. One of its main features is to generate GitHub Actions configuration files to continuously test a Coq project and its reverse dependencies.
 
-1. It generates [GitHub actions](https://github.com/features/actions) configuration files to trigger a CI for your Coq project and its reverse dependencies.
-   These files are generated in `.github/workflows` and,
-   when pushed to github, they trigger a CI using "github actions".
-   This CI uses the Nix packaging system and a caching mechanism called "cachix".
+Besides Nix, the Coq Nix Toolbox relies on the [nixpkgs package repository](https://github.com/NixOS/nixpkgs) and its large collection of Coq packages.
+
+The Coq Nix Toolbox provide the following features:
+
+1. It can generate [GitHub Actions](https://github.com/features/actions) configuration files to trigger a CI for your Coq project and its reverse dependencies. This CI uses the Nix packaging system and a caching mechanism called [Cachix](https://www.cachix.org/).
 
 2. It offers Nix configurations files so that one can locally obtain a shell with all dependencies preloaded by simply running `nix-shell` in the development root directory.
 
-3. Multiple cases of dependencies (typically different versions of Coq) can be easily handled with "bundles" of (reverse) dependency versions/git refs.
+3. Multiple versions of dependencies (typically different versions of Coq) can be easily handled with "bundles" of (reverse) dependency versions/git refs.
 
-4. One can retrieve locally builds already performed on CI through "cachix".
+4. One can retrieve locally builds already performed on CI thanks to Cachix.
 
 ## How to use
 
