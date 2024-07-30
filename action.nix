@@ -12,7 +12,7 @@ with builtins; with lib; let
   };
   stepCheckout1 = {
     name =  "Git checkout";
-    uses =  "actions/checkout@v3";
+    uses =  "actions/checkout@v4";
     "with" = {
       fetch-depth = 0;
       ref = "\${{ env.target_commit }}";
@@ -36,7 +36,7 @@ with builtins; with lib; let
   };
   stepCheckout2 = {
     name =  "Git checkout";
-    uses =  "actions/checkout@v3";
+    uses =  "actions/checkout@v4";
     "with" = {
       fetch-depth = 0;
       ref = "\${{ env.tested_commit }}";
