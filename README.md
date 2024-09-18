@@ -63,8 +63,8 @@ This can be useful in the following case:
 - The package that you are building is not yet available in nixpkgs.
 
 
-To amend a package already present in nixpkgs, just run `nix-shell --run "fetchCoqOverlay PACKAGENAME"`.
-To create a package from scratch, run `nix-shell --run "createOverlay PACKAGENAME"` and refer to the nixpkgs documentation available at https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq.
+To amend a package already present in nixpkgs, just run `nix-shell --arg do-nothing true --run "fetchCoqOverlay PACKAGENAME"`.
+To create a package from scratch, run `nix-shell --arg do-nothing true --run "createOverlay PACKAGENAME"` and refer to the nixpkgs documentation available at https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq.
 
 ## Bundles and jobs
 
