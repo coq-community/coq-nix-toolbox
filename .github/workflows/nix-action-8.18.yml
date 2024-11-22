@@ -4001,7 +4001,7 @@ jobs:
   mathcomp-infotheo:
     needs:
     - coq
-    - mathcomp-analysis
+    - mathcomp-analysis-stdlib
     - mathcomp-algebra-tactics
     runs-on: ubuntu-latest
     steps:
@@ -4049,9 +4049,9 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18" --argstr
         job "coq"
     - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: mathcomp-analysis'
+      name: 'Building/fetching previous CI target: mathcomp-analysis-stdlib'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18" --argstr
-        job "mathcomp-analysis"
+        job "mathcomp-analysis-stdlib"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: mathcomp-algebra-tactics'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18" --argstr
@@ -6112,6 +6112,7 @@ jobs:
     - equations
     - mathcomp-ssreflect
     - mathcomp-analysis
+    - mathcomp-experimental-reals
     - extructures
     - deriving
     runs-on: ubuntu-latest
@@ -6171,6 +6172,10 @@ jobs:
       name: 'Building/fetching previous CI target: mathcomp-analysis'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18" --argstr
         job "mathcomp-analysis"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: mathcomp-experimental-reals'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18" --argstr
+        job "mathcomp-experimental-reals"
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: extructures'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.18" --argstr
