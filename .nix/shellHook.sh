@@ -79,7 +79,7 @@ updateNixpkgsUnstable (){
   SHA256=$(nix-prefetch-url --unpack $URL)
   mkdir -p $configDir
   echo "fetchTarball {
-    url = $URL;
+    url = \"$URL\";
     sha256 = \"$SHA256\";
   }" > $configDir/nixpkgs.nix
 }
@@ -91,7 +91,7 @@ updateNixpkgsMaster (){
   SHA256=$(nix-prefetch-url --unpack $URL)
   mkdir -p $configDir
   echo "fetchTarball {
-    url = $URL;
+    url = \"$URL\";
     sha256 = \"$SHA256\";
   }" > $configDir/nixpkgs.nix
 }
@@ -105,7 +105,7 @@ updateNixpkgs (){
        SHA256=$(nix-prefetch-url --unpack $URL)
        mkdir -p $configDir
        echo "fetchTarball {
-         url = $URL;
+         url = \"$URL\";
          sha256 = \"$SHA256\";
        }" > $configDir/nixpkgs.nix
   else
