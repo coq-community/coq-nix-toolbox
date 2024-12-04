@@ -4207,7 +4207,7 @@ jobs:
   mathcomp-infotheo:
     needs:
     - coq
-    - mathcomp-analysis
+    - mathcomp-analysis-stdlib
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to initially checkout
@@ -4254,9 +4254,9 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16" --argstr
         job "coq"
     - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: mathcomp-analysis'
+      name: 'Building/fetching previous CI target: mathcomp-analysis-stdlib'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16" --argstr
-        job "mathcomp-analysis"
+        job "mathcomp-analysis-stdlib"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16" --argstr
