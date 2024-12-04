@@ -76,17 +76,34 @@ with builtins; with lib; let
         extraPullNames = map (v: v.name) (tail reordered);
       })) ];
 
-  stepCheck = { job, bundles ? [] }:
+  stepGetDerivation = { job, bundles ? [] }:
     let bundlestr = if isList bundles then "\${{ matrix.bundle }}" else bundles; in {
-    name = "Checking presence of CI target ${job}";
-    id = "stepCheck";
+    name = "Getting derivation for current job (${job})";
+    id = "stepGetDerivation";
     run = ''
-      nb_dry_run=$(NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \
+      NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \
          --argstr bundle "${bundlestr}" --argstr job "${job}" \
-         --dry-run 2>&1 > /dev/null)
-      echo $nb_dry_run
-      echo status=$(echo $nb_dry_run | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+         --dry-run 2> err > out || (touch fail; true)
     '';
+  };
+
+  stepErrorReporting = {
+    name = "Error reporting";
+    run = ''
+        echo "out="; cat out
+        echo "err="; cat err
+    '';
+  };
+
+  stepFailureCheck = {
+    name = "Failure check";
+    run = "if [ -e fail ]; then exit 1; else exit 0; fi;";
+  };
+
+  stepCheck = {
+    name = "Checking presence of CI target for current job";
+    id = "stepCheck";
+    run = "(echo -n status=; cat out | grep \"built:\" | sed \"s/.*/built/\") >> $GITHUB_OUTPUT";
   };
 
   stepBuild = {job, bundles ? [], current ? false}:
@@ -108,7 +125,8 @@ with builtins; with lib; let
       steps = [ stepCommitToInitiallyCheckout stepCheckout1
                 stepCommitToTest stepCheckout2 stepCachixInstall ]
               ++ (stepCachixUseAll cachix)
-              ++ [ (stepCheck { inherit job bundles; }) ]
+              ++ [ (stepGetDerivation { inherit job bundles; }) 
+                    stepErrorReporting stepFailureCheck stepCheck ]
               ++ (map (job: stepBuild { inherit job bundles; }) jdeps)
               ++ [ (stepBuild { inherit job bundles; current = true; }) ];
     } // (optionalAttrs (isList bundles) {strategy.matrix.bundle = bundles;});
