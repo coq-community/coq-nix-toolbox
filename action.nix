@@ -44,7 +44,7 @@ with builtins; with lib; let
   };
   stepCachixInstall = {
     name =  "Cachix install";
-    uses =  "cachix/install-nix-action@v27";
+    uses =  "cachix/install-nix-action@v30";
     "with".nix_path = "nixpkgs=channel:nixpkgs-unstable";
   };
   stepCachixUse = { name, authToken ? null,
