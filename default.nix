@@ -69,7 +69,7 @@ with initial.lib; let
      [ selected-instance.pkgs.coqPackages.coq-lsp ] else [];
   vscoq = if selected-instance.pkgs.coqPackages?vscoq-language-server then
      [ selected-instance.pkgs.coqPackages.vscoq-language-server ] else [];
-  emacs = with selected-instance.pkgs; emacsWithPackages
+  emacs = selected-instance.pkgs.emacs.pkgs.withPackages
     (epkgs: with epkgs.melpaPackages; [ proof-general ]);
   emacsInit = ./emacs-init.el;
 
