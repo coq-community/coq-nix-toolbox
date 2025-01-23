@@ -49,7 +49,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -112,7 +112,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -175,7 +175,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -237,7 +237,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -297,7 +297,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -364,7 +364,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -426,7 +426,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -485,7 +485,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -547,7 +547,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -608,7 +608,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -679,7 +679,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -742,7 +742,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -807,7 +807,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -878,7 +878,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -944,7 +944,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1021,7 +1021,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1092,7 +1092,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1155,7 +1155,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1218,7 +1218,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1282,7 +1282,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1349,7 +1349,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1413,7 +1413,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1478,7 +1478,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1533,7 +1533,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1596,7 +1596,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1659,7 +1659,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1722,7 +1722,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1784,7 +1784,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1842,7 +1842,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1900,7 +1900,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -1963,7 +1963,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2041,7 +2041,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2100,7 +2100,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2163,7 +2163,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2227,7 +2227,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2293,7 +2293,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2352,7 +2352,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2415,7 +2415,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2480,7 +2480,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2553,7 +2553,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2624,7 +2624,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2688,7 +2688,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2759,7 +2759,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2838,7 +2838,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2900,7 +2900,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -2960,7 +2960,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3028,7 +3028,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3099,7 +3099,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3178,7 +3178,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3241,7 +3241,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3304,7 +3304,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3368,7 +3368,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3436,7 +3436,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3503,7 +3503,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3573,7 +3573,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3667,7 +3667,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3744,7 +3744,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3815,7 +3815,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3884,7 +3884,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -3976,7 +3976,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4061,7 +4061,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4132,7 +4132,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4200,7 +4200,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4287,7 +4287,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4367,7 +4367,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4435,7 +4435,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4504,7 +4504,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4577,7 +4577,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4652,7 +4652,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4732,7 +4732,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4801,7 +4801,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4874,7 +4874,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -4946,7 +4946,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5016,7 +5016,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5092,7 +5092,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5161,7 +5161,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5233,7 +5233,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5302,7 +5302,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5374,7 +5374,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5441,7 +5441,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5503,7 +5503,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5566,7 +5566,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5651,7 +5651,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5738,7 +5738,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5800,7 +5800,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5860,7 +5860,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5926,7 +5926,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -5985,7 +5985,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6049,7 +6049,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6115,7 +6115,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6173,7 +6173,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6232,7 +6232,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6295,7 +6295,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6357,7 +6357,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6416,7 +6416,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6479,7 +6479,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6542,7 +6542,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6605,7 +6605,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6670,7 +6670,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
@@ -6740,7 +6740,7 @@ jobs:
       run: if [ -e fail ]; then exit 1; else exit 0; fi;
     - id: stepCheck
       name: Checking presence of CI target for current job
-      run: (echo -n status=; cat out | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
+      run: (echo -n status=; cat out err | grep "built:" | sed "s/.*/built/") >> $GITHUB_OUTPUT
     - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: coq'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.16-mathcomp2"
