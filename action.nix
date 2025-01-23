@@ -103,7 +103,7 @@ with builtins; with lib; let
   stepCheck = {
     name = "Checking presence of CI target for current job";
     id = "stepCheck";
-    run = "(echo -n status=; cat out | grep \"built:\" | sed \"s/.*/built/\") >> $GITHUB_OUTPUT";
+    run = "(echo -n status=; cat out err | grep \"built:\" | sed \"s/.*/built/\") >> $GITHUB_OUTPUT";
   };
 
   stepBuild = {job, bundles ? [], current ? false}:
