@@ -18,7 +18,7 @@ with (import (import ./nixpkgs.nix) {}).lib;
   ## write one `bundles.name` attribute set per
   ## alternative configuration, the can be used to
   ## compute several ci jobs as well
-  bundles = (genAttrs [ "8.18" "8.19" "8.20" ]
+  bundles = (genAttrs [ "8.18" "8.19" "8.20" "9.0" ]
     (v: {
       coqPackages.coq.override.version = v;
     })) // {
