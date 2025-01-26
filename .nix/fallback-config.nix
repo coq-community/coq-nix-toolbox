@@ -18,14 +18,10 @@ with (import (import ./nixpkgs.nix) {}).lib;
   ## write one `bundles.name` attribute set per
   ## alternative configuration, the can be used to
   ## compute several ci jobs as well
-  bundles = (genAttrs [ "8.16" "8.17" "8.18" "8.19" "8.20" ]
+  bundles = (genAttrs [ "8.18" "8.19" "8.20" "9.0" ]
     (v: {
       coqPackages.coq.override.version = v;
     })) // {
-    "8.16-mathcomp2" = {
-      coqPackages.coq.override.version = "8.16";
-      coqPackages.mathcomp.override.version = "2.1.0";
-    };
     master = {
       coqPackages.coq.override.version = "master";
       coqPackages.heq.job = false;
