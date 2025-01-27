@@ -6,20 +6,25 @@ with builtins; with lib;
                    (this-shell-pkg.propagatedBuildInputs or []);
     collect-job = v: if v?job && v.job != "_excluded" then [ v.job ] else [];
     collect-jobs = p: flatten (map collect-job (attrValues p));
-    jobs = collect-jobs (bundle.coqPackages or {});
+    bundle-packages =
+      if bundle ? isRocq then (bundle.rocqPackages or {})
+      else  (bundle.coqPackages or {});
+    jobs = collect-jobs bundle-packages;
     excluded-pkg = n: v: if v?job && v.job == "_excluded" then [ n ] else [];
-    excluded = flatten (mapAttrsToList excluded-pkg
-      (bundle.coqPackages or {}));
+    excluded = flatten (mapAttrsToList excluded-pkg bundle-packages);
     main-job = v: if (v.main-job or false) && (v.job or "" != "_excluded")
                   then [ v.job ] else [];
     main-jobs = p: flatten (map main-job (attrValues p));
-    mains = main-jobs (bundle.coqPackages or {});
+    mains = main-jobs bundle-packages;
     keep_ = tgt: job: (job != "_excluded")
       && (tgt == "_all" || tgt == job
           || (tgt == "_allJobs" && elem job jobs));
+    pkgs-packages =
+      if bundle ? isRocq then pkgs.rocqPackages
+      else pkgs.coqPackages;
     subpkgs = job:
       let keep = n: v: keep_ job (bundle.coqPackages.${n}.job or n); in
-      attrValues (filterAttrs keep pkgs.coqPackages)
+      attrValues (filterAttrs keep pkgs-packages)
       ++ optionals (job == "_deps") dependencies;
 in
 {
