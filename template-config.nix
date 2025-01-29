@@ -38,6 +38,10 @@
   ## When generating GitHub Action CI, one workflow file
   ## will be created per bundle
   bundles.default = {
+    ## Uncomment the following to mark the current bundle as a rocq bundle.
+    ## By default, the bundle is a coq bundle,
+    ## i.e., Coq <= 8.20 or using Coq shim for Rocq >= 9.0.
+    # isRocq = true;
 
     ## You can override Coq and other Coq coqPackages
     ## through the following attribute

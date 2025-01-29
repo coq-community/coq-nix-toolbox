@@ -25,6 +25,11 @@ with (import (import ./nixpkgs.nix) {}).lib;
     master = {
       coqPackages.coq.override.version = "master";
       coqPackages.heq.job = false;
+      coqPackages.stdlib.job = false;
+    };
+    "rocq-9.0" = {
+      isRocq = true;
+      rocqPackages.rocq-core.override.version = "9.0";
     };
   };
 
