@@ -1879,9 +1879,9 @@ jobs:
     - coq
     - mathcomp-algebra
     - bignums
-    - paramcoq
     - multinomials
     - mathcomp-real-closed
+    - paramcoq
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to initially checkout
@@ -1942,10 +1942,6 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
         job "bignums"
     - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: paramcoq'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
-        job "paramcoq"
-    - if: steps.stepCheck.outputs.status == 'built'
       name: 'Building/fetching previous CI target: multinomials'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
         job "multinomials"
@@ -1953,6 +1949,10 @@ jobs:
       name: 'Building/fetching previous CI target: mathcomp-real-closed'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
         job "mathcomp-real-closed"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: paramcoq'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
+        job "paramcoq"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
