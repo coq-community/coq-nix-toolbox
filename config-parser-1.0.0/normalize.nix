@@ -26,9 +26,6 @@ in rec {
   format = "1.0.0";
   attribute = config.attribute or "template";
   shell-attribute = config.shell-attribute or attribute;
-  path-to-attribute = config.path-to-attribute or [ "coqPackages" ];
-  path-to-shell-attribute =
-    config.path-to-shell-attribute or path-to-attribute;
   nixpkgs = config.nixpkgs or initial.nixpkgs;
   pname = config.pname or attribute;
   shell-pname = config.shell-pname or pname;
@@ -46,7 +43,4 @@ in rec {
                 # cf https://github.com/NixOS/nix/issues/1837
        then { url = initial.src; shallow = true; } else initial.src)
      else /. + initial.src);
-  # not configurable from config.nix:
-  ppath = path-to-attribute ++ [ attribute ];
-  shell-ppath = path-to-shell-attribute ++ [ shell-attribute ];
 }
