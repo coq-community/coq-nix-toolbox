@@ -764,6 +764,7 @@ jobs:
     needs:
     - coq
     - ITree
+    - compcert
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to initially checkout
@@ -819,6 +820,10 @@ jobs:
       name: 'Building/fetching previous CI target: ITree'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
         job "ITree"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: compcert'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
+        job "compcert"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
@@ -2204,6 +2209,7 @@ jobs:
     - coq
     - bignums
     - math-classes
+    - coq-elpi
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to initially checkout
@@ -2263,6 +2269,10 @@ jobs:
       name: 'Building/fetching previous CI target: math-classes'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
         job "math-classes"
+    - if: steps.stepCheck.outputs.status == 'built'
+      name: 'Building/fetching previous CI target: coq-elpi'
+      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
+        job "coq-elpi"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "8.19" --argstr
