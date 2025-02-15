@@ -6,7 +6,7 @@ with (import (import ./nixpkgs.nix) {}).lib;
   ## to another supported format.
 
   ## The attribute to build, either from nixpkgs
-  ## of from the overlays located in `.nix/coq-overlays`
+  ## of from the overlays located in `.nix/rocq-overlays` or `.nix/coq-overlays`
   attribute = "coq";
   shell-attribute = "coq-shell";
   src = ../coq-shell;
@@ -34,6 +34,7 @@ with (import (import ./nixpkgs.nix) {}).lib;
     "rocq-master" = {
       isRocq = true;
       rocqPackages.rocq-core.override.version = "master";
+      rocqPackages.stdlib.override.version = "master";
     };
   };
 

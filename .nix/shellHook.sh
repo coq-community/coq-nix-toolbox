@@ -197,7 +197,7 @@ addNixCommand initNixConfig
 createOverlay (){
   Orig=$toolboxDir/template-overlay.nix
   if [[ -n "$1" ]]; then
-       D=$configDir/coq-overlays/$1;
+       D=$configDir/rocq-overlays/$1;
        mkdir -p $D
        cat $Orig > $D/default.nix
        sed -i "s/template/$1/" $D/default.nix
@@ -217,6 +217,18 @@ fetchCoqOverlay (){
   fi
 }
 addNixCommand fetchCoqOverlay
+
+fetchRocqOverlay (){
+  F=$nixpkgs/pkgs/development/rocq-modules/$1/default.nix
+  D=$configDir/rocq-overlays/$1/
+  if [[ -f "$F" ]]
+    then mkdir -p $D; cp $F $D; chmod u+w ${D}default.nix;
+         git add ${D}default.nix
+         echo "You may now amend ${D}default.nix"
+    else echo "usage: fetchRocqOverlay pname"
+  fi
+}
+addNixCommand fetchRocqOverlay
 
 my-nix-build (){
   if [ ${NIX_PATH} ]; then

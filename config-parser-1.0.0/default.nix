@@ -6,6 +6,7 @@ with builtins;
   pkgs ? import ../nixpkgs {}, # some instance of pkgs for libraries
   src ? ./., # the source directory
   overlays-dir,
+  rocq-overlays-dir,
   coq-overlays-dir,
   ocaml-overlays-dir,
   override ? {},
@@ -24,8 +25,7 @@ in with config; let
         if bundle ? isRocq then "rocqPackages" else "coqPackages";
       path-to-attribute = config.path-to-attribute or [ rocq-coq-packages ];
       path-to-shell-attribute =
-        config.path-to-shell-attribute
-        or (config.path-to-attribute or [ "coqPackages" ]);
+        config.path-to-shell-attribute or path-to-attribute;
       attribute =
         if bundle ? isRocq && config.attribute == "coq" then "rocq-core"
         else config.attribute;
@@ -66,7 +66,7 @@ in with config; let
 
   mk-instance = bundleName: bundle: let
     overlays = import ./overlays.nix
-      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir bundle;
+      { inherit lib overlays-dir rocq-overlays-dir coq-overlays-dir ocaml-overlays-dir bundle;
         inherit (config) attribute pname shell-attribute shell-pname src; };
 
     pkgs = import config.nixpkgs { inherit overlays; };

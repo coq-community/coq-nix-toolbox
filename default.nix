@@ -14,6 +14,7 @@ in
   nixpkgs-file ? get-path src "nixpkgs.nix",
   shellHook-file ? get-path src "shellHook.sh",
   overlays-dir ? get-path src "overlays",
+  rocq-overlays-dir ? get-path src "rocq-overlays",
   coq-overlays-dir ? get-path src "coq-overlays",
   ocaml-overlays-dir ? get-path src "ocaml-overlays",
   ci-matrix ? false,
@@ -42,7 +43,7 @@ let
     src = src;
     lib = (initial.pkgs.coqPackages.lib or tmp-pkgs.lib)
           // { diag = f: x: f x x; };
-    inherit overlays-dir coq-overlays-dir ocaml-overlays-dir;
+    inherit overlays-dir rocq-overlays-dir coq-overlays-dir ocaml-overlays-dir;
     inherit global-override override ocaml-override;
   };
   my-throw = x: throw "Coq nix toolbox error: ${x}";

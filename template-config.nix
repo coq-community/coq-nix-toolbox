@@ -5,7 +5,8 @@
   ## to another supported format.
 
   ## The attribute to build from the local sources,
-  ## either using nixpkgs data or the overlays located in `.nix/coq-overlays`
+  ## either using nixpkgs data or the overlays located in `.nix/rocq-overlays`
+  ## and `.nix/coq-overlays`
   ## Will determine the default main-job of the bundles defined below
   attribute = "template";
 
@@ -22,7 +23,8 @@
   ## These dependencies will systematically be added to the currently
   ## known dependencies, if any more than Coq.
   ## /!\ Remove this field as soon as the package is available on nixpkgs.
-  ## /!\ Manual overlays in `.nix/coq-overlays` should be preferred then.
+  ## /!\ Manual overlays in `.nix/rocq-overlays` or `.nix/coq-overlays`
+  ##     should be preferred then.
   # buildInputs = [ ];
 
   ## Indicate the relative location of your _CoqProject
@@ -50,7 +52,7 @@
     ## In some cases, light overrides are not available/enough
     ## in which case you can use either
     # coqPackages.<coq-pkg>.overrideAttrs = o: <overrides>;
-    ## or a "long" overlay to put in `.nix/coq-overlays
+    ## or a "long" overlay to put in `.nix/rocq-overlays` or `.nix/coq-overlays`
     ## you may use `nix-shell --run fetchOverlay <coq-pkg>`
     ## to automatically retrieve the one from nixpkgs
     ## if it exists and is correctly named/located

@@ -55,7 +55,7 @@ nix-shell --arg do-nothing true --run "updateNixToolBox & genNixActions"
 
 ## Overlays
 
-You can create directories named after a Coq package and containing `default.nix` files in `.nix/coq-overlays` to override the contents of `coqPackages`.
+You can create directories named after a Coq package and containing `default.nix` files in `.nix/rocq-overlays` or `.nix/coq-overlays` to override the contents of `rocqPackages` or `coqPackages` respectively.
 This can be useful in the following case:
 
 - You depend on a package or a version of a package that is not yet available in nixpkgs.
@@ -63,7 +63,8 @@ This can be useful in the following case:
 - The package that you are building is not yet available in nixpkgs.
 
 
-To amend a package already present in nixpkgs, just run `nix-shell --arg do-nothing true --run "fetchCoqOverlay PACKAGENAME"`.
+To amend a package already present in nixpkgs, just run `nix-shell --arg do-nothing true --run "fetchRocqOverlay PACKAGENAME"`
+or `nix-shell --arg do-nothing true --run "fetchCoqOverlay PACKAGENAME"`.
 To create a package from scratch, run `nix-shell --arg do-nothing true --run "createOverlay PACKAGENAME"` and refer to the nixpkgs documentation available at https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq.
 
 ## Bundles and jobs
@@ -71,7 +72,7 @@ To create a package from scratch, run `nix-shell --arg do-nothing true --run "cr
 Bundles are defined in your `config.nix` file. If you didn't change this part of the auto-generated file, you have a single bundle called "default".
 Bundles are used to create sets of compatible packages. You can override the version of some packages and you can explicitly exclude some incompatible packages.
 
-Jobs represent buildable outputs. You can build any package in `coqPackages` (including any package defined in your `.nix/coq-overlays` directory) with the following command:
+Jobs represent buildable outputs. You can build any package in `rocqPackages` and `coqPackages` (including any package defined in your `.nix/rocq-overlays` and `.nix/coq-overlays` directories) with the following command:
 
 ```
 nix-build --argstr job PACKAGENAME
@@ -112,6 +113,7 @@ When you run `nix-shell`, you get an environment with a few available commands:
 - `ppBundleSet`: print a detailed account of what each bundle contains.
 - `initNixConfig`: create an initial `.nix/config.nix` file.
 - `nixEnv`: displays the list of Nix store locations for all the available packages.
+- `fetchRocqOverlay`: fetch a derivation file from nixpkgs that you may then edit locally to override a package.
 - `fetchCoqOverlay`: fetch a derivation file from nixpkgs that you may then edit locally to override a package.
 - `createOverlay`: create a fresh derivation file from a template, which could then be added to nixpkgs.
 - `cachedMake`: compile the project by reusing build outputs cached (generally thanks to Cachix).
