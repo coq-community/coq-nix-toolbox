@@ -1,4 +1,4 @@
-{ overlays-dir, lib, coq-overlays-dir, ocaml-overlays-dir, bundle,
+{ overlays-dir, lib, rocq-overlays-dir, coq-overlays-dir, ocaml-overlays-dir, bundle,
   attribute, pname, shell-attribute, shell-pname, src }:
 with builtins; with lib;
 let
@@ -17,10 +17,21 @@ let
       then pkg'.overrideAttrs cfg.overrideAttrs else pkg';
   nixpkgs-overrides =
     self: super: mapAttrs (n: ov: do-override super.${n} ov)
-      (removeAttrs bundle [ "coqPackages" "ocamlPackages" ]);
+      (removeAttrs bundle [ "rocqPackages" "coqPackages" "ocamlPackages" ]);
   ocaml-overrides =
     self: super: mapAttrs (n: ov: do-override super.${n} ov)
       (bundle.ocamlPackages or {});
+  rocq-overrides =
+    self: super:
+    let newRocqPkg = pname: args: makeOverridable self.mkRocqDerivation
+      { inherit pname; version = "${src}"; } // args;
+    in
+      mapAttrs (n: ov: do-override (super.${n} or
+        (switch n [
+          { case = attribute;       out = newRocqPkg pname {}; }
+          { case = shell-attribute; out = newRocqPkg shell-pname {}; }
+        ] (newRocqPkg n ((super.${n}.mk or (_: {})) self))
+      )) ov) (bundle.rocqPackages or {});
   coq-overrides =
     self: super:
     let newCoqPkg = pname: args: makeOverridable self.mkCoqDerivation
@@ -37,6 +48,15 @@ let
 [
   (mk-overlay overlays-dir)
   nixpkgs-overrides
+  (self: super: { rocqPackages = fold-override super.rocqPackages ([
+    (mk-overlay rocq-overlays-dir)
+    rocq-overrides
+    (self: super: { rocq-core = super.rocq-core.override {
+      customOCamlPackages = fold-override super.rocq-core.ocamlPackages [
+        (mk-overlay ocaml-overlays-dir)
+        ocaml-overrides
+      ];};})
+  ]);})
   (self: super: { coqPackages = fold-override super.coqPackages ([
     (mk-overlay coq-overlays-dir)
     coq-overrides
@@ -46,6 +66,9 @@ let
         ocaml-overrides
       ];};})
   ]);})
+  (self: super: { rocqPackages =
+    super.rocqPackages.filterPackages
+      (! (super.rocqPackages.rocq-core.dontFilter or false)); })
   (self: super: { coqPackages =
     super.coqPackages.filterPackages
       (! (super.coqPackages.coq.dontFilter or false)); })

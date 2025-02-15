@@ -23,7 +23,7 @@ printNixEnv () {
   for x in $buildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
   echo "propagatedBuildInputs:"
   for x in $propagatedBuildInputs; do printf -- "- "; echo $x | cut -d "-" -f "2-"; done
-  echo "you can pass option --arg override '{coq = \"x.y\"; ...}' to nix-shell to change packages versions"
+  echo "you can pass option --arg override '{rocq-core = \"x.y\"; ...}' to nix-shell to change packages versions"
 }
 addNixCommand printNixEnv
 
@@ -32,22 +32,22 @@ ppNixEnv () {
   for x in $nativeBuildInputs
   do printf -- "- "
      pkgv=$(echo $x | cut -d "-" -f "2-")
-     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+     echo $(echo $pkgv | sed "s/rocq-core[0-9][^\-]*-//")
   done
   for x in $propagatedNativeBuildInputs
   do printf -- "- "
      pkgv=$(echo $x | cut -d "-" -f "2-")
-     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+     echo $(echo $pkgv | sed "s/rocq-core[0-9][^\-]*-//")
   done
   for x in $buildInputs
   do printf -- "- "
      pkgv=$(echo $x | cut -d "-" -f "2-")
-     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+     echo $(echo $pkgv | sed "s/rocq-core[0-9][^\-]*-//")
   done
   for x in $propagatedBuildInputs
   do printf -- "- "
      pkgv=$(echo $x | cut -d "-" -f "2-")
-     echo $(echo $pkgv | sed "s/coq[0-9][^\-]*-//")
+     echo $(echo $pkgv | sed "s/rocq-core[0-9][^\-]*-//")
   done
 }
 addNixCommand ppNixEnv
@@ -197,7 +197,7 @@ addNixCommand initNixConfig
 createOverlay (){
   Orig=$toolboxDir/template-overlay.nix
   if [[ -n "$1" ]]; then
-       D=$configDir/coq-overlays/$1;
+       D=$configDir/rocq-overlays/$1;
        mkdir -p $D
        cat $Orig > $D/default.nix
        sed -i "s/template/$1/" $D/default.nix
@@ -217,6 +217,18 @@ fetchCoqOverlay (){
   fi
 }
 addNixCommand fetchCoqOverlay
+
+fetchRocqOverlay (){
+  F=$nixpkgs/pkgs/development/rocq-modules/$1/default.nix
+  D=$configDir/rocq-overlays/$1/
+  if [[ -f "$F" ]]
+    then mkdir -p $D; cp $F $D; chmod u+w ${D}default.nix;
+         git add ${D}default.nix
+         echo "You may now amend ${D}default.nix"
+    else echo "usage: fetchRocqOverlay pname"
+  fi
+}
+addNixCommand fetchRocqOverlay
 
 my-nix-build (){
   if [ ${NIX_PATH} ]; then

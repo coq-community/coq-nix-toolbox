@@ -6,9 +6,11 @@ with builtins;
   pkgs ? import ../nixpkgs {}, # some instance of pkgs for libraries
   src ? ./., # the source directory
   overlays-dir,
+  rocq-overlays-dir,
   coq-overlays-dir,
   ocaml-overlays-dir,
   override ? {},
+  coq-override ? {},
   ocaml-override ? {},
   global-override ? {},
   lib,
@@ -24,8 +26,7 @@ in with config; let
         if bundle ? isRocq then "rocqPackages" else "coqPackages";
       path-to-attribute = config.path-to-attribute or [ rocq-coq-packages ];
       path-to-shell-attribute =
-        config.path-to-shell-attribute
-        or (config.path-to-attribute or [ "coqPackages" ]);
+        config.path-to-shell-attribute or path-to-attribute;
       attribute =
         if bundle ? isRocq && config.attribute == "coq" then "rocq-core"
         else config.attribute;
@@ -33,7 +34,7 @@ in with config; let
         if bundle ? isRocq && config.shell-attribute == "coq-shell" then "rocq-shell"
         else config.shell-attribute;
     in {
-      inherit rocq-coq-packages attribute shell-attribute;
+      inherit attribute shell-attribute;
       # not configurable from config.nix:
       ppath = path-to-attribute ++ [ attribute ];
       shell-ppath = path-to-shell-attribute ++ [ shell-attribute ];
@@ -56,7 +57,8 @@ in with config; let
           job = config-ppath.attribute;
           main-job = true; })
       i
-      (mk-bundles [ config-ppath.rocq-coq-packages ] override)
+      (mk-bundles [ "rocqPackages" ] override)
+      (mk-bundles [ "coqPackages" ] coq-override)
       (mk-bundles [ "ocamlPackages" ] ocaml-override)
       (mk-bundles [ ] global-override)
     ]) config.bundles;
@@ -66,7 +68,7 @@ in with config; let
 
   mk-instance = bundleName: bundle: let
     overlays = import ./overlays.nix
-      { inherit lib overlays-dir coq-overlays-dir ocaml-overlays-dir bundle;
+      { inherit lib overlays-dir rocq-overlays-dir coq-overlays-dir ocaml-overlays-dir bundle;
         inherit (config) attribute pname shell-attribute shell-pname src; };
 
     pkgs = import config.nixpkgs { inherit overlays; };
