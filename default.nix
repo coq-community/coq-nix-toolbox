@@ -20,6 +20,7 @@ in
   ci-matrix ? false,
   config ? {},
   override ? {},
+  coq-override ? {},
   ocaml-override ? {},
   global-override ? {},
   withEmacs ? false,
@@ -44,7 +45,7 @@ let
     lib = (initial.pkgs.coqPackages.lib or tmp-pkgs.lib)
           // { diag = f: x: f x x; };
     inherit overlays-dir rocq-overlays-dir coq-overlays-dir ocaml-overlays-dir;
-    inherit global-override override ocaml-override;
+    inherit global-override override coq-override ocaml-override;
   };
   my-throw = x: throw "Coq nix toolbox error: ${x}";
 in

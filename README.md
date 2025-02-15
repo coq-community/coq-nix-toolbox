@@ -131,13 +131,13 @@ After one of these three commands, you should leave and re-enter `nix-shell` if 
 One can pass the following arguments to `nix-shell` or `nix-build`:
 - `--arg do-nothing true`: do not even provide Coq, just enough context to execute the above commands.
 - `--argstr bundle t`: select the bundle `t` (one can use the above commands `ppBundles` to know the options and `ppBundleSet` to see their contents)
-- `--arg override '{p1 = v1; ...; pn = vn;}'`: a very condensed inline way to select specific versions of `coq` or any package from `coqPackages` or `ocamlPackages`. E.g. `--arg override '{coq = "8.12"; ...; mathcomp = "1.12.0";}'` to override the current default bundle with the given versions.
+- `--arg override '{p1 = v1; ...; pn = vn;}'`: a very condensed inline way to select specific versions of `rocq-core` or any package from `rocqPackages`, `coqPackages` (using `--arg coq-override`) or `ocamlPackages` (using `--arg ocaml-override`). E.g. `--arg override '{rocq-core = "9.0"; ...; mathcomp = "2.3.0";}'` to override the current default bundle with the given versions.
 - `--arg withEmacs true`: provide a ready to use version of emacs with proofgeneral; for the sake of reproducibility this will **not** use your system emacs nor will it use your user configuration.
 - `--argstr job p`: provide the dependencies for (in case of `nix-shell`) or build (in case of `nix-build`) Coq package `p` instead of the current project, but using the current version of the current project. Combined with `--argstr bundle t` this gives a fully configurable way to test reverse dependencies for various configurations.
 
-## Testing `coqPackages` updates in nixpkgs
+## Testing `rocqPackages` updates in nixpkgs
 
-To test a PR on nixpkgs that modifies the `coqPackages` set, clone this repository, `cd` into it, and run:
+To test a PR on nixpkgs that modifies the `rocqPackages` set, clone this repository, `cd` into it, and run:
 
 ```
 nix-shell --arg do-nothing true --run "updateNixpkgs <pr_owner> <pr_branch>"

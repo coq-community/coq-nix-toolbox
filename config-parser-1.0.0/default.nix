@@ -10,6 +10,7 @@ with builtins;
   coq-overlays-dir,
   ocaml-overlays-dir,
   override ? {},
+  coq-override ? {},
   ocaml-override ? {},
   global-override ? {},
   lib,
@@ -33,7 +34,7 @@ in with config; let
         if bundle ? isRocq && config.shell-attribute == "coq-shell" then "rocq-shell"
         else config.shell-attribute;
     in {
-      inherit rocq-coq-packages attribute shell-attribute;
+      inherit attribute shell-attribute;
       # not configurable from config.nix:
       ppath = path-to-attribute ++ [ attribute ];
       shell-ppath = path-to-shell-attribute ++ [ shell-attribute ];
@@ -56,7 +57,8 @@ in with config; let
           job = config-ppath.attribute;
           main-job = true; })
       i
-      (mk-bundles [ config-ppath.rocq-coq-packages ] override)
+      (mk-bundles [ "rocqPackages" ] override)
+      (mk-bundles [ "coqPackages" ] coq-override)
       (mk-bundles [ "ocamlPackages" ] ocaml-override)
       (mk-bundles [ ] global-override)
     ]) config.bundles;
