@@ -7,7 +7,8 @@ with (import (import ./nixpkgs.nix) {}).lib;
 
   ## The attribute to build, either from nixpkgs
   ## of from the overlays located in `.nix/rocq-overlays` or `.nix/coq-overlays`
-  attribute = "coq";
+  attribute = "rocq-core";
+  coq-attribute = "coq";
   shell-attribute = "coq-shell";
   src = ../coq-shell;
 

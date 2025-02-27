@@ -29,6 +29,7 @@ let
 in rec {
   format = "1.0.0";
   attribute = config.attribute or "template";
+  coq-attribute = config.coq-attribute or attribute;
   shell-attribute = config.shell-attribute or attribute;
   nixpkgs = config.nixpkgs or initial.nixpkgs;
   pname = config.pname or attribute;
