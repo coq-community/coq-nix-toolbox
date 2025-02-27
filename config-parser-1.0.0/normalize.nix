@@ -3,8 +3,6 @@
 {lib, config, nixpkgs, src}@initial:
 with builtins; with lib;
 let
-  normalize-pkg = name: pkg:
-    if name == "coqPackages" then mapAttrs normalize-coqpkg pkg else pkg;
   normalize-coqpkg = name: pkg: let j = pkg.job or name; in
     pkg // { job = switch j [
                { case = true;     out = name; }
@@ -22,6 +20,12 @@ let
   - a string which corresponds both to the job name
     and an attribute in coqPackages.
  ''); };
+  normalize-pkg = name: pkg:
+    if name != "rocqPackages" && name != "coqPackages" then pkg else
+      mapAttrs normalize-coqpkg pkg;
+  normalize-bundle = _name: b:
+    mapAttrs normalize-pkg b
+    // optionalAttrs (b ? rocqPackages && ! b ? coqPackages) { isRocq = true; };
 in rec {
   format = "1.0.0";
   attribute = config.attribute or "template";
@@ -32,7 +36,7 @@ in rec {
   coqproject = config.coqproject or "_CoqProject";
   default-bundle = config.default-bundle or "default";
   cachix = config.cachix or { coq = {}; };
-  bundles = mapAttrs (_: t: mapAttrs normalize-pkg t)
+  bundles = mapAttrs normalize-bundle
     (config.bundles or { default = {}; });
   buildInputs = config.buildInputs or [];
   src = config.src or
